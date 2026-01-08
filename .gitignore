@@ -1,13 +1,30 @@
-# Vivado generated files
+# Vivado / Xilinx generated files (general)
 *.jou
 *.log
 *.pb
 *.wdb
+*.wcfg
+*.wdf
 *.db
 
-.cache/
-.sim/
-.hw/
-.ip_user_files/
-.runs/
-xsims
+# Xilinx/Vivado working directories (any project name)
+**/*.cache/
+**/*.hw/
+**/*.ip_user_files/
+**/*.runs/
+**/*.sim/
+**/*.xsim/
+**/.Xil/
+**/xsim/
+
+# Sometimes shows up in Windows toolchains
+*.str
+*.tmp
+*.bak
+*~
+
+# Optional: ignore bitstreams and reports (enable if you don't want them in git)
+# **/*.bit
+# **/*.rpt
+# **/*.dcp
+# **/*.ltx
