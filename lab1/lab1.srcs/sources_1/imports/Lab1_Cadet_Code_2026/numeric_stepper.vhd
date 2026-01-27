@@ -4,6 +4,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
+use work.ece383_pkg.ALL;
 
 entity numeric_stepper is
   generic (
@@ -23,10 +24,70 @@ entity numeric_stepper is
 end numeric_stepper;
 
 architecture numeric_stepper_arch of numeric_stepper is
-    signal process_q : signed(num_bits-1 downto 0) := to_signed(0,num_bits);
+    signal process_q : signed(num_bits-1 downto 0) := to_signed(min_value,num_bits);
     signal prev_up, prev_down : std_logic := '0';
-    signal is_increment, is_decrement : boolean := false;
+    signal is_increment, is_decrement, is_debouncing_up, is_debouncing_down : boolean := false;
+    signal counter_ctrl, counter_reset: std_logic := '1';
+    signal roll: std_logic := '0';
+    signal process_counter: unsigned (18 downto 0) := (others => '0');
+    
 begin
-
+    debouncer: counter
+    -- horizontal counter
+        generic map (
+            num_bits  => 19,
+            max_value => 500000
+        )
+        port map ( clk => clk,
+               reset_n => counter_reset,
+               ctrl => counter_ctrl,
+               roll => roll ,
+               Q => process_counter);
+    process(clk)
+    begin
+    if(rising_edge(clk)) then
+        if(reset_n = '0') then 
+            process_q <= to_signed(min_value, num_bits);
+            prev_up <= '0';
+            prev_down <= '0';
+            is_debouncing_up <= false;
+            is_debouncing_down <= false;
+            counter_reset <= '0';
+        else 
+            if(is_debouncing_up or is_debouncing_down) then
+                counter_reset <= '1';
+            end if;
+            if(is_debouncing_up) then
+            --Case 1: Debouncing and then settles at up = 1
+                if roll = '1' then
+                    if(up = '1' and en = '1' and (process_q + to_signed(delta, num_bits)) <= to_signed(max_value, num_bits)) then
+                        process_q <=  process_q + to_signed(delta, num_bits); 
+                    end if;
+                    is_debouncing_up <= false;
+                end if;
+            elsif(is_debouncing_down) then  
+                if roll = '1' then 
+                    if(down = '1' and en = '1' and (process_q - to_signed(delta, num_bits)) >= to_signed(min_value, num_bits)) then
+                        process_q <=  process_q - to_signed(delta, num_bits); 
+                    end if;
+                    is_debouncing_down <= false; 
+                end if;
+            else 
+                --If we got here, we're not in the debouncing mode
+                if(prev_up = '0' and up = '1') then 
+                    is_debouncing_up <= true;
+                    counter_reset <= '0';
+                elsif(prev_down = '0' and down = '1') then 
+                    is_debouncing_down <= true;
+                    counter_reset <= '0';
+                end if;
+            end if;
+        end if; 
+        
+        prev_up <= up;
+        prev_down <= down;
+        q <= process_q;   
+    end if;       
+    end process;
     
 end numeric_stepper_arch;
