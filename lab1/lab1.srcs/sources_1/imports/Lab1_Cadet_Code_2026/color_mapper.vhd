@@ -40,7 +40,6 @@ constant center_row : integer := 220;
 constant hash_size : integer := 6; -- Might change it later
 constant hash_horizontal_spacing : integer := 15;
 constant hash_vertical_spacing : integer := 10;
---I added these
 constant trigger_width : integer := 20;
 constant trigger_height : integer := 10;
 
@@ -51,25 +50,34 @@ begin
     --First make sure we're inside the grid
     is_within_grid <= (position.row >= grid_start_row) and (position.row <= grid_stop_row)
                                  and (position.col >= grid_start_col) and (position.col <= grid_stop_col);
+    --Detect whether the current row and col is within the triggerT range
     is_within_trigger_t_range <= (position.row >= grid_start_row) and (position.row <= grid_start_row + trigger_height)
                                  and (position.col >= grid_start_col - trigger_width / 2) and (position.col <= grid_stop_col + trigger_width / 2);
+    --Detect whether the current row and col is within the triggerV range
     is_within_trigger_v_range <= (position.row >= grid_start_row - trigger_width / 2) and (position.row <= grid_stop_row + trigger_width / 2)
                                  and (position.col >= grid_start_col) and (position.col <= grid_start_col + trigger_height);
+    --Determine if the current pixel corresponds to a horizontal gridline
     is_horizontal_gridline <= is_within_grid and ((position.row - grid_start_row) mod 50 = 0);
+    --Determine if the current pixel corresponds to a vertical gridline
     is_vertical_gridline <= is_within_grid and ((position.col - grid_start_col) mod 60 = 0);
+    
+    --Determine if the current pixel corresponds to a horizontal hash
     is_horizontal_hash <= (not is_vertical_gridline) and is_within_grid and
                           ((position.col - grid_start_col) mod hash_horizontal_spacing = 0) and
                           ((position.row <= center_row + hash_size / 2) and (position.row >= center_row - hash_size / 2));
+    --Determine if the current pixel corresponds to a vertical hash 
     is_vertical_hash <= (not is_horizontal_gridline) and is_within_grid and
                          ((position.row - grid_start_row) mod hash_vertical_spacing = 0) and 
                          ((position.col <= center_column + hash_size / 2) and (position.col >= center_column - hash_size / 2));
+    --Trigger time logic
     is_trigger_time <= (abs(to_integer(position.col) - to_integer(trigger.t))) <= (trigger_width / 2) and
                        (trigger_width / 2 - (abs(to_integer(position.col) - to_integer(trigger.t)))) >= abs(to_integer(position.row) - grid_start_row)
                         and is_within_trigger_t_range;
+    --Trigger volt logic 
     is_trigger_volt <= (abs(to_integer(position.row) - to_integer(trigger.v))) <= (trigger_width / 2) and
                        (trigger_width / 2 - abs(to_integer(position.row) - to_integer(trigger.v))) >= abs(to_integer(position.col) - grid_start_col)
                         and is_within_trigger_v_range;
--- Use your booleans to choose the color
+    --Decide which color the current pixel is
     color <=        ch1_color when(ch1.en = '1' and ch1.active = '1' and is_within_grid) else
                     ch2_color when(ch2.en = '1' and ch2.active = '1' and is_within_grid) else
                     trigger_color when (is_trigger_time or is_trigger_volt) else 

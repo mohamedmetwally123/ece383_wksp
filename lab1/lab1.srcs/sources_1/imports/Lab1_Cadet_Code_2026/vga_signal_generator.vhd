@@ -75,7 +75,8 @@ begin
     --When v_blank goes low
     v_blank_is_low <= ((current_pos.row >= v_blank_lowest_boundary) and (current_pos.row < v_blank_highest_boundary)) or 
                        (current_pos.row = v_sync_max_value);  
-                 
+    
+    --Update the output            
     position <= current_pos;
     vga.hsync <= '0' when (h_sync_is_low = true) else '1';
     vga.vsync <= '0' when (v_sync_is_low = true) else '1';
