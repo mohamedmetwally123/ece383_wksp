@@ -64,10 +64,13 @@ architecture lab2_datapath_arch of lab2_datapath is
     signal cw_counter_control: std_logic_vector(1 downto 0);
     signal cw_write_en: std_logic := '0';
     
+    -- Choose between external and internal control
+    -- What actually go into the LBRAM and RBRAM
+    signal wrENB: std_logic;
     
     signal counter_reset : std_logic;
     signal ch1, ch2: channel_t;       
-    signal is_live: std_logic;    
+    signal is_live: std_logic := '1';    
     signal trigger: trigger_t;
     signal num_stepper_t, num_stepper_v : signed(10 downto 0);
     signal writeCntr: unsigned (9 downto 0);
@@ -82,10 +85,11 @@ architecture lab2_datapath_arch of lab2_datapath is
     constant LEFT : integer := 1;
     constant RIGHT : integer := 3;
     constant UP : integer := 0;
-    
+    constant start_col: unsigned(9 downto 0) := to_unsigned(20, 10);
+    constant last_address : unsigned(9 downto 0) := to_unsigned(620, 10);
     --trigger
     signal time_trigger_value, volt_trigger_value : signed(10 downto 0);
-
+    signal monitored_signal: unsigned(8 downto 0);
 begin
 
     -- Determine if the current row matches the stored data from BRAM which means the channel should be active (drawn)
@@ -103,24 +107,45 @@ begin
 		if (rising_edge(clk)) then
 			if reset_n = '0' then
 				-- Add code here
+				ch1.to_ac <= (others => '0');
+				ch2.to_ac <= (others => '0');
+				ch1.incoming_sample <= (others => '0');
+				ch2.incoming_sample <= (others => '0');
 			elsif(sw_ready = '1') then
 				-- Add code here
+				--Ask the teacher about this
+				
+				--Loop back
+				ch1.to_ac <= ch1.from_ac;
+				ch2.to_ac <= ch2.from_ac;
+				                
+                --Update current samples. Losing the 2 LSBs won't affect the number
+                --This also convert sampled signed into unsiged value
+                ch1.current_sample <= make_unsigned(ch1.from_ac)(17 downto 2);
+                ch2.current_sample <= make_unsigned(ch2.from_ac)(17 downto 2);
 			end if;
 		end if;
 	end process;
 
-    -- Convert Signed sample from Codec into an unsigned value
-    -- Add code here (Look at make_unsigned function)
-    
+
     -- Send the unsigned current sample to the BRAM
-    -- Add code here 
-	
+    -- Choose between the external and internal sample based on exSel
+	ch1.to_bram <= ch1.current_sample when (exSel = '0') else exLBus;
+	ch2.to_bram <= ch2.current_sample when (exSel = '0') else exRBus;
+
     -- Need logic for the FLAG register
 	-- Add code here
-	
+	flag_register_inst: Flag_Register
+	port map (
+	   clk => clk,
+	   reset_n => reset_n,
+	   set => sw_ready,
+	   clear => flagClear,
+	   Q => flagQ
+	);
     ------------------------------------------------------------------------------
 	-- If a button has been pressed then increment of decrement the trigger time and Volt
-	--    should this be debounced?
+	--    Debouncer is already implemented from last lab
 	--  Use a debounced numeric stepper
 	------------------------------------------------------------------------------
     
@@ -165,21 +190,33 @@ begin
 	-- How high should it count?  Will it go to its start value on reset or load?
 	-------------------------------------------------------------------------------
 	-- Add code here.  Use a previously built counter.
-	
+	counter_bram:  BRAM_Counter 
+	generic map (N => 10)
+	Port map(	clk => clk,
+			reset => reset_n,
+			crtl => cw_counter_control,
+			D => start_col,
+			Q => writeCntr
+			);
+    -- Using exSel to choose between internal and external control
+    --Choose between external address and the address coming from the counter
+    write_address <= writeCntr when (exSel = '0') else unsigned(exWrAddr);
+    --Compare counter to the last_address
+    sw_last_address <= '1' when writeCntr = last_address else '0';
 	-------------------------------------------------------------------------------
 	-- Triggering Logic: A positive crossing of the trigger occurs when the previous value is 
 	--	less than the trigger and the current value is greater than or equal to
 	-- the trigger.  Set the status word to alert the FSM that it should start 
 	-- recording the samples.
 	-------------------------------------------------------------------------------		
+	monitored_signal <= unsigned(apply_offset(ch1.current_sample(15 downto 7)));
 	trig_detect : trigger_detector
     port map (
         clk  => clk,
         reset_n => reset_n,
         threshold => trigger.v,
         ready => sw_ready,
-        --not sure --we will definetely need to change this
-        monitored_signal => unsigned(ch1.from_ac),
+        monitored_signal => monitored_signal,
         crossed_trigger => sw_trigger
     );
 	
@@ -200,9 +237,11 @@ begin
       ch2.en <=  switch(1);
 
 -- Audio Codec stuff goes here
-
---is_live <=   --  '0' simulate audio; '1' live audio
+      
+      --Chooses between simulated and live
+      is_live <=    switch(3);-- simulate audio; '1' live audio
                   -- should a switch go here?
+      --External switch chooses between external and internal control is implemented in the top level
                   
 
 Audio_Codec : Audio_Codec_Wrapper
@@ -224,9 +263,10 @@ Audio_Codec : Audio_Codec_Wrapper
 
 
     -- BRAM stuff goes here
-
 	reset <= not reset_n;
 	
+	--Choosing between external and internal write enable using a mux
+	wrENB <= cw_write_en when (exSel = '0') else exWen;
 	leftChannelMemory : BRAM_SDP_MACRO
 		generic map (
             BRAM_SIZE => "18Kb",            -- Target BRAM, "18Kb" or "36Kb"
@@ -312,11 +352,11 @@ Audio_Codec : Audio_Codec_Wrapper
             RDEN => '1',                    -- read enable
             REGCE => '1',                   -- 1-bit input read output register enable
             --not sure --Will be modified for next GC1
-            DI => (15 downto 0 => '0'),                   -- Input data port, width defined by WRITE_WIDTH parameter
-            WE => (1 downto 0 => '0'),                     -- Input write enable, width defined by write port depth
-            WRADDR => (9 downto 0 => '0'),                -- Input write address, width defined by write port depth
+            DI => ch1.to_bram,                   -- Input data port, width defined by WRITE_WIDTH parameter
+            WE => "11",                     -- Input write enable, width defined by write port depth
+            WRADDR => std_logic_vector(write_address),                -- Input write address, width defined by write port depth
             WRCLK => clk,                   -- 1-bit input write clock
-            WREN => '0');              -- 1-bit input write port enable
+            WREN => wrENB);              -- 1-bit input write port enable
             -- End of BRAM_SDP_MACRO_inst instantiation
 
 
@@ -404,14 +444,15 @@ Audio_Codec : Audio_Codec_Wrapper
             RST => reset,
             RDEN => '1',
             REGCE => '1',                   -- 1-bit input read output register enable
-            --not sure --will be modified later
-            DI => (15 downto 0 => '0'),                    -- Input data port, width defined by WRITE_WIDTH parameter
-            WE => (1 downto 0 => '0'),                        -- Input write enable, width defined by write port depth
-            WRADDR => (9 downto 0 => '0'),                -- Input write address, width defined by write port depth
+            DI => ch2.to_bram,                    -- Input data port, width defined by WRITE_WIDTH parameter
+            WE => "11",                        -- Input write enable, width defined by write port depth
+            WRADDR => std_logic_vector(write_address),                -- Input write address, width defined by write port depth
             WRCLK => clk,                    -- 1-bit input write clock
-            WREN => '0');                -- 1-bit input write port enable
+            WREN => wrENB);                -- 1-bit input write port enable
             -- End of BRAM_SDP_MACRO_inst instantiation
 
+    --Will be modified to a mux in later gate checks
+    cw_write_en <= cw(2);
     sw(0) <= sw_ready;
     sw(1) <= sw_last_address;
     sw(2) <= sw_trigger;

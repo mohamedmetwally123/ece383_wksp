@@ -168,6 +168,23 @@ package ece383_pkg is
         crossed_trigger  : out std_logic
     );
     end component;
+    component BRAM_Counter is 
+	generic (N: integer := 4);
+	Port(	clk: in  STD_LOGIC;
+			reset : in  STD_LOGIC;
+			crtl: in std_logic_vector(1 downto 0);
+			D: in unsigned (N-1 downto 0);
+			Q: out unsigned (N-1 downto 0));
+    end component;
+    
+    component Flag_Register is 
+    port( clk: in std_logic;
+          reset_n: in std_logic;
+          set: in std_logic;
+          clear: in std_logic;
+          Q: out std_logic
+    );
+    end component;
   
   --= FUNCTIONS ==-
   function Get_Red(rgb : std_logic_vector(23 downto 0)) return std_logic_vector;

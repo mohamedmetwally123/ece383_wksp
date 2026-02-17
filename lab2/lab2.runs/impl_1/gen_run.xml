@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a200tsbg484-1" LaunchTime="1770925551">
+<GenRun Id="impl_1" LaunchPart="xc7a200tsbg484-1" LaunchTime="1771342584">
   <File Type="PA-TCL" Name="lab2.tcl"/>
   <File Type="REPORTS-TCL" Name="lab2_reports.tcl"/>
   <File Type="INIT-TIMING" Name="lab2_timing_summary_init.rpt"/>
@@ -99,6 +99,18 @@
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../Downloads/Lab02_cadet_code/lab2_code_for_cadets_2026/Audio_Codec_Wrapper.vhd"/>
         <Attr Name="ImportTime" Val="1770907482"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/C27Mohamed.Metwally/Downloads/Lab02_cadet_code/lab2_code_for_cadets_2026/BRAM_Counter.vhdl">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Flag_Register.vhd">
+      <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
@@ -257,9 +269,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2024">
-      <Desc>Default settings for Implementation.</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2024"/>
     <Step Id="init_design"/>
     <Step Id="opt_design"/>
     <Step Id="power_opt_design"/>

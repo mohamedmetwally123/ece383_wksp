@@ -28,35 +28,54 @@ end lab2_fsm;
 
 architecture Behavioral of lab2_fsm is
 
---	type state_type is NEED_SOMETHING_HERE;
---	signal state: state_type;
+    type state_type is (WaitForTrigger, ResetCounter, WaitForReady, SaveSample, IncrementCounter);
+	signal state: state_type := WaitForTrigger;
 
 begin
 
 	-------------------------------------------------------------------------------
 	--		SW		meaning
-	--		
+	--		sw[0] -> Ready
+	--      sw[1] -> Last Address
+	--      sw[2] -> Trigger
 	-------------------------------------------------------------------------------
 	state_proces: process(clk)  
 	begin
 		if (rising_edge(clk)) then
---			if (reset_n = '0') then 
---				state <= NEED_SOMETHING_HERE;
---			else 
---				case state is
---					when NEED_SOMETHING_HERE
---				end case;
---			end if;
+			if (reset_n = '0') then 
+				state <= WaitForTrigger;
+			else 
+				case state is
+				    when WaitForTrigger => 
+				        if(sw(2) = '1') then state <= ResetCounter; end if;
+					when ResetCounter =>
+					   state <= WaitForReady;
+					when WaitForReady =>
+					   if(sw(0) = '1') then state <= SaveSample; end if;
+				    when SaveSample => 
+				        state <= IncrementCounter;
+				    when IncrementCounter =>
+				        if(sw(1) = '1') then state <= WaitForTrigger; else state <= WaitForReady; end if;	   
+				end case;
+			end if;
 		end if;
 	end process;
 
 	-------------------------------------------------------------------------------
 	--  CW output table
 	--		CW		meaning
-	--		
+	--		cw[0:1]            cw[2]
+    --	    00 -> Hold         1 -> Save Sample
+    --	    01 -> Count Up     0 -> don't save sample
+    --	    11 -> Reset  
+    --      10 -> load D  
 	-------------------------------------------------------------------------------
 	
-	-- NEED_SOMETHING_HERE
+	cw <= "000" when state = WaitForTrigger else
+	      "010" when state = ResetCounter else 
+	      "000" when state = WaitForReady    else 
+	      "100" when state = SaveSample   else
+	      "001" when state = IncrementCounter;
 
 end Behavioral;
 
