@@ -7,81 +7,64 @@ they become positive and suitable for display and storage. The values coming out
 which tells the system when to start capturing samples. This helps in displaying a stable waveform on the screen. The point at which the waverform intersects the left edge of the grid should changing by changing the position of the trigger. 
 ## Design Implementation: when 
 
-### Oscilloscope Grid(Figure 1):
-![Screenshot](images/oscilliscop_grid.jpg)
-As shown, the grid is 640*480 pixels. X-axis is time, while Y-axis is volt.  The vertical lines are separated by 60 pixels, whereas the horizontal lines are separated by 50 pixels. Hash marks are drawn on both the x and y axes. 
+### Block Diagram (Figure 1):
+![Screenshot](images/Lab2_BlockDiagram.jpg)
+The block diagram includes both the data path and the control unit. The flow in the diagram is as follows:
+1- Audio_Codec_Wrapper receives audio signals from the blue line-in jack port. When data is ready, the ready signal goes high for a single clock cycle.
+2- The system then checks for rising edge triggering, which means that it waits until the voltage crosses the trigger going upward. 
+3- Afterwards, the audio samples are stored in the BRAM. 
+4- We use a counter to store the audio samples at different addresses in the BRAM. The counter counts from 20 (First colum in the grid) up to 420(Last column in the grid)
+5- The video module sends the column of the current pixel being displayed on the screen to the BRAM. The BRAM responds with the row value where the output signal should be displayed. If the response is equal to the row value of the pixel being displayed on the screen, the video module displays this pixel with the corresponding channel color. 
+6- This cycle repeats every video frame.
 
-### Block Diagram(Figure 2):
-![Screenshot](images/Block_Diagram.png)
+### Finite State Machine(Figure 2):
+![Screenshot](images/Lab2_cu.png)
+The FSM represents the control unit in lab 2. In each video frame, The Wait_For_Trigger state waits for the voltage to cross the trigger volt upward. This is signaled by sw[2], which is tied directly to the output of the trigger_detector component. Upon detection, the Reset_Counter state resets the counter to the first column in our grid(20). This is down by setting cw(1 downto 0) <= "10". Afterwards, the system transitions to Wait_For_Ready state, where it waits until the converted data from the audio_codec is ready. This is signaled by sw[0], which is connected to the ready flag output from the audio_codec. Then, the system moves to the save_sample state, where the control unit infroms the data path that this is the time to store our sample in the BRAM. Then, the counter counts up, which moves the write address in the BRAM to the next memory location. If the system reached the last column in the grid(420), it transitions back to the Wait_For_Trigger, and repeats. Otherwise, it jumps back to the Wait_For_Ready state. 
+
+### Output Equation Table(Figure 3):
+![Screenshot](images/Output_EquationTable.png)
+This screenshot shows the output of cw(2 downto 0). cw(1 downto 0) controls the counter, while cw(2) controls when the BRAM should store the audio samples. 
+Counter:
+	00 -> Hold
+	01 -> Count Up
+	11 -> Reset
+	10 -> Load D (In this case, D = 20)
+
 
 ### Components: 
-#### 1- Color Mapper:
-The color mapper generates the R,G,B value of each pixel on the screen. It decides which color to output based on the row and column of the current pixel. When the current pixel is part of channel 1 signal or a trigger marker, the output is yellow; When the current pixel is part of channel 2 signal, the output is green. The oscilloscope’s grid is drawn with a white color. When the current pixel doesn’t correspond to any of the things mentioned above, the output is black, which is the background. 
+#### 1- BRAM_Counter:
+This is a counter module built in previous labs. It counts form 20(beginning column) up unti 420(End column). In the datapath, the counter is used to control the write address of the BRAM. The FSM controls the states of the counter, including when to count up, hold, or reset. 
 
-Inputs/outputs:
-Color: 24-bit color value for the current row and column
-position.row: the row currently being processed.
-position.col: the column currently being processed
-trigger.t: This 11-bit signed value, representing the trigger time, is used to display a yellow arrow on the horizontal axis. 
-trigger.v: This 11-bit signed value, representing the volt time, is used to display a yellow arrow on the horizontal axis. 
-ch1.active: a 1-bit signal indicating whether to draw channel 1 signal. Its logic is implemented at the top level of this lab. The color mapper outputs a yellow pixel when this value is 1. Its logic is implemented at the top level of this lab. 
-Ch1.enb: A 1-bit signal enabling channel 1 signal to be drawn. It’s connected to sw(0) at the top level
-Ch2.active: a 1-bit signal indicating whether to draw channel 2 signal. Its logic is implemented at the top level of this lab. The color mapper outputs a green pixel when this value is 1. Its logic is implemented at the top level of this lab. 
-Ch1.enb: A 1-bit signal enabling channel 1 signal to be drawn. It’s connected to sw(1) at the top level
+#### Inputs/outputs:
+		clk     : Synchronizes the whole system
+		reset   : Resets the counter
+		ctrl    : controls the state of the counter
+		00      -> Hold
+		01      -> Count Up
+		11      -> Reset
+		10      -> Load D (In this case, D = 20)
 
-#### 2- Counter: 
-We have two counters inside the vga_signal_generator component to calculate the current row and column being displayed. The two counters are as follows:
-Col_counter: Counts from 0 up to 799. 
-Row_counter: counts from 0 up to 479.
+		D       : The value loaded into the counter when ctrl => "10". 
+		Q       : The output of the counter. In our case, the output is tied to the write address of the BRAM. 
 
-We needed to connect the two counters so when col_counter reaches its maximum value and rolls back to zero, row_counter counts up by 1, indicating that displaying the current row is completed; and the displayer should move over to the next row. This is done by connecting the roll flag of the col_counter to the ctrl of the row_counter. 
+#### 2- Flag Resister: 
+The flag resgister will be used as a way of communication between lab2 components and the MicroBlaze processor in later labs. The lab2 will produce some data, put it on a data line to the MicroBlaze, and set the flag register using the READY signal . At some point, the MicroBlaze will read the data, and clear the bit. 
 
-Inputs/Outputs
-Clk: Synchronize the entire system
-reset_n: Reset the counter to zero.
-Ctrl: controls the counter. If ctrl is 1, the counter counts. Otherwise, it stays at the same value. 
-Roll: This flag is used to indicate when the counter rolls over. When the counter reaches its maximum value, it rolls to zero, which sets the roll flag to one. 
+![Screenshot](images/FlagRegister_I&O_Table.png)
 
 
-#### 3- Vga_signal_generator:
-This component is used to sweep across the display from left to right and then returns to the left side of the next lower row. The current row and column that need to be displayed are determined by the row_counter and col_counter mentioned above. It determines the value of hsync, vsync, and blank using the values of current row and column. These signals are important to determine when pixels are displayed on the screen. 
 
-Inputs/Outputs
-Clk: This is the 25 MHz pixel clock generated by the DCM in the video module. 
-reset_n: This is the same active high reset signal passed into the top level Lab1 module.
-Position: This is a record of coordinate_t, which holds the current pixel row and col calculated by the two counters. 
-Vga: This is a record of vga_t type which holds the hsync, vsync, and blank signals. 
-	Hsync: It tells the screen that the current row is done. The screen then starts writing pixels to the next line
-	Vsync: It tells the screen that the current video frame is done. The screen then starts writing pixels to the top-left corner of the screen. 
-	Blank: This 1-bit signal indicates when pixels are displayed on the screen. When it’s low, pixels are displayed. 
+#### 3- : trigger_detector
+The trigger detector watches the voltage and determine whether it has crossed the trigger volt value. It's instantiated in the datapath, enabling the system to capture and store audio samples that are above a certain threshold. It does so by comparing the previous and current sample to the threshold. If the previous sample is below the threshold while the current sample is above the threshold, the signal has crossed the trigger level, and systems begins capturing samples. This is used in the datapath to ensure a stable output signal on the screen
 
-#### 4- Vga:
-This component serves as a container for vga_signal_generator and the color mapper modules. It receives critical inputs from the top-level component, including the position of trigger-time and trigger voltage, as well as channel enable and active signals, and pass these down to the lower-level modules. It then produces the current row and column using  the two counters, and the R,G, B values of the current pixel using the color mapper. The R,G, B values are then used in the video component to generate the tmds and tmdsb signals. These signals are used to transmit video frames over HDMI. 
+#### Inputs/outputs:
+        clk              : Synchronizes the whole system
+        reset_n          : Resets the register that is used to hold the previous value captured
+        threshold        : The trigger level. The monitored signal and the previos signal are compared against this value to determine if the signal has crossed the trigger level
+        ready            : Indicates that a new audio sample is ready. This port is tied to the ready signal coming out of the audio_codec
+        monitored_signal : The current audio sample. 
+        crossed_trigger  : Output a signal that notifies the control unit when the signal has crossed the trigger level
 
-clk: This is the 25 MHz pixel clock generated by the DCM in the video module. It’s used to synchronize the whole system.
-reset_n : This is the same active high reset signal passed into the top level Lab1 module.
-vga : This is a record of vga_t type which holds the hsync, vsync, and blank signals. This is produced by the vga_signal_generator module
- pixel : This is a record of the coordinates and color of the current pixel. The coordinates are produced by the vga_signal_generator, while the color is produced b the color mapper. 
-trigger :  This is a record of trigger time and volt position. This value is passed along to the color mapper to display both triggers at the correct coordinates. 
- ch1 : Determines if the channel is active/enabled. The channel is enabled through sw(0) in the top level component. The channel is considered active when the current pixel corresponds to channel 1 waveform. This information is passed to color mapper to generate the correct RGB output for channel 1. 
-  ch2 : Determines if the channel is active/enabled. The channel is enabled through sw(1) in the top-level component. The channel is considered active when the current pixel corresponds to channel 1 waveform. This information is passed to color mapper to generate the correct RGB output for channel 2.
-
-
-#### 5- Numeric_stepper:
-This module is used to increment or decrement the trigger position when the up or down button is pressed. It uses a counter to prevent debouncing. When the button is pressed, the signal generated from the button goes from low to high. The numeric_stepper then detects this transition and starts the counter using a local variable. The module then waits approximately 20 ms for the signal to settle before incrementing or decrementing the trigger position by a fixed step value. When resetted, both triggers will be positioned at the top left corner of the grid.
-
-clk: This is the 25 MHz pixel clock generated by the DCM in the video module. It’s used to synchronize the whole system. 
-reset_n: Used to reset the triggers to their default position (20,20). We can reset them by pressing the cpu_reset button on the FPGA development board. 
-Up: Increment the trigger by a fixed step value (Delta).
-down: decrement the trigger by a fixed step value (Delta).
-En: In this lab, we set this value to 1, because we want the numeric_stepper to be working all the time. 
-Q: The output of the numeric_stepper. 
-
-#### 6- Lab 1
-This module is the top-level component of Lab 1 and serves as the interface between the VHDL design and the physical FPGA development board. It acts as the integration point that connects and coordinates all submodules required to achieve the overall system functionality. The Lab1 module receives button inputs (Up, Down, Left, and Right) from the FPGA board. These buttons are used to adjust the trigger time and trigger voltage positions displayed on the screen. Button presses are passed to the time_numeric_stepper and volt_numeric_stepper modules, which determine the updated trigger positions for the next video frame. It also synchronizes the system using a 25 MHz pixel clock.  
-1-	T_Numeric_stepper: Generates the position of the time trigger, used by the color mapper to draw the trigger time marker at the correct screen coordinates
-2-	T_Numeric_stepper: Generates the position of the volt trigger, used by the color mapper to draw the trigger volt marker at the correct screen coordinates  
-3-	Video: Integrates the VGA module, the DVID module, and the clock_wiz_0. The clock_wiz_0 is used to generate different clock signals at specific frequencies required by different parts of the system. The VGA module produces synchronization signals and pixel color data, which are then converted by the DVID module into TMDS signals for HDMI output. 
 
 ## Test/Debug:
 In this lab, the instructor test benches and visual observation were primarily used to test/debug our VHDL design. 
