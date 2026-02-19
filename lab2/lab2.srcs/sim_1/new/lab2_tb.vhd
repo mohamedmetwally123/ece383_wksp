@@ -41,10 +41,8 @@ architecture tb of lab2_tb is
  end component;
 begin
 
-  -- 100 MHz clock (10 ns period)
   clk <= not clk after 5 ns;
 
-  -- reset pulse
   process
   begin
     reset_n <= '0';
@@ -53,14 +51,13 @@ begin
     wait;
   end process;
 
-  -- enable CH1/CH2 (optional)
   process
   begin
     wait for 20 ns;
     switch(0) <= '1';  -- ch1 enable
     switch(1) <= '1';  -- ch2 enable
-    switch(2) <= '0';  -- exSel off
-    switch(3) <= '0';  -- sim_live off (but your datapath already forces is_live='0')
+    switch(2) <= '0';  
+    switch(3) <= '0';  
     wait;
   end process;
 
