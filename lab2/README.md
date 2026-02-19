@@ -16,25 +16,39 @@ The values coming out of the sign2unsigned component are stored in the BRAM, whi
 
 The block diagram includes both the datapath and the control unit. The flow in the diagram is as follows:
 1- Audio_Codec_Wrapper receives audio signals from the blue line-in jack port. When data is ready, the ready signal goes high for a single clock cycle.
+
 2- The system then checks for rising edge triggering, meaning it waits until the voltage crosses the trigger level going upward.
+
 3- Afterwards, the audio samples are stored in the BRAM.
+
 4- A counter is used to store audio samples at different addresses in the BRAM. The counter counts from 20 (first column in the grid) up to 620 (last column in the grid).
-5- The video module sends the column of the current pixel being displayed on the screen to the BRAM. The BRAM responds with the row value where the output signal should be displayed. If the response equals the row value of the current pixel, the video module displays that pixel with the corresponding channel color.
+
+5- The video module sends the column of the current pixel being displayed on the screen to the BRAM. The BRAM responds with the row value where the output signal should be displayed. If the response equals the row value of the current pixel, the video module 
+displays that pixel with the corresponding channel color.
+
 6- This cycle repeats every video frame.
 
 ### Finite State Machine(Figure 2):
+
 ![Screenshot](images/Lab2_cu.png)
 
 The FSM represents the control unit in Lab 2. In each video frame:
 1- The Wait_For_Trigger state waits for the voltage to cross the trigger level upward. This is signaled by sw[2], which is tied directly to the output of the trigger_detector component.
+
 2- Upon detection, the system transitions to the Reset_Counter state, which resets the counter to the first column in the grid (20). This is done by setting cw(1 downto 0) <= "10".
+
 3- The system then transitions to Wait_For_Ready, where it waits until the converted data from the audio_codec is ready. This is signaled by sw[0], which is connected to the ready flag from the audio_codec.
+
 4- Next, the system moves to the Save_Sample state, where the control unit informs the datapath to store the sample in the BRAM.
+
 5- The counter then increments, moving the write address in the BRAM to the next memory location.
+
 6- If the system reaches the last column in the grid (620), it transitions back to Wait_For_Trigger and repeats the process. Otherwise, it returns to Wait_For_Ready.
 
 ### Output Equation Table(Figure 3):
+
 ![Screenshot](images/Output_EquationTable.png)
+
 This screenshot shows the output of cw(2 downto 0). cw(1 downto 0) controls the counter, while cw(2) controls when the BRAM stores the audio samples. 
 Counter control values:
 	00 -> Hold
