@@ -15,6 +15,7 @@ The values coming out of the sign2unsigned component are stored in the BRAM, whi
 ![Screenshot](images/Lab2_BlockDiagram.jpg)
 
 The block diagram includes both the datapath and the control unit. The flow in the diagram is as follows:
+
 1- Audio_Codec_Wrapper receives audio signals from the blue line-in jack port. When data is ready, the ready signal goes high for a single clock cycle.
 
 2- The system then checks for rising edge triggering, meaning it waits until the voltage crosses the trigger level going upward.
@@ -33,6 +34,7 @@ displays that pixel with the corresponding channel color.
 ![Screenshot](images/Lab2_cu.png)
 
 The FSM represents the control unit in Lab 2. In each video frame:
+
 1- The Wait_For_Trigger state waits for the voltage to cross the trigger level upward. This is signaled by sw[2], which is tied directly to the output of the trigger_detector component.
 
 2- Upon detection, the system transitions to the Reset_Counter state, which resets the counter to the first column in the grid (20). This is done by setting cw(1 downto 0) <= "10".
@@ -51,6 +53,7 @@ The FSM represents the control unit in Lab 2. In each video frame:
 
 This screenshot shows the output of cw(2 downto 0). cw(1 downto 0) controls the counter, while cw(2) controls when the BRAM stores the audio samples. 
 Counter control values:
+
 	00 -> Hold
 	01 -> Count Up
 	11 -> Reset
@@ -83,7 +86,7 @@ The flag register will be used as a communication mechanism between Lab 2 compon
 
 
 
-#### 3- : trigger_detector
+#### 3- trigger_detector
 
 The trigger detector monitors the voltage and determines whether it has crossed the trigger level. It is instantiated in the datapath and allows the system to capture and store audio samples only after a specified threshold is crossed.
 It compares the previous sample and the current sample to the threshold. If the previous sample is below the threshold and the current sample is above it, the signal has crossed the trigger level, and the system begins capturing samples. This ensures a stable waveform display.
@@ -143,4 +146,5 @@ Video is uploaded to teams, and under vide files. The actual trigger was establi
 
 
 ## Conclusion: 
+
 This lab integrates the Audio_Codec_Wrapper with lab1 module. I think being able to switch between simulated signals, actual audio signals, while also implementing the trigger was really interesting. The way the code was structured and the given block diagram was helpful to ensure our success in this lab. For future iterations, while the audio_codec_wrapper looks very complex, I would challenge students to implement portions of it themselves to better understand its internal functionality rather than treating it entirely as a black box.
