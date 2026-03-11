@@ -54,7 +54,7 @@
         "C_TRACE": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_LOCKSTEP_SELECT": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_ENABLE_DISCRETE_PORTS": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "C_ENABLE_CONVERSION": [ { "value": "1", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "C_ENABLE_CONVERSION": [ { "value": "0", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_M_AXI_DC_USER_SIGNALS": [ { "value": "0", "value_src": "propagated", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_M_AXI_IC_USER_SIGNALS": [ { "value": "0", "value_src": "propagated", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "G_TEMPLATE_LIST": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "all" } ],
@@ -214,7 +214,7 @@
         "C_MMU_TLB_ACCESS": [ { "value": "3", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "C_MMU_ZONES": [ { "value": "16", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "C_MMU_PRIVILEGED_INSTR": [ { "value": "0", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
-        "C_USE_INTERRUPT": [ { "value": "0", "value_src": "propagated", "value_permission": "bd_and_user", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "C_USE_INTERRUPT": [ { "value": "1", "value_src": "propagated", "value_permission": "bd_and_user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_INTERRUPT_MON": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_USE_EXT_BRK": [ { "value": "0", "value_src": "propagated", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_USE_EXT_NM_BRK": [ { "value": "0", "value_src": "propagated", "resolve_type": "user", "format": "long", "usage": "all" } ],
@@ -284,7 +284,7 @@
         "C_FSL_EXCEPTION": [ { "value": "0", "resolve_type": "generated", "format": "long", "enabled": false, "usage": "all" } ],
         "C_USE_STACK_PROTECTION": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_IMPRECISE_EXCEPTIONS": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_USE_INTERRUPT": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_USE_INTERRUPT": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_USE_EXT_BRK": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_USE_EXT_NM_BRK": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_USE_NON_SECURE": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
@@ -416,7 +416,7 @@
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "../../ipshared" } ],
         "SWVERSION": [ { "value": "2024.2" } ],
-        "SYNTHESISFLOW": [ { "value": "OUT_OF_CONTEXT" } ]
+        "SYNTHESISFLOW": [ { "value": "GLOBAL" } ]
       }
     },
     "boundary": {
@@ -903,7 +903,15 @@
     "contents": {
       "cpus": {
         "microblaze": {
-          "address_space_refs": "Data"
+          "address_space_refs": "Data",
+          "parameters": {
+            "endian": [ { "value": "little" } ],
+            "elf_class": [ { "value": "32-bit" } ],
+            "instance_path": [ { "value": "" } ],
+            "bootloop_file": [ { "value": "data/mb_bootloop_le.elf" } ],
+            "processor_type": [ { "value": "MICROBLAZE_LE" } ],
+            "is_visible": [ { "value": "true" } ]
+          }
         }
       }
     }

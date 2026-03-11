@@ -244,6 +244,24 @@
             },
             "V6": {
                 "VT": "AC",
+                "BA": "0x44A00000",
+                "HA": "0x44A0FFFF",
+                "BP": "C_S00_AXI_BASEADDR",
+                "HP": "C_S00_AXI_HIGHADDR",
+                "MA": "Data",
+                "MX": "/microblaze_0",
+                "MI": "M_AXI_DP",
+                "MS": "SEG_My_Lab2_0_S00_AXI_reg",
+                "MV": "xilinx.com:ip:microblaze:11.0",
+                "SX": "/My_Lab2_0",
+                "SI": "S00_AXI",
+                "SS": "S00_AXI_reg",
+                "SV": "xilinx.com:user:My_Lab2:1.0",
+                "TM": "data",
+                "TU": "register"
+            },
+            "V7": {
+                "VT": "AC",
                 "BA": "0x80000000",
                 "HA": "0x9FFFFFFF",
                 "BP": "C_BASEADDR",
@@ -261,7 +279,7 @@
                 "TM": "data",
                 "TU": "memory"
             },
-            "V7": {
+            "V8": {
                 "VT": "AC",
                 "BA": "0x80000000",
                 "HA": "0x9FFFFFFF",
@@ -312,6 +330,11 @@
             },
             {
                 "src": "V7",
+                "trg": "V2",
+                "EH": "2"
+            },
+            {
+                "src": "V8",
                 "trg": "V2",
                 "EH": "2"
             }
