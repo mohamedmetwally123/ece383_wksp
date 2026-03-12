@@ -8,23 +8,33 @@
 module design_1 (
   usb_uart_rxd,
   usb_uart_txd,
-  DDR3_0_dq,
-  DDR3_0_dqs_p,
-  DDR3_0_dqs_n,
-  DDR3_0_addr,
-  DDR3_0_ba,
-  DDR3_0_ras_n,
-  DDR3_0_cas_n,
-  DDR3_0_we_n,
-  DDR3_0_reset_n,
-  DDR3_0_ck_p,
-  DDR3_0_ck_n,
-  DDR3_0_cke,
-  DDR3_0_dm,
-  DDR3_0_odt,
+  DDR3_dq,
+  DDR3_dqs_p,
+  DDR3_dqs_n,
+  DDR3_addr,
+  DDR3_ba,
+  DDR3_ras_n,
+  DDR3_cas_n,
+  DDR3_we_n,
+  DDR3_reset_n,
+  DDR3_ck_p,
+  DDR3_ck_n,
+  DDR3_cke,
+  DDR3_dm,
+  DDR3_odt,
   sys_clock,
   reset,
-  LED
+  ac_mclk,
+  ac_dac_sdata,
+  ac_bclk,
+  ac_lrclk,
+  scl,
+  sda,
+  tmds,
+  tmdsb,
+  btn,
+  switch,
+  ac_adc_sdata
 );
 
   (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 usb_uart RxD" *)
@@ -32,36 +42,36 @@ module design_1 (
   input usb_uart_rxd;
   (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 usb_uart TxD" *)
   output usb_uart_txd;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 DQ" *)
-  (* X_INTERFACE_MODE = "master DDR3_0" *)
-  (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DDR3_0, CAN_DEBUG false, TIMEPERIOD_PS 1250, MEMORY_TYPE COMPONENTS, DATA_WIDTH 8, CS_ENABLED true, DATA_MASK_ENABLED true, SLOT Single, MEM_ADDR_MAP ROW_COLUMN_BANK, BURST_LENGTH 8, AXI_ARBITRATION_SCHEME TDM, CAS_LATENCY 11, CAS_WRITE_LATENCY 11" *)
-  inout [15:0]DDR3_0_dq;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 DQS_P" *)
-  inout [1:0]DDR3_0_dqs_p;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 DQS_N" *)
-  inout [1:0]DDR3_0_dqs_n;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 ADDR" *)
-  output [14:0]DDR3_0_addr;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 BA" *)
-  output [2:0]DDR3_0_ba;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 RAS_N" *)
-  output DDR3_0_ras_n;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 CAS_N" *)
-  output DDR3_0_cas_n;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 WE_N" *)
-  output DDR3_0_we_n;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 RESET_N" *)
-  output DDR3_0_reset_n;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 CK_P" *)
-  output [0:0]DDR3_0_ck_p;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 CK_N" *)
-  output [0:0]DDR3_0_ck_n;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 CKE" *)
-  output [0:0]DDR3_0_cke;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 DM" *)
-  output [1:0]DDR3_0_dm;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3_0 ODT" *)
-  output [0:0]DDR3_0_odt;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 DQ" *)
+  (* X_INTERFACE_MODE = "master DDR3" *)
+  (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DDR3, CAN_DEBUG false, TIMEPERIOD_PS 1250, MEMORY_TYPE COMPONENTS, DATA_WIDTH 8, CS_ENABLED true, DATA_MASK_ENABLED true, SLOT Single, MEM_ADDR_MAP ROW_COLUMN_BANK, BURST_LENGTH 8, AXI_ARBITRATION_SCHEME TDM, CAS_LATENCY 11, CAS_WRITE_LATENCY 11" *)
+  inout [15:0]DDR3_dq;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 DQS_P" *)
+  inout [1:0]DDR3_dqs_p;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 DQS_N" *)
+  inout [1:0]DDR3_dqs_n;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 ADDR" *)
+  output [14:0]DDR3_addr;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 BA" *)
+  output [2:0]DDR3_ba;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 RAS_N" *)
+  output DDR3_ras_n;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 CAS_N" *)
+  output DDR3_cas_n;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 WE_N" *)
+  output DDR3_we_n;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 RESET_N" *)
+  output DDR3_reset_n;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 CK_P" *)
+  output [0:0]DDR3_ck_p;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 CK_N" *)
+  output [0:0]DDR3_ck_n;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 CKE" *)
+  output [0:0]DDR3_cke;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 DM" *)
+  output [1:0]DDR3_dm;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 ODT" *)
+  output [0:0]DDR3_odt;
   (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.SYS_CLOCK CLK" *)
   (* X_INTERFACE_MODE = "slave CLK.SYS_CLOCK" *)
   (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.SYS_CLOCK, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_sys_clock, INSERT_VIP 0" *)
@@ -71,7 +81,27 @@ module design_1 (
   (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RST.RESET, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
   input reset;
   (* X_INTERFACE_IGNORE = "true" *)
-  output [7:0]LED;
+  output ac_mclk;
+  (* X_INTERFACE_IGNORE = "true" *)
+  output ac_dac_sdata;
+  (* X_INTERFACE_IGNORE = "true" *)
+  output ac_bclk;
+  (* X_INTERFACE_IGNORE = "true" *)
+  output ac_lrclk;
+  (* X_INTERFACE_IGNORE = "true" *)
+  inout scl;
+  (* X_INTERFACE_IGNORE = "true" *)
+  inout sda;
+  (* X_INTERFACE_IGNORE = "true" *)
+  output [3:0]tmds;
+  (* X_INTERFACE_IGNORE = "true" *)
+  output [3:0]tmdsb;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input [4:0]btn;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input [3:0]switch;
+  (* X_INTERFACE_IGNORE = "true" *)
+  input ac_adc_sdata;
 
   // stub module has no contents
 

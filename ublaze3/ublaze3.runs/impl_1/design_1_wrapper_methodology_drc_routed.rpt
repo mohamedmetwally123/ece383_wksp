@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Thu Mar  5 08:23:31 2026
+| Date         : Wed Mar 11 14:56:08 2026
 | Host         : C27-5CG3123P67 running 64-bit major release  (build 9200)
 | Command      : report_methodology -file design_1_wrapper_methodology_drc_routed.rpt -pb design_1_wrapper_methodology_drc_routed.pb -rpx design_1_wrapper_methodology_drc_routed.rpx
 | Design       : design_1_wrapper
@@ -23,22 +23,53 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 1044
-+-----------+------------------+-------------------------------------------------+--------+
-| Rule      | Severity         | Description                                     | Checks |
-+-----------+------------------+-------------------------------------------------+--------+
-| TIMING-17 | Critical Warning | Non-clocked sequential cell                     | 1000   |
-| TIMING-27 | Critical Warning | Invalid primary clock on hierarchical pin       | 1      |
-| LUTAR-1   | Warning          | LUT drives async reset alert                    | 2      |
-| PDRC-190  | Warning          | Suboptimally placed synchronized register chain | 12     |
-| TIMING-9  | Warning          | Unknown CDC Logic                               | 1      |
-| TIMING-18 | Warning          | Missing input or output delay                   | 11     |
-| XDCB-5    | Warning          | Runtime inefficient way to find pin objects     | 1      |
-| REQP-1959 | Advisory         | connects_SERDES_RST_driver_not_FF               | 16     |
-+-----------+------------------+-------------------------------------------------+--------+
+             Checks found: 1061
++-----------+------------------+----------------------------------------------------+--------+
+| Rule      | Severity         | Description                                        | Checks |
++-----------+------------------+----------------------------------------------------+--------+
+| TIMING-4  | Critical Warning | Invalid primary clock redefinition on a clock tree | 1      |
+| TIMING-6  | Critical Warning | No common primary clock between related clocks     | 2      |
+| TIMING-7  | Critical Warning | No common node between related clocks              | 2      |
+| TIMING-17 | Critical Warning | Non-clocked sequential cell                        | 1000   |
+| TIMING-27 | Critical Warning | Invalid primary clock on hierarchical pin          | 2      |
+| HPDR-1    | Warning          | Port pin direction inconsistency                   | 2      |
+| LUTAR-1   | Warning          | LUT drives async reset alert                       | 2      |
+| PDRC-190  | Warning          | Suboptimally placed synchronized register chain    | 12     |
+| TIMING-9  | Warning          | Unknown CDC Logic                                  | 1      |
+| TIMING-18 | Warning          | Missing input or output delay                      | 16     |
+| TIMING-20 | Warning          | Non-clocked latch                                  | 3      |
+| XDCB-5    | Warning          | Runtime inefficient way to find pin objects        | 1      |
+| LATCH-1   | Advisory         | Existing latches in the design                     | 1      |
+| REQP-1959 | Advisory         | connects_SERDES_RST_driver_not_FF                  | 16     |
++-----------+------------------+----------------------------------------------------+--------+
 
 2. REPORT DETAILS
 -----------------
+TIMING-4#1 Critical Warning
+Invalid primary clock redefinition on a clock tree  
+Invalid clock redefinition on a clock tree. The primary clock design_1_i/My_Lab2_0/U0/My_Lab2_slave_lite_v1_0_S00_AXI_inst/lab2_component/datapath/Audio_Codec/audiocodec_master_clock/inst/clk_in1 is defined downstream of clock clk_out1_design_1_clk_wiz_1_0 and overrides its insertion delay and/or waveform definition
+Related violations: <none>
+
+TIMING-6#1 Critical Warning
+No common primary clock between related clocks  
+The clocks clk_out1_clk_wiz_0_1 and clk_out1_design_1_clk_wiz_1_0 are related (timed together) but they have no common primary clock. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_out1_clk_wiz_0_1] -to [get_clocks clk_out1_design_1_clk_wiz_1_0]
+Related violations: <none>
+
+TIMING-6#2 Critical Warning
+No common primary clock between related clocks  
+The clocks clk_out1_design_1_clk_wiz_1_0 and clk_out1_clk_wiz_0_1 are related (timed together) but they have no common primary clock. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_out1_design_1_clk_wiz_1_0] -to [get_clocks clk_out1_clk_wiz_0_1]
+Related violations: <none>
+
+TIMING-7#1 Critical Warning
+No common node between related clocks  
+The clocks clk_out1_clk_wiz_0_1 and clk_out1_design_1_clk_wiz_1_0 are related (timed together) but they have no common node. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_out1_clk_wiz_0_1] -to [get_clocks clk_out1_design_1_clk_wiz_1_0]
+Related violations: <none>
+
+TIMING-7#2 Critical Warning
+No common node between related clocks  
+The clocks clk_out1_design_1_clk_wiz_1_0 and clk_out1_clk_wiz_0_1 are related (timed together) but they have no common node. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_out1_design_1_clk_wiz_1_0] -to [get_clocks clk_out1_clk_wiz_0_1]
+Related violations: <none>
+
 TIMING-17#1 Critical Warning
 Non-clocked sequential cell  
 The clock pin design_1_i/axi_smc_1/inst/clk_map/psr0/U0/ACTIVE_LOW_BSR_OUT_DFF[0].FDRE_BSR_N/C is not reached by a timing clock
@@ -5041,7 +5072,22 @@ Related violations: <none>
 
 TIMING-27#1 Critical Warning
 Invalid primary clock on hierarchical pin  
+A primary clock design_1_i/My_Lab2_0/U0/My_Lab2_slave_lite_v1_0_S00_AXI_inst/lab2_component/datapath/Audio_Codec/audiocodec_master_clock/inst/clk_in1 is created on an inappropriate internal pin design_1_i/My_Lab2_0/U0/My_Lab2_slave_lite_v1_0_S00_AXI_inst/lab2_component/datapath/Audio_Codec/audiocodec_master_clock/inst/clk_in1. It is not recommended to create a primary clock on a hierarchical pin when its driver pin has a fanout connected to multiple clock pins
+Related violations: <none>
+
+TIMING-27#2 Critical Warning
+Invalid primary clock on hierarchical pin  
 A primary clock design_1_i/clk_wiz_1/inst/clk_in1 is created on an inappropriate internal pin design_1_i/clk_wiz_1/inst/clk_in1. It is not recommended to create a primary clock on a hierarchical pin when its driver pin has a fanout connected to multiple clock pins
+Related violations: <none>
+
+HPDR-1#1 Warning
+Port pin direction inconsistency  
+Hierarchical port(pin) scl direction INOUT is not consistent with the directions of the cell pins/ports found at that level of the netlist hierarchy. Please review the design and consider changing the port(pin) direction. Both drivers and loads were expected for the net (scl) connected to this Port, but both were not found.
+Related violations: <none>
+
+HPDR-1#2 Warning
+Port pin direction inconsistency  
+Hierarchical port(pin) sda direction INOUT is not consistent with the directions of the cell pins/ports found at that level of the netlist hierarchy. Please review the design and consider changing the port(pin) direction. Both drivers and loads were expected for the net (sda) connected to this Port, but both were not found.
 Related violations: <none>
 
 LUTAR-1#1 Warning
@@ -5071,62 +5117,62 @@ Related violations: <none>
 
 PDRC-190#1 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[0] in site SLICE_X39Y180 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[0] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[0] in site SLICE_X59Y172 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[0] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#2 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[10] in site SLICE_X38Y178 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[10] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[10] in site SLICE_X58Y172 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[10] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#3 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[11] in site SLICE_X37Y181 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[11] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[11] in site SLICE_X56Y177 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[11] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#4 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[1] in site SLICE_X38Y183 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[1] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[1] in site SLICE_X56Y172 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[1] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#5 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[2] in site SLICE_X36Y178 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[2] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[2] in site SLICE_X59Y174 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[2] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#6 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[3] in site SLICE_X37Y179 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[3] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[3] in site SLICE_X59Y176 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[3] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#7 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[4] in site SLICE_X38Y176 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[4] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[4] in site SLICE_X57Y174 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[4] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#8 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[5] in site SLICE_X39Y182 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[5] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[5] in site SLICE_X58Y176 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[5] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#9 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[6] in site SLICE_X40Y177 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[6] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[6] in site SLICE_X57Y172 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[6] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#10 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[7] in site SLICE_X40Y179 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[7] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[7] in site SLICE_X54Y174 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[7] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#11 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[8] in site SLICE_X40Y181 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[8] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[8] in site SLICE_X60Y174 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[8] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#12 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[9] in site SLICE_X38Y181 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[9] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_sync_r5_reg[9] in site SLICE_X56Y174 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/temp_mon_enabled.u_tempmon/device_temp_r_reg[9] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 TIMING-9#1 Warning
@@ -5136,63 +5182,108 @@ Related violations: <none>
 
 TIMING-18#1 Warning
 Missing input or output delay  
-An input delay is missing on reset relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+An input delay is missing on ac_adc_sdata relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
 Related violations: <none>
 
 TIMING-18#2 Warning
 Missing input or output delay  
-An input delay is missing on usb_uart_rxd relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+An input delay is missing on btn[0] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
 Related violations: <none>
 
 TIMING-18#3 Warning
 Missing input or output delay  
-An output delay is missing on LED[0] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+An input delay is missing on btn[1] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
 Related violations: <none>
 
 TIMING-18#4 Warning
 Missing input or output delay  
-An output delay is missing on LED[1] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+An input delay is missing on btn[2] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
 Related violations: <none>
 
 TIMING-18#5 Warning
 Missing input or output delay  
-An output delay is missing on LED[2] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+An input delay is missing on btn[3] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
 Related violations: <none>
 
 TIMING-18#6 Warning
 Missing input or output delay  
-An output delay is missing on LED[3] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+An input delay is missing on btn[4] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
 Related violations: <none>
 
 TIMING-18#7 Warning
 Missing input or output delay  
-An output delay is missing on LED[4] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+An input delay is missing on reset relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
 Related violations: <none>
 
 TIMING-18#8 Warning
 Missing input or output delay  
-An output delay is missing on LED[5] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+An input delay is missing on switch[0] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
 Related violations: <none>
 
 TIMING-18#9 Warning
 Missing input or output delay  
-An output delay is missing on LED[6] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+An input delay is missing on switch[1] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
 Related violations: <none>
 
 TIMING-18#10 Warning
 Missing input or output delay  
-An output delay is missing on LED[7] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+An input delay is missing on switch[2] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
 Related violations: <none>
 
 TIMING-18#11 Warning
 Missing input or output delay  
+An input delay is missing on switch[3] relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+Related violations: <none>
+
+TIMING-18#12 Warning
+Missing input or output delay  
+An input delay is missing on usb_uart_rxd relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+Related violations: <none>
+
+TIMING-18#13 Warning
+Missing input or output delay  
+An output delay is missing on ac_bclk relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+Related violations: <none>
+
+TIMING-18#14 Warning
+Missing input or output delay  
+An output delay is missing on ac_dac_sdata relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+Related violations: <none>
+
+TIMING-18#15 Warning
+Missing input or output delay  
+An output delay is missing on ac_lrclk relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+Related violations: <none>
+
+TIMING-18#16 Warning
+Missing input or output delay  
 An output delay is missing on usb_uart_txd relative to the rising and/or falling clock edge(s) of design_1_i/clk_wiz_1/inst/clk_in1.
+Related violations: <none>
+
+TIMING-20#1 Warning
+Non-clocked latch  
+The latch design_1_i/My_Lab2_0/U0/My_Lab2_slave_lite_v1_0_S00_AXI_inst/lab2_component/control/cw_reg[0] cannot be properly analyzed as its control pin design_1_i/My_Lab2_0/U0/My_Lab2_slave_lite_v1_0_S00_AXI_inst/lab2_component/control/cw_reg[0]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#2 Warning
+Non-clocked latch  
+The latch design_1_i/My_Lab2_0/U0/My_Lab2_slave_lite_v1_0_S00_AXI_inst/lab2_component/control/cw_reg[1] cannot be properly analyzed as its control pin design_1_i/My_Lab2_0/U0/My_Lab2_slave_lite_v1_0_S00_AXI_inst/lab2_component/control/cw_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#3 Warning
+Non-clocked latch  
+The latch design_1_i/My_Lab2_0/U0/My_Lab2_slave_lite_v1_0_S00_AXI_inst/lab2_component/control/cw_reg[2] cannot be properly analyzed as its control pin design_1_i/My_Lab2_0/U0/My_Lab2_slave_lite_v1_0_S00_AXI_inst/lab2_component/control/cw_reg[2]/G is not reached by a timing clock
 Related violations: <none>
 
 XDCB-5#1 Warning
 Runtime inefficient way to find pin objects  
 The option '-to : [get_pins -hier -include_replicated_objects -filter {NAME =~ *temp_mon_enabled.u_tempmon/device_temp_sync_r1_reg[*]/D}]' of constraint 'set_max_delay' uses inefficient query to find pin objects (see constraint position '11' in the Timing Constraint window in Vivado IDE). To reduce runtime, it is recommended to get the pins through the cell objects. Please refer to Using Constraints Guide (Constraints Efficiency). An example of optimal query is: get_pins -filter {REF_PIN_NAME=~yy*} -of_objects [get_cells -hierarchical xx*].
 Current XDC: c:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.gen/sources_1/bd/design_1/ip/design_1_mig_7series_0_0/design_1_mig_7series_0_0/user_design/constraints/design_1_mig_7series_0_0.xdc (Line: 356)
+Related violations: <none>
+
+LATCH-1#1 Advisory
+Existing latches in the design  
+There are 3 latches found in the design. Inferred latches are often the result of HDL coding mistakes, such as incomplete if or case statements.
 Related violations: <none>
 
 REQP-1959#1 Advisory

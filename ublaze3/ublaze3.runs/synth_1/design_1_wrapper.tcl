@@ -56,6 +56,7 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 4
 set_param bd.open.in_stealth_mode 2
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a200tsbg484-1
@@ -71,7 +72,11 @@ set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
 set_property board_part_repo_paths {C:/Users/C27Mohamed.Metwally/AppData/Roaming/Xilinx/Vivado/2024.2/xhub/board_store/xilinx_board_store} [current_project]
 set_property board_part digilentinc.com:nexys_video:part0:1.2 [current_project]
-set_property ip_repo_paths c:/Users/C27Mohamed.Metwally/ece383_wksp/ip_repo/My_Counter_IP_1_0 [current_project]
+set_property ip_repo_paths {
+  c:/Users/C27Mohamed.Metwally/ece383_wksp/ip_repo/My_Lab2_1_0/src
+  c:/Users/C27Mohamed.Metwally/ece383_wksp/ip_repo/My_Lab2_1_0
+  c:/Users/C27Mohamed.Metwally/ece383_wksp/ip_repo/My_Counter_IP_1_0
+} [current_project]
 update_ip_catalog
 set_property ip_output_repo c:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
@@ -171,7 +176,11 @@ set_property used_in_implementation false [get_files -all c:/Users/C27Mohamed.Me
 set_property used_in_implementation false [get_files -all c:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.gen/sources_1/bd/design_1/ip/design_1_rst_mig_7series_0_100M_0/design_1_rst_mig_7series_0_100M_0_board.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.gen/sources_1/bd/design_1/ip/design_1_rst_mig_7series_0_100M_0/design_1_rst_mig_7series_0_100M_0.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.gen/sources_1/bd/design_1/ip/design_1_rst_mig_7series_0_100M_0/design_1_rst_mig_7series_0_100M_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all C:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.gen/sources_1/bd/design_1/design_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.gen/sources_1/bd/design_1/ip/design_1_My_Lab2_0_0/src/clk_wiz_1/clk_wiz_1.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.gen/sources_1/bd/design_1/ip/design_1_My_Lab2_0_0/src/clk_wiz_1/clk_wiz_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.gen/sources_1/bd/design_1/ip/design_1_My_Lab2_0_0/src/clk_wiz_0/clk_wiz_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.gen/sources_1/bd/design_1/ip/design_1_My_Lab2_0_0/src/clk_wiz_0/clk_wiz_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.gen/sources_1/bd/design_1/design_1_ooc.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.gen/sources_1/bd/design_1/ip/design_1_microblaze_0_0/data/mb_bootloop_le.elf]
 
 OPTRACE "Adding files" END { }
@@ -183,8 +192,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.srcs/constrs_1/imports/ice2/ice2.xdc
-set_property used_in_implementation false [get_files C:/Users/C27Mohamed.Metwally/ece383_wksp/ublaze3/ublaze3.srcs/constrs_1/imports/ice2/ice2.xdc]
+read_xdc C:/Users/C27Mohamed.Metwally/ece383_wksp/lab2/lab2.srcs/constrs_1/imports/lab2_code_for_cadets_2026/Lab2.xdc
+set_property used_in_implementation false [get_files C:/Users/C27Mohamed.Metwally/ece383_wksp/lab2/lab2.srcs/constrs_1/imports/lab2_code_for_cadets_2026/Lab2.xdc]
 
 read_xdc dont_touch.xdc
 set_property used_in_implementation false [get_files dont_touch.xdc]

@@ -1,82 +1,107 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Mar  5 08:17:01 2026" VIVADOVERSION="2024.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Mar 11 14:49:20 2026" VIVADOVERSION="2024.2">
 
   <SYSTEMINFO ARCH="artix7" BOARD="digilentinc.com:nexys_video:part0:1.2" DEVICE="7a200t" NAME="design_1" PACKAGE="sbg484" SPEEDGRADE="-1"/>
 
   <EXTERNALPORTS>
-    <PORT DIR="O" LEFT="14" NAME="DDR3_0_addr" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_addr">
+    <PORT DIR="O" LEFT="14" NAME="DDR3_addr" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_addr">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_addr"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="2" NAME="DDR3_0_ba" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_ba">
+    <PORT DIR="O" LEFT="2" NAME="DDR3_ba" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_ba">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_ba"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" NAME="DDR3_0_cas_n" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_cas_n">
+    <PORT DIR="O" NAME="DDR3_cas_n" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_cas_n">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_cas_n"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="0" NAME="DDR3_0_ck_n" RIGHT="0" SIGIS="clk" SIGNAME="mig_7series_0_ddr3_ck_n">
+    <PORT DIR="O" LEFT="0" NAME="DDR3_ck_n" RIGHT="0" SIGIS="clk" SIGNAME="mig_7series_0_ddr3_ck_n">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_ck_n"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="0" NAME="DDR3_0_ck_p" RIGHT="0" SIGIS="clk" SIGNAME="mig_7series_0_ddr3_ck_p">
+    <PORT DIR="O" LEFT="0" NAME="DDR3_ck_p" RIGHT="0" SIGIS="clk" SIGNAME="mig_7series_0_ddr3_ck_p">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_ck_p"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="0" NAME="DDR3_0_cke" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_cke">
+    <PORT DIR="O" LEFT="0" NAME="DDR3_cke" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_cke">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_cke"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="1" NAME="DDR3_0_dm" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dm">
+    <PORT DIR="O" LEFT="1" NAME="DDR3_dm" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dm">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_dm"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="IO" LEFT="15" NAME="DDR3_0_dq" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dq">
+    <PORT DIR="IO" LEFT="15" NAME="DDR3_dq" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dq">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_dq"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="IO" LEFT="1" NAME="DDR3_0_dqs_n" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dqs_n">
+    <PORT DIR="IO" LEFT="1" NAME="DDR3_dqs_n" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dqs_n">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_dqs_n"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="IO" LEFT="1" NAME="DDR3_0_dqs_p" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dqs_p">
+    <PORT DIR="IO" LEFT="1" NAME="DDR3_dqs_p" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dqs_p">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_dqs_p"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="0" NAME="DDR3_0_odt" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_odt">
+    <PORT DIR="O" LEFT="0" NAME="DDR3_odt" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_odt">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_odt"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" NAME="DDR3_0_ras_n" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_ras_n">
+    <PORT DIR="O" NAME="DDR3_ras_n" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_ras_n">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_ras_n"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" NAME="DDR3_0_reset_n" SIGIS="rst" SIGNAME="mig_7series_0_ddr3_reset_n">
+    <PORT DIR="O" NAME="DDR3_reset_n" SIGIS="rst" SIGNAME="mig_7series_0_ddr3_reset_n">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_reset_n"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" NAME="DDR3_0_we_n" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_we_n">
+    <PORT DIR="O" NAME="DDR3_we_n" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_we_n">
       <CONNECTIONS>
         <CONNECTION INSTANCE="mig_7series_0" PORT="ddr3_we_n"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="7" NAME="LED" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_LED">
+    <PORT DIR="I" NAME="ac_adc_sdata" SIGIS="undef" SIGNAME="External_Ports_ac_adc_sdata">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="My_Counter_IP_0" PORT="LED"/>
+        <CONNECTION INSTANCE="My_Lab2_0" PORT="ac_adc_sdata"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="ac_bclk" SIGIS="undef" SIGNAME="My_Lab2_0_ac_bclk">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="My_Lab2_0" PORT="ac_bclk"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="ac_dac_sdata" SIGIS="undef" SIGNAME="My_Lab2_0_ac_dac_sdata">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="My_Lab2_0" PORT="ac_dac_sdata"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="ac_lrclk" SIGIS="undef" SIGNAME="My_Lab2_0_ac_lrclk">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="My_Lab2_0" PORT="ac_lrclk"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="ac_mclk" SIGIS="undef" SIGNAME="My_Lab2_0_ac_mclk">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="My_Lab2_0" PORT="ac_mclk"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="4" NAME="btn" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_btn">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="My_Lab2_0" PORT="btn"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="reset" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="External_Ports_reset">
@@ -86,9 +111,34 @@
         <CONNECTION INSTANCE="mig_7series_0" PORT="sys_rst"/>
       </CONNECTIONS>
     </PORT>
+    <PORT DIR="IO" NAME="scl" SIGIS="undef" SIGNAME="External_Ports_scl">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="My_Lab2_0" PORT="scl"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="IO" NAME="sda" SIGIS="undef" SIGNAME="External_Ports_sda">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="My_Lab2_0" PORT="sda"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" LEFT="3" NAME="switch" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_switch">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="My_Lab2_0" PORT="switch"/>
+      </CONNECTIONS>
+    </PORT>
     <PORT CLKFREQUENCY="100000000" DIR="I" NAME="sys_clock" SIGIS="clk" SIGNAME="External_Ports_sys_clock">
       <CONNECTIONS>
         <CONNECTION INSTANCE="util_ds_buf_0" PORT="BUFG_I"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="3" NAME="tmds" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_tmds">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="My_Lab2_0" PORT="tmds"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="3" NAME="tmdsb" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_tmdsb">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="My_Lab2_0" PORT="tmdsb"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="usb_uart_rxd" SIGIS="undef" SIGNAME="axi_uartlite_0_rx">
@@ -110,7 +160,7 @@
         <PORTMAP LOGICAL="TxD" PHYSICAL="usb_uart_txd"/>
       </PORTMAPS>
     </BUSINTERFACE>
-    <BUSINTERFACE BUSNAME="mig_7series_0_DDR3" DATAWIDTH="8" NAME="DDR3_0" TYPE="INITIATOR">
+    <BUSINTERFACE BUSNAME="mig_7series_0_DDR3" DATAWIDTH="8" NAME="DDR3" TYPE="INITIATOR">
       <PARAMETER NAME="AXI_ARBITRATION_SCHEME" VALUE="TDM"/>
       <PARAMETER NAME="BURST_LENGTH" VALUE="8"/>
       <PARAMETER NAME="CAN_DEBUG" VALUE="false"/>
@@ -126,26 +176,26 @@
       <PARAMETER NAME="SLOT" VALUE="Single"/>
       <PARAMETER NAME="TIMEPERIOD_PS" VALUE="1250"/>
       <PORTMAPS>
-        <PORTMAP LOGICAL="ADDR" PHYSICAL="DDR3_0_addr"/>
-        <PORTMAP LOGICAL="BA" PHYSICAL="DDR3_0_ba"/>
-        <PORTMAP LOGICAL="CAS_N" PHYSICAL="DDR3_0_cas_n"/>
-        <PORTMAP LOGICAL="CKE" PHYSICAL="DDR3_0_cke"/>
-        <PORTMAP LOGICAL="CK_N" PHYSICAL="DDR3_0_ck_n"/>
-        <PORTMAP LOGICAL="CK_P" PHYSICAL="DDR3_0_ck_p"/>
-        <PORTMAP LOGICAL="DM" PHYSICAL="DDR3_0_dm"/>
-        <PORTMAP LOGICAL="DQ" PHYSICAL="DDR3_0_dq"/>
-        <PORTMAP LOGICAL="DQS_N" PHYSICAL="DDR3_0_dqs_n"/>
-        <PORTMAP LOGICAL="DQS_P" PHYSICAL="DDR3_0_dqs_p"/>
-        <PORTMAP LOGICAL="ODT" PHYSICAL="DDR3_0_odt"/>
-        <PORTMAP LOGICAL="RAS_N" PHYSICAL="DDR3_0_ras_n"/>
-        <PORTMAP LOGICAL="RESET_N" PHYSICAL="DDR3_0_reset_n"/>
-        <PORTMAP LOGICAL="WE_N" PHYSICAL="DDR3_0_we_n"/>
+        <PORTMAP LOGICAL="ADDR" PHYSICAL="DDR3_addr"/>
+        <PORTMAP LOGICAL="BA" PHYSICAL="DDR3_ba"/>
+        <PORTMAP LOGICAL="CAS_N" PHYSICAL="DDR3_cas_n"/>
+        <PORTMAP LOGICAL="CKE" PHYSICAL="DDR3_cke"/>
+        <PORTMAP LOGICAL="CK_N" PHYSICAL="DDR3_ck_n"/>
+        <PORTMAP LOGICAL="CK_P" PHYSICAL="DDR3_ck_p"/>
+        <PORTMAP LOGICAL="DM" PHYSICAL="DDR3_dm"/>
+        <PORTMAP LOGICAL="DQ" PHYSICAL="DDR3_dq"/>
+        <PORTMAP LOGICAL="DQS_N" PHYSICAL="DDR3_dqs_n"/>
+        <PORTMAP LOGICAL="DQS_P" PHYSICAL="DDR3_dqs_p"/>
+        <PORTMAP LOGICAL="ODT" PHYSICAL="DDR3_odt"/>
+        <PORTMAP LOGICAL="RAS_N" PHYSICAL="DDR3_ras_n"/>
+        <PORTMAP LOGICAL="RESET_N" PHYSICAL="DDR3_reset_n"/>
+        <PORTMAP LOGICAL="WE_N" PHYSICAL="DDR3_we_n"/>
       </PORTMAPS>
     </BUSINTERFACE>
   </EXTERNALINTERFACES>
 
   <MODULES>
-    <MODULE COREREVISION="3" FULLNAME="/My_Counter_IP_0" HWVERSION="1.0" INSTANCE="My_Counter_IP_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="My_Counter_IP" VLNV="xilinx.com:user:My_Counter_IP:1.0">
+    <MODULE COREREVISION="20" FULLNAME="/My_Lab2_0" HWVERSION="1.0" INSTANCE="My_Lab2_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="My_Lab2" VLNV="xilinx.com:user:My_Lab2:1.0">
       <DOCUMENTS/>
       <ADDRESSBLOCKS>
         <ADDRESSBLOCK ACCESS="" INTERFACE="S00_AXI" NAME="S00_AXI_reg" RANGE="4096" USAGE="register"/>
@@ -153,18 +203,43 @@
       <PARAMETERS>
         <PARAMETER NAME="C_S00_AXI_ADDR_WIDTH" VALUE="7"/>
         <PARAMETER NAME="C_S00_AXI_DATA_WIDTH" VALUE="32"/>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_My_Counter_IP_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_My_Lab2_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
         <PARAMETER NAME="C_S00_AXI_BASEADDR" VALUE="0x44A00000"/>
         <PARAMETER NAME="C_S00_AXI_HIGHADDR" VALUE="0x44A0FFFF"/>
       </PARAMETERS>
       <PORTS>
-        <PORT DIR="O" LEFT="7" NAME="LED" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_LED">
+        <PORT DIR="I" NAME="ac_adc_sdata" SIGIS="undef" SIGNAME="External_Ports_ac_adc_sdata">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="LED"/>
+            <CONNECTION INSTANCE="External_Ports" PORT="ac_adc_sdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="roll" SIGIS="undef" SIGNAME="My_Counter_IP_0_roll">
+        <PORT DIR="O" NAME="ac_bclk" SIGIS="undef" SIGNAME="My_Lab2_0_ac_bclk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="ac_bclk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="ac_dac_sdata" SIGIS="undef" SIGNAME="My_Lab2_0_ac_dac_sdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="ac_dac_sdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="ac_lrclk" SIGIS="undef" SIGNAME="My_Lab2_0_ac_lrclk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="ac_lrclk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="ac_mclk" SIGIS="undef" SIGNAME="My_Lab2_0_ac_mclk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="ac_mclk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="4" NAME="btn" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_btn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="btn"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="flagQ" SIGIS="undef" SIGNAME="My_Lab2_0_flagQ">
           <CONNECTIONS>
             <CONNECTION INSTANCE="microblaze_0" PORT="Interrupt"/>
           </CONNECTIONS>
@@ -174,7 +249,7 @@
             <CONNECTION INSTANCE="clk_wiz_1" PORT="clk_out1"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="6" NAME="s00_axi_araddr" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_araddr">
+        <PORT DIR="I" LEFT="6" NAME="s00_axi_araddr" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_araddr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_araddr"/>
           </CONNECTIONS>
@@ -184,94 +259,119 @@
             <CONNECTION INSTANCE="rst_clk_wiz_1_100M" PORT="peripheral_aresetn"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="2" NAME="s00_axi_arprot" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_arprot">
+        <PORT DIR="I" LEFT="2" NAME="s00_axi_arprot" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_arprot">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_arprot"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s00_axi_arready" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_arready">
+        <PORT DIR="O" NAME="s00_axi_arready" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_arready">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_arready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s00_axi_arvalid" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_arvalid">
+        <PORT DIR="I" NAME="s00_axi_arvalid" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_arvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_arvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="6" NAME="s00_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_awaddr">
+        <PORT DIR="I" LEFT="6" NAME="s00_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_awaddr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_awaddr"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="2" NAME="s00_axi_awprot" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_awprot">
+        <PORT DIR="I" LEFT="2" NAME="s00_axi_awprot" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_awprot">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_awprot"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s00_axi_awready" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_awready">
+        <PORT DIR="O" NAME="s00_axi_awready" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_awready">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_awready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s00_axi_awvalid" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_awvalid">
+        <PORT DIR="I" NAME="s00_axi_awvalid" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_awvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_awvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s00_axi_bready" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_bready">
+        <PORT DIR="I" NAME="s00_axi_bready" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_bready">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_bready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="1" NAME="s00_axi_bresp" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_bresp">
+        <PORT DIR="O" LEFT="1" NAME="s00_axi_bresp" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_bresp">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_bresp"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s00_axi_bvalid" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_bvalid">
+        <PORT DIR="O" NAME="s00_axi_bvalid" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_bvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_bvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="31" NAME="s00_axi_rdata" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_rdata">
+        <PORT DIR="O" LEFT="31" NAME="s00_axi_rdata" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_rdata">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_rdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s00_axi_rready" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_rready">
+        <PORT DIR="I" NAME="s00_axi_rready" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_rready">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_rready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="1" NAME="s00_axi_rresp" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_rresp">
+        <PORT DIR="O" LEFT="1" NAME="s00_axi_rresp" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_rresp">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_rresp"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s00_axi_rvalid" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_rvalid">
+        <PORT DIR="O" NAME="s00_axi_rvalid" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_rvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_rvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="31" NAME="s00_axi_wdata" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_wdata">
+        <PORT DIR="I" LEFT="31" NAME="s00_axi_wdata" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_wdata">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_wdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s00_axi_wready" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_wready">
+        <PORT DIR="O" NAME="s00_axi_wready" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_wready">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_wready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="3" NAME="s00_axi_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_wstrb">
+        <PORT DIR="I" LEFT="3" NAME="s00_axi_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_wstrb">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_wstrb"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s00_axi_wvalid" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_wvalid">
+        <PORT DIR="I" NAME="s00_axi_wvalid" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_wvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="M01_AXI_wvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="IO" NAME="scl" SIGIS="undef" SIGNAME="External_Ports_scl">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="scl"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="IO" NAME="sda" SIGIS="undef" SIGNAME="External_Ports_sda">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="sda"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="switch" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_switch">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="switch"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="tmds" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_tmds">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="tmds"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="tmdsb" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_tmdsb">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="tmdsb"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -435,99 +535,99 @@
             <CONNECTION INSTANCE="axi_uartlite_0" PORT="s_axi_wvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="6" NAME="M01_AXI_araddr" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_araddr">
+        <PORT DIR="O" LEFT="6" NAME="M01_AXI_araddr" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_araddr">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_araddr"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_araddr"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="2" NAME="M01_AXI_arprot" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_arprot">
+        <PORT DIR="O" LEFT="2" NAME="M01_AXI_arprot" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_arprot">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_arprot"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_arprot"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="M01_AXI_arready" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_arready">
+        <PORT DIR="I" NAME="M01_AXI_arready" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_arready">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_arready"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_arready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="M01_AXI_arvalid" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_arvalid">
+        <PORT DIR="O" NAME="M01_AXI_arvalid" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_arvalid">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_arvalid"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_arvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="6" NAME="M01_AXI_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_awaddr">
+        <PORT DIR="O" LEFT="6" NAME="M01_AXI_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_awaddr">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_awaddr"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_awaddr"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="2" NAME="M01_AXI_awprot" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_awprot">
+        <PORT DIR="O" LEFT="2" NAME="M01_AXI_awprot" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_awprot">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_awprot"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_awprot"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="M01_AXI_awready" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_awready">
+        <PORT DIR="I" NAME="M01_AXI_awready" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_awready">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_awready"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_awready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="M01_AXI_awvalid" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_awvalid">
+        <PORT DIR="O" NAME="M01_AXI_awvalid" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_awvalid">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_awvalid"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_awvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="M01_AXI_bready" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_bready">
+        <PORT DIR="O" NAME="M01_AXI_bready" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_bready">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_bready"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_bready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="1" NAME="M01_AXI_bresp" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_bresp">
+        <PORT DIR="I" LEFT="1" NAME="M01_AXI_bresp" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_bresp">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_bresp"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_bresp"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="M01_AXI_bvalid" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_bvalid">
+        <PORT DIR="I" NAME="M01_AXI_bvalid" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_bvalid">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_bvalid"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_bvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="31" NAME="M01_AXI_rdata" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_rdata">
+        <PORT DIR="I" LEFT="31" NAME="M01_AXI_rdata" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_rdata">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_rdata"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_rdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="M01_AXI_rready" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_rready">
+        <PORT DIR="O" NAME="M01_AXI_rready" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_rready">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_rready"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_rready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="1" NAME="M01_AXI_rresp" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_rresp">
+        <PORT DIR="I" LEFT="1" NAME="M01_AXI_rresp" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_rresp">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_rresp"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_rresp"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="M01_AXI_rvalid" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_rvalid">
+        <PORT DIR="I" NAME="M01_AXI_rvalid" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_rvalid">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_rvalid"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_rvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="31" NAME="M01_AXI_wdata" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_wdata">
+        <PORT DIR="O" LEFT="31" NAME="M01_AXI_wdata" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_wdata">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_wdata"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_wdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="M01_AXI_wready" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_wready">
+        <PORT DIR="I" NAME="M01_AXI_wready" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_wready">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_wready"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_wready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="3" NAME="M01_AXI_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_wstrb">
+        <PORT DIR="O" LEFT="3" NAME="M01_AXI_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_wstrb">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_wstrb"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_wstrb"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="M01_AXI_wvalid" SIGIS="undef" SIGNAME="My_Counter_IP_0_s00_axi_wvalid">
+        <PORT DIR="O" NAME="M01_AXI_wvalid" SIGIS="undef" SIGNAME="My_Lab2_0_s00_axi_wvalid">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_wvalid"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_wvalid"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="31" NAME="S00_AXI_araddr" RIGHT="0" SIGIS="undef" SIGNAME="axi_smc_S00_AXI_araddr">
@@ -2388,7 +2488,7 @@
             <CONNECTION INSTANCE="axi_smc" PORT="aclk"/>
             <CONNECTION INSTANCE="axi_uartlite_0" PORT="s_axi_aclk"/>
             <CONNECTION INSTANCE="axi_smc_1" PORT="aclk"/>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_aclk"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_aclk"/>
           </CONNECTIONS>
         </PORT>
         <PORT CLKFREQUENCY="200000000" DIR="O" NAME="clk_out2" SIGIS="clk" SIGNAME="clk_wiz_1_clk_out2">
@@ -2895,9 +2995,9 @@
             <CONNECTION INSTANCE="microblaze_0_local_memory_ilmb_v10" PORT="M_ABus"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="Interrupt" SIGIS="INTERRUPT" SIGNAME="My_Counter_IP_0_roll">
+        <PORT DIR="I" NAME="Interrupt" SIGIS="INTERRUPT" SIGNAME="My_Lab2_0_flagQ">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="roll"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="flagQ"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="0" NAME="Interrupt_Ack" RIGHT="1" SIGIS="undef"/>
@@ -3488,7 +3588,7 @@
         <MEMRANGE ADDRESSBLOCK="Mem" BASENAME="C_BASEADDR" BASEVALUE="0x00000000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x00007FFF" INSTANCE="microblaze_0_local_memory_dlmb_bram_if_cntlr" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MASTERBUSINTERFACE="DLMB" MEMTYPE="MEMORY" SLAVEBUSINTERFACE="SLMB"/>
         <MEMRANGE ADDRESSBLOCK="Mem" BASENAME="C_BASEADDR" BASEVALUE="0x00000000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x00007FFF" INSTANCE="microblaze_0_local_memory_ilmb_bram_if_cntlr" IS_DATA="FALSE" IS_INSTRUCTION="TRUE" MASTERBUSINTERFACE="ILMB" MEMTYPE="MEMORY" SLAVEBUSINTERFACE="SLMB"/>
         <MEMRANGE ADDRESSBLOCK="Reg" BASENAME="C_BASEADDR" BASEVALUE="0x40600000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x4060FFFF" INSTANCE="axi_uartlite_0" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MASTERBUSINTERFACE="M_AXI_DP" MEMTYPE="REGISTER" SLAVEBUSINTERFACE="S_AXI"/>
-        <MEMRANGE ADDRESSBLOCK="S00_AXI_reg" BASENAME="C_S00_AXI_BASEADDR" BASEVALUE="0x44A00000" HIGHNAME="C_S00_AXI_HIGHADDR" HIGHVALUE="0x44A0FFFF" INSTANCE="My_Counter_IP_0" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MASTERBUSINTERFACE="M_AXI_DP" MEMTYPE="REGISTER" SLAVEBUSINTERFACE="S00_AXI"/>
+        <MEMRANGE ADDRESSBLOCK="S00_AXI_reg" BASENAME="C_S00_AXI_BASEADDR" BASEVALUE="0x44A00000" HIGHNAME="C_S00_AXI_HIGHADDR" HIGHVALUE="0x44A0FFFF" INSTANCE="My_Lab2_0" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MASTERBUSINTERFACE="M_AXI_DP" MEMTYPE="REGISTER" SLAVEBUSINTERFACE="S00_AXI"/>
         <MEMRANGE ADDRESSBLOCK="memaddr" BASENAME="C_BASEADDR" BASEVALUE="0x80000000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x9FFFFFFF" INSTANCE="mig_7series_0" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MASTERBUSINTERFACE="M_AXI_DC" MEMTYPE="MEMORY" SLAVEBUSINTERFACE="S_AXI"/>
         <MEMRANGE ADDRESSBLOCK="memaddr" BASENAME="C_BASEADDR" BASEVALUE="0x80000000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x9FFFFFFF" INSTANCE="mig_7series_0" IS_DATA="FALSE" IS_INSTRUCTION="TRUE" MASTERBUSINTERFACE="M_AXI_IC" MEMTYPE="MEMORY" SLAVEBUSINTERFACE="S_AXI"/>
       </MEMORYMAP>
@@ -3496,7 +3596,7 @@
         <PERIPHERAL INSTANCE="microblaze_0_local_memory_dlmb_bram_if_cntlr"/>
         <PERIPHERAL INSTANCE="microblaze_0_local_memory_ilmb_bram_if_cntlr"/>
         <PERIPHERAL INSTANCE="axi_uartlite_0"/>
-        <PERIPHERAL INSTANCE="My_Counter_IP_0"/>
+        <PERIPHERAL INSTANCE="My_Lab2_0"/>
         <PERIPHERAL INSTANCE="mig_7series_0"/>
       </PERIPHERALS>
     </MODULE>
@@ -5644,72 +5744,72 @@
         </PORT>
         <PORT DIR="O" LEFT="14" NAME="ddr3_addr" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_addr">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_addr"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_addr"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="2" NAME="ddr3_ba" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_ba">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_ba"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_ba"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="ddr3_cas_n" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_cas_n">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_cas_n"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_cas_n"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="0" NAME="ddr3_ck_n" RIGHT="0" SIGIS="clk" SIGNAME="mig_7series_0_ddr3_ck_n">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_ck_n"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_ck_n"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="0" NAME="ddr3_ck_p" RIGHT="0" SIGIS="clk" SIGNAME="mig_7series_0_ddr3_ck_p">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_ck_p"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_ck_p"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="0" NAME="ddr3_cke" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_cke">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_cke"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_cke"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="1" NAME="ddr3_dm" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dm">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_dm"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_dm"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="IO" LEFT="15" NAME="ddr3_dq" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dq">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_dq"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_dq"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="IO" LEFT="1" NAME="ddr3_dqs_n" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dqs_n">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_dqs_n"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_dqs_n"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="IO" LEFT="1" NAME="ddr3_dqs_p" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_dqs_p">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_dqs_p"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_dqs_p"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="0" NAME="ddr3_odt" RIGHT="0" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_odt">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_odt"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_odt"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="ddr3_ras_n" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_ras_n">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_ras_n"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_ras_n"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="ddr3_reset_n" SIGIS="rst" SIGNAME="mig_7series_0_ddr3_reset_n">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_reset_n"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_reset_n"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="ddr3_we_n" SIGIS="undef" SIGNAME="mig_7series_0_ddr3_we_n">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_0_we_n"/>
+            <CONNECTION INSTANCE="design_1_imp" PORT="DDR3_we_n"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="init_calib_complete" SIGIS="undef"/>
@@ -6064,7 +6164,7 @@
             <CONNECTION INSTANCE="axi_uartlite_0" PORT="s_axi_aresetn"/>
             <CONNECTION INSTANCE="axi_smc" PORT="aresetn"/>
             <CONNECTION INSTANCE="axi_smc_1" PORT="aresetn"/>
-            <CONNECTION INSTANCE="My_Counter_IP_0" PORT="s00_axi_aresetn"/>
+            <CONNECTION INSTANCE="My_Lab2_0" PORT="s00_axi_aresetn"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="0" NAME="peripheral_reset" POLARITY="ACTIVE_HIGH" RIGHT="0" SIGIS="rst"/>

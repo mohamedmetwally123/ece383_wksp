@@ -3,7 +3,7 @@
 	"modules": {
 		"design_1": {
 			"proto_instances": {
-				"/My_Counter_IP_0/S00_AXI": {
+				"/My_Lab2_0/S00_AXI": {
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {
 						"ACLK": { "actual": "s00_axi_aclk"},

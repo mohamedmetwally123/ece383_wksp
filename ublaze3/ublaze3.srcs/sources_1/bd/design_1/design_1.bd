@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x54F45E1E3A925C74",
+      "boundary_crc": "0xA72DABD1D6869957",
       "device": "xc7a200tsbg484-1",
       "gen_directory": "../../../../ublaze3.gen/sources_1/bd/design_1",
       "name": "design_1",
@@ -28,7 +28,7 @@
       "util_ds_buf_0": "",
       "axi_smc_1": "",
       "rst_mig_7series_0_100M": "",
-      "My_Counter_IP_0": ""
+      "My_Lab2_0": ""
     },
     "interface_ports": {
       "usb_uart": {
@@ -46,7 +46,7 @@
           }
         }
       },
-      "DDR3_0": {
+      "DDR3": {
         "mode": "Master",
         "vlnv_bus_definition": "xilinx.com:interface:ddrx:1.0",
         "vlnv": "xilinx.com:interface:ddrx_rtl:1.0",
@@ -102,77 +102,77 @@
         },
         "port_maps": {
           "DQ": {
-            "physical_name": "DDR3_0_dq",
+            "physical_name": "DDR3_dq",
             "direction": "IO",
             "left": "15",
             "right": "0"
           },
           "DQS_P": {
-            "physical_name": "DDR3_0_dqs_p",
+            "physical_name": "DDR3_dqs_p",
             "direction": "IO",
             "left": "1",
             "right": "0"
           },
           "DQS_N": {
-            "physical_name": "DDR3_0_dqs_n",
+            "physical_name": "DDR3_dqs_n",
             "direction": "IO",
             "left": "1",
             "right": "0"
           },
           "ADDR": {
-            "physical_name": "DDR3_0_addr",
+            "physical_name": "DDR3_addr",
             "direction": "O",
             "left": "14",
             "right": "0"
           },
           "BA": {
-            "physical_name": "DDR3_0_ba",
+            "physical_name": "DDR3_ba",
             "direction": "O",
             "left": "2",
             "right": "0"
           },
           "RAS_N": {
-            "physical_name": "DDR3_0_ras_n",
+            "physical_name": "DDR3_ras_n",
             "direction": "O"
           },
           "CAS_N": {
-            "physical_name": "DDR3_0_cas_n",
+            "physical_name": "DDR3_cas_n",
             "direction": "O"
           },
           "WE_N": {
-            "physical_name": "DDR3_0_we_n",
+            "physical_name": "DDR3_we_n",
             "direction": "O"
           },
           "RESET_N": {
-            "physical_name": "DDR3_0_reset_n",
+            "physical_name": "DDR3_reset_n",
             "direction": "O"
           },
           "CK_P": {
-            "physical_name": "DDR3_0_ck_p",
+            "physical_name": "DDR3_ck_p",
             "direction": "O",
             "left": "0",
             "right": "0"
           },
           "CK_N": {
-            "physical_name": "DDR3_0_ck_n",
+            "physical_name": "DDR3_ck_n",
             "direction": "O",
             "left": "0",
             "right": "0"
           },
           "CKE": {
-            "physical_name": "DDR3_0_cke",
+            "physical_name": "DDR3_cke",
             "direction": "O",
             "left": "0",
             "right": "0"
           },
           "DM": {
-            "physical_name": "DDR3_0_dm",
+            "physical_name": "DDR3_dm",
             "direction": "O",
             "left": "1",
             "right": "0"
           },
           "ODT": {
-            "physical_name": "DDR3_0_odt",
+            "physical_name": "DDR3_odt",
             "direction": "O",
             "left": "0",
             "right": "0"
@@ -218,10 +218,46 @@
           }
         }
       },
-      "LED": {
+      "ac_mclk": {
+        "direction": "O"
+      },
+      "ac_dac_sdata": {
+        "direction": "O"
+      },
+      "ac_bclk": {
+        "direction": "O"
+      },
+      "ac_lrclk": {
+        "direction": "O"
+      },
+      "scl": {
+        "direction": "IO"
+      },
+      "sda": {
+        "direction": "IO"
+      },
+      "tmds": {
         "direction": "O",
-        "left": "7",
+        "left": "3",
         "right": "0"
+      },
+      "tmdsb": {
+        "direction": "O",
+        "left": "3",
+        "right": "0"
+      },
+      "btn": {
+        "direction": "I",
+        "left": "4",
+        "right": "0"
+      },
+      "switch": {
+        "direction": "I",
+        "left": "3",
+        "right": "0"
+      },
+      "ac_adc_sdata": {
+        "direction": "I"
       }
     },
     "components": {
@@ -792,12 +828,12 @@
         "xci_path": "ip\\design_1_rst_mig_7series_0_100M_0\\design_1_rst_mig_7series_0_100M_0.xci",
         "inst_hier_path": "rst_mig_7series_0_100M"
       },
-      "My_Counter_IP_0": {
-        "vlnv": "xilinx.com:user:My_Counter_IP:1.0",
-        "ip_revision": "3",
-        "xci_name": "design_1_My_Counter_IP_0_0",
-        "xci_path": "ip\\design_1_My_Counter_IP_0_0\\design_1_My_Counter_IP_0_0.xci",
-        "inst_hier_path": "My_Counter_IP_0"
+      "My_Lab2_0": {
+        "vlnv": "xilinx.com:user:My_Lab2:1.0",
+        "ip_revision": "20",
+        "xci_name": "design_1_My_Lab2_0_0",
+        "xci_path": "ip\\design_1_My_Lab2_0_0\\design_1_My_Lab2_0_0.xci",
+        "inst_hier_path": "My_Lab2_0"
       }
     },
     "interface_nets": {
@@ -816,7 +852,7 @@
       "axi_smc_M01_AXI": {
         "interface_ports": [
           "axi_smc/M01_AXI",
-          "My_Counter_IP_0/S00_AXI"
+          "My_Lab2_0/S00_AXI"
         ]
       },
       "axi_uartlite_0_UART": {
@@ -863,22 +899,76 @@
       },
       "mig_7series_0_DDR3": {
         "interface_ports": [
-          "DDR3_0",
+          "DDR3",
           "mig_7series_0/DDR3"
         ]
       }
     },
     "nets": {
-      "My_Counter_IP_0_LED": {
+      "My_Lab2_0_ac_bclk": {
         "ports": [
-          "My_Counter_IP_0/LED",
-          "LED"
+          "My_Lab2_0/ac_bclk",
+          "ac_bclk"
         ]
       },
-      "My_Counter_IP_0_roll": {
+      "My_Lab2_0_ac_dac_sdata": {
         "ports": [
-          "My_Counter_IP_0/roll",
+          "My_Lab2_0/ac_dac_sdata",
+          "ac_dac_sdata"
+        ]
+      },
+      "My_Lab2_0_ac_lrclk": {
+        "ports": [
+          "My_Lab2_0/ac_lrclk",
+          "ac_lrclk"
+        ]
+      },
+      "My_Lab2_0_ac_mclk": {
+        "ports": [
+          "My_Lab2_0/ac_mclk",
+          "ac_mclk"
+        ]
+      },
+      "My_Lab2_0_flagQ": {
+        "ports": [
+          "My_Lab2_0/flagQ",
           "microblaze_0/Interrupt"
+        ]
+      },
+      "My_Lab2_0_tmds": {
+        "ports": [
+          "My_Lab2_0/tmds",
+          "tmds"
+        ]
+      },
+      "My_Lab2_0_tmdsb": {
+        "ports": [
+          "My_Lab2_0/tmdsb",
+          "tmdsb"
+        ]
+      },
+      "Net": {
+        "ports": [
+          "scl",
+          "My_Lab2_0/scl"
+        ]
+      },
+      "Net1": {
+        "ports": [
+          "sda",
+          "My_Lab2_0/sda"
+        ]
+      },
+      "ac_adc_sdata_0_1": {
+        "ports": [
+          "ac_adc_sdata",
+          "My_Lab2_0/ac_adc_sdata"
+        ]
+      },
+      "btn_0_1": {
+        "ports": [
+          "btn",
+          "My_Lab2_0/btn"
         ]
       },
       "clk_wiz_1_clk_out2": {
@@ -908,7 +998,7 @@
           "axi_smc/aclk",
           "axi_uartlite_0/s_axi_aclk",
           "axi_smc_1/aclk",
-          "My_Counter_IP_0/s00_axi_aclk"
+          "My_Lab2_0/s00_axi_aclk"
         ]
       },
       "mig_7series_0_mmcm_locked": {
@@ -956,13 +1046,19 @@
           "axi_uartlite_0/s_axi_aresetn",
           "axi_smc/aresetn",
           "axi_smc_1/aresetn",
-          "My_Counter_IP_0/s00_axi_aresetn"
+          "My_Lab2_0/s00_axi_aresetn"
         ]
       },
       "rst_mig_7series_0_100M_peripheral_aresetn": {
         "ports": [
           "rst_mig_7series_0_100M/peripheral_aresetn",
           "mig_7series_0/aresetn"
+        ]
+      },
+      "switch_0_1": {
+        "ports": [
+          "switch",
+          "My_Lab2_0/switch"
         ]
       },
       "sys_clock_1": {
@@ -984,8 +1080,8 @@
         "address_spaces": {
           "Data": {
             "segments": {
-              "SEG_My_Counter_IP_0_S00_AXI_reg": {
-                "address_block": "/My_Counter_IP_0/S00_AXI/S00_AXI_reg",
+              "SEG_My_Lab2_0_S00_AXI_reg": {
+                "address_block": "/My_Lab2_0/S00_AXI/S00_AXI_reg",
                 "offset": "0x44A00000",
                 "range": "64K",
                 "offset_base_param": "C_S00_AXI_BASEADDR",

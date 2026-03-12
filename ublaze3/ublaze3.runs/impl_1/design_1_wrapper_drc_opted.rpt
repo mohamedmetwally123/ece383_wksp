@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Thu Mar  5 08:20:37 2026
+| Date         : Wed Mar 11 14:53:32 2026
 | Host         : C27-5CG3123P67 running 64-bit major release  (build 9200)
 | Command      : report_drc -file design_1_wrapper_drc_opted.rpt -pb design_1_wrapper_drc_opted.pb -rpx design_1_wrapper_drc_opted.rpx
 | Design       : design_1_wrapper
@@ -24,13 +24,14 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max checks: <unlimited>
-             Checks found: 4
+             Checks found: 6
 +-----------+----------+-----------------------------------------------------+--------+
 | Rule      | Severity | Description                                         | Checks |
 +-----------+----------+-----------------------------------------------------+--------+
 | BUFC-1    | Warning  | Input Buffer Connections                            | 2      |
 | CFGBVS-1  | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties | 1      |
 | REQP-1709 | Warning  | Clock output buffering                              | 1      |
+| RPBF-3    | Warning  | IO port buffering is incomplete                     | 2      |
 +-----------+----------+-----------------------------------------------------+--------+
 
 2. REPORT DETAILS
@@ -61,6 +62,16 @@ Related violations: <none>
 REQP-1709#1 Warning
 Clock output buffering  
 PLLE2_ADV connectivity violation. The signal design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/u_ddr3_infrastructure/pll_clk3_out on the design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3 pin of design_1_i/mig_7series_0/u_design_1_mig_7series_0_0_mig/u_ddr3_infrastructure/plle2_i does not drive the same kind of BUFFER load as the other CLKOUT pins. Routing from the different buffer types will not be phase aligned.
+Related violations: <none>
+
+RPBF-3#1 Warning
+IO port buffering is incomplete  
+Device port scl expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+RPBF-3#2 Warning
+IO port buffering is incomplete  
+Device port sda expects both input and output buffering but the buffers are incomplete.
 Related violations: <none>
 
 

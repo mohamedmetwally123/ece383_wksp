@@ -2,7 +2,7 @@
 --Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
---Date        : Thu Mar  5 08:16:47 2026
+--Date        : Wed Mar 11 14:49:01 2026
 --Host        : C27-5CG3123P67 running 64-bit major release  (build 9200)
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -530,28 +530,38 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity design_1 is
   port (
-    DDR3_0_addr : out STD_LOGIC_VECTOR ( 14 downto 0 );
-    DDR3_0_ba : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    DDR3_0_cas_n : out STD_LOGIC;
-    DDR3_0_ck_n : out STD_LOGIC_VECTOR ( 0 to 0 );
-    DDR3_0_ck_p : out STD_LOGIC_VECTOR ( 0 to 0 );
-    DDR3_0_cke : out STD_LOGIC_VECTOR ( 0 to 0 );
-    DDR3_0_dm : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_0_dq : inout STD_LOGIC_VECTOR ( 15 downto 0 );
-    DDR3_0_dqs_n : inout STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_0_dqs_p : inout STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_0_odt : out STD_LOGIC_VECTOR ( 0 to 0 );
-    DDR3_0_ras_n : out STD_LOGIC;
-    DDR3_0_reset_n : out STD_LOGIC;
-    DDR3_0_we_n : out STD_LOGIC;
-    LED : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    DDR3_addr : out STD_LOGIC_VECTOR ( 14 downto 0 );
+    DDR3_ba : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    DDR3_cas_n : out STD_LOGIC;
+    DDR3_ck_n : out STD_LOGIC_VECTOR ( 0 to 0 );
+    DDR3_ck_p : out STD_LOGIC_VECTOR ( 0 to 0 );
+    DDR3_cke : out STD_LOGIC_VECTOR ( 0 to 0 );
+    DDR3_dm : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DDR3_dq : inout STD_LOGIC_VECTOR ( 15 downto 0 );
+    DDR3_dqs_n : inout STD_LOGIC_VECTOR ( 1 downto 0 );
+    DDR3_dqs_p : inout STD_LOGIC_VECTOR ( 1 downto 0 );
+    DDR3_odt : out STD_LOGIC_VECTOR ( 0 to 0 );
+    DDR3_ras_n : out STD_LOGIC;
+    DDR3_reset_n : out STD_LOGIC;
+    DDR3_we_n : out STD_LOGIC;
+    ac_adc_sdata : in STD_LOGIC;
+    ac_bclk : out STD_LOGIC;
+    ac_dac_sdata : out STD_LOGIC;
+    ac_lrclk : out STD_LOGIC;
+    ac_mclk : out STD_LOGIC;
+    btn : in STD_LOGIC_VECTOR ( 4 downto 0 );
     reset : in STD_LOGIC;
+    scl : inout STD_LOGIC;
+    sda : inout STD_LOGIC;
+    switch : in STD_LOGIC_VECTOR ( 3 downto 0 );
     sys_clock : in STD_LOGIC;
+    tmds : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    tmdsb : out STD_LOGIC_VECTOR ( 3 downto 0 );
     usb_uart_rxd : in STD_LOGIC;
     usb_uart_txd : out STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=17,numReposBlks=16,numNonXlnxBlks=0,numHierBlks=1,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=3,da_board_cnt=5,da_clkrst_cnt=1,da_mb_cnt=1,synth_mode=Hierarchical}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=17,numReposBlks=16,numNonXlnxBlks=0,numHierBlks=1,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=4,da_board_cnt=5,da_clkrst_cnt=1,da_mb_cnt=1,synth_mode=Hierarchical}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -985,10 +995,20 @@ architecture STRUCTURE of design_1 is
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1_rst_mig_7series_0_100M_0;
-  component design_1_My_Counter_IP_0_0 is
+  component design_1_My_Lab2_0_0 is
   port (
-    LED : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    roll : out STD_LOGIC;
+    ac_mclk : out STD_LOGIC;
+    ac_adc_sdata : in STD_LOGIC;
+    ac_dac_sdata : out STD_LOGIC;
+    ac_bclk : out STD_LOGIC;
+    ac_lrclk : out STD_LOGIC;
+    scl : inout STD_LOGIC;
+    sda : inout STD_LOGIC;
+    tmds : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    tmdsb : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    switch : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    btn : in STD_LOGIC_VECTOR ( 4 downto 0 );
+    flagQ : out STD_LOGIC;
     s00_axi_aclk : in STD_LOGIC;
     s00_axi_aresetn : in STD_LOGIC;
     s00_axi_awaddr : in STD_LOGIC_VECTOR ( 6 downto 0 );
@@ -1011,8 +1031,8 @@ architecture STRUCTURE of design_1 is
     s00_axi_rvalid : out STD_LOGIC;
     s00_axi_rready : in STD_LOGIC
   );
-  end component design_1_My_Counter_IP_0_0;
-  signal My_Counter_IP_0_roll : STD_LOGIC;
+  end component design_1_My_Lab2_0_0;
+  signal My_Lab2_0_flagQ : STD_LOGIC;
   signal axi_smc_1_M00_AXI_ARADDR : STD_LOGIC_VECTOR ( 28 downto 0 );
   signal axi_smc_1_M00_AXI_ARBURST : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal axi_smc_1_M00_AXI_ARCACHE : STD_LOGIC_VECTOR ( 3 downto 0 );
@@ -1226,10 +1246,10 @@ architecture STRUCTURE of design_1 is
   attribute KEEP_HIERARCHY : string;
   attribute KEEP_HIERARCHY of microblaze_0 : label is "yes";
   attribute X_INTERFACE_INFO : string;
-  attribute X_INTERFACE_INFO of DDR3_0_cas_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 CAS_N";
-  attribute X_INTERFACE_INFO of DDR3_0_ras_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 RAS_N";
-  attribute X_INTERFACE_INFO of DDR3_0_reset_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 RESET_N";
-  attribute X_INTERFACE_INFO of DDR3_0_we_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 WE_N";
+  attribute X_INTERFACE_INFO of DDR3_cas_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3 CAS_N";
+  attribute X_INTERFACE_INFO of DDR3_ras_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3 RAS_N";
+  attribute X_INTERFACE_INFO of DDR3_reset_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3 RESET_N";
+  attribute X_INTERFACE_INFO of DDR3_we_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3 WE_N";
   attribute X_INTERFACE_INFO of reset : signal is "xilinx.com:signal:reset:1.0 RST.RESET RST";
   attribute X_INTERFACE_PARAMETER : string;
   attribute X_INTERFACE_PARAMETER of reset : signal is "XIL_INTERFACENAME RST.RESET, INSERT_VIP 0, POLARITY ACTIVE_LOW";
@@ -1239,23 +1259,28 @@ architecture STRUCTURE of design_1 is
   attribute X_INTERFACE_MODE : string;
   attribute X_INTERFACE_MODE of usb_uart_rxd : signal is "Master";
   attribute X_INTERFACE_INFO of usb_uart_txd : signal is "xilinx.com:interface:uart:1.0 usb_uart TxD";
-  attribute X_INTERFACE_INFO of DDR3_0_addr : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 ADDR";
-  attribute X_INTERFACE_MODE of DDR3_0_addr : signal is "Master";
-  attribute X_INTERFACE_PARAMETER of DDR3_0_addr : signal is "XIL_INTERFACENAME DDR3_0, AXI_ARBITRATION_SCHEME TDM, BURST_LENGTH 8, CAN_DEBUG false, CAS_LATENCY 11, CAS_WRITE_LATENCY 11, CS_ENABLED true, DATA_MASK_ENABLED true, DATA_WIDTH 8, MEMORY_TYPE COMPONENTS, MEM_ADDR_MAP ROW_COLUMN_BANK, SLOT Single, TIMEPERIOD_PS 1250";
-  attribute X_INTERFACE_INFO of DDR3_0_ba : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 BA";
-  attribute X_INTERFACE_INFO of DDR3_0_ck_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 CK_N";
-  attribute X_INTERFACE_INFO of DDR3_0_ck_p : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 CK_P";
-  attribute X_INTERFACE_INFO of DDR3_0_cke : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 CKE";
-  attribute X_INTERFACE_INFO of DDR3_0_dm : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 DM";
-  attribute X_INTERFACE_INFO of DDR3_0_dq : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 DQ";
-  attribute X_INTERFACE_INFO of DDR3_0_dqs_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 DQS_N";
-  attribute X_INTERFACE_INFO of DDR3_0_dqs_p : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 DQS_P";
-  attribute X_INTERFACE_INFO of DDR3_0_odt : signal is "xilinx.com:interface:ddrx:1.0 DDR3_0 ODT";
+  attribute X_INTERFACE_INFO of DDR3_addr : signal is "xilinx.com:interface:ddrx:1.0 DDR3 ADDR";
+  attribute X_INTERFACE_MODE of DDR3_addr : signal is "Master";
+  attribute X_INTERFACE_PARAMETER of DDR3_addr : signal is "XIL_INTERFACENAME DDR3, AXI_ARBITRATION_SCHEME TDM, BURST_LENGTH 8, CAN_DEBUG false, CAS_LATENCY 11, CAS_WRITE_LATENCY 11, CS_ENABLED true, DATA_MASK_ENABLED true, DATA_WIDTH 8, MEMORY_TYPE COMPONENTS, MEM_ADDR_MAP ROW_COLUMN_BANK, SLOT Single, TIMEPERIOD_PS 1250";
+  attribute X_INTERFACE_INFO of DDR3_ba : signal is "xilinx.com:interface:ddrx:1.0 DDR3 BA";
+  attribute X_INTERFACE_INFO of DDR3_ck_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3 CK_N";
+  attribute X_INTERFACE_INFO of DDR3_ck_p : signal is "xilinx.com:interface:ddrx:1.0 DDR3 CK_P";
+  attribute X_INTERFACE_INFO of DDR3_cke : signal is "xilinx.com:interface:ddrx:1.0 DDR3 CKE";
+  attribute X_INTERFACE_INFO of DDR3_dm : signal is "xilinx.com:interface:ddrx:1.0 DDR3 DM";
+  attribute X_INTERFACE_INFO of DDR3_dq : signal is "xilinx.com:interface:ddrx:1.0 DDR3 DQ";
+  attribute X_INTERFACE_INFO of DDR3_dqs_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3 DQS_N";
+  attribute X_INTERFACE_INFO of DDR3_dqs_p : signal is "xilinx.com:interface:ddrx:1.0 DDR3 DQS_P";
+  attribute X_INTERFACE_INFO of DDR3_odt : signal is "xilinx.com:interface:ddrx:1.0 DDR3 ODT";
 begin
-My_Counter_IP_0: component design_1_My_Counter_IP_0_0
+My_Lab2_0: component design_1_My_Lab2_0_0
      port map (
-      LED(7 downto 0) => LED(7 downto 0),
-      roll => My_Counter_IP_0_roll,
+      ac_adc_sdata => ac_adc_sdata,
+      ac_bclk => ac_bclk,
+      ac_dac_sdata => ac_dac_sdata,
+      ac_lrclk => ac_lrclk,
+      ac_mclk => ac_mclk,
+      btn(4 downto 0) => btn(4 downto 0),
+      flagQ => My_Lab2_0_flagQ,
       s00_axi_aclk => microblaze_0_Clk,
       s00_axi_araddr(6 downto 0) => axi_smc_M01_AXI_ARADDR(6 downto 0),
       s00_axi_aresetn => rst_clk_wiz_1_100M_peripheral_aresetn(0),
@@ -1276,7 +1301,12 @@ My_Counter_IP_0: component design_1_My_Counter_IP_0_0
       s00_axi_wdata(31 downto 0) => axi_smc_M01_AXI_WDATA(31 downto 0),
       s00_axi_wready => axi_smc_M01_AXI_WREADY,
       s00_axi_wstrb(3 downto 0) => axi_smc_M01_AXI_WSTRB(3 downto 0),
-      s00_axi_wvalid => axi_smc_M01_AXI_WVALID
+      s00_axi_wvalid => axi_smc_M01_AXI_WVALID,
+      scl => scl,
+      sda => sda,
+      switch(3 downto 0) => switch(3 downto 0),
+      tmds(3 downto 0) => tmds(3 downto 0),
+      tmdsb(3 downto 0) => tmdsb(3 downto 0)
     );
 axi_smc: component design_1_axi_smc_0
      port map (
@@ -1502,7 +1532,7 @@ microblaze_0: component design_1_microblaze_0_0
       I_AS => microblaze_0_ilmb_1_ADDRSTROBE,
       Instr(0 to 31) => microblaze_0_ilmb_1_READDBUS(0 to 31),
       Instr_Addr(0 to 31) => microblaze_0_ilmb_1_ABUS(0 to 31),
-      Interrupt => My_Counter_IP_0_roll,
+      Interrupt => My_Lab2_0_flagQ,
       Interrupt_Ack(0 to 1) => NLW_microblaze_0_Interrupt_Ack_UNCONNECTED(0 to 1),
       Interrupt_Address(0 to 31) => B"00000000000000000000000000000000",
       M_AXI_DC_ARADDR(31 downto 0) => microblaze_0_M_AXI_DC_ARADDR(31 downto 0),
@@ -1630,20 +1660,20 @@ mig_7series_0: component design_1_mig_7series_0_0
      port map (
       aresetn => rst_mig_7series_0_100M_peripheral_aresetn(0),
       clk_ref_i => clk_wiz_1_clk_out2,
-      ddr3_addr(14 downto 0) => DDR3_0_addr(14 downto 0),
-      ddr3_ba(2 downto 0) => DDR3_0_ba(2 downto 0),
-      ddr3_cas_n => DDR3_0_cas_n,
-      ddr3_ck_n(0) => DDR3_0_ck_n(0),
-      ddr3_ck_p(0) => DDR3_0_ck_p(0),
-      ddr3_cke(0) => DDR3_0_cke(0),
-      ddr3_dm(1 downto 0) => DDR3_0_dm(1 downto 0),
-      ddr3_dq(15 downto 0) => DDR3_0_dq(15 downto 0),
-      ddr3_dqs_n(1 downto 0) => DDR3_0_dqs_n(1 downto 0),
-      ddr3_dqs_p(1 downto 0) => DDR3_0_dqs_p(1 downto 0),
-      ddr3_odt(0) => DDR3_0_odt(0),
-      ddr3_ras_n => DDR3_0_ras_n,
-      ddr3_reset_n => DDR3_0_reset_n,
-      ddr3_we_n => DDR3_0_we_n,
+      ddr3_addr(14 downto 0) => DDR3_addr(14 downto 0),
+      ddr3_ba(2 downto 0) => DDR3_ba(2 downto 0),
+      ddr3_cas_n => DDR3_cas_n,
+      ddr3_ck_n(0) => DDR3_ck_n(0),
+      ddr3_ck_p(0) => DDR3_ck_p(0),
+      ddr3_cke(0) => DDR3_cke(0),
+      ddr3_dm(1 downto 0) => DDR3_dm(1 downto 0),
+      ddr3_dq(15 downto 0) => DDR3_dq(15 downto 0),
+      ddr3_dqs_n(1 downto 0) => DDR3_dqs_n(1 downto 0),
+      ddr3_dqs_p(1 downto 0) => DDR3_dqs_p(1 downto 0),
+      ddr3_odt(0) => DDR3_odt(0),
+      ddr3_ras_n => DDR3_ras_n,
+      ddr3_reset_n => DDR3_reset_n,
+      ddr3_we_n => DDR3_we_n,
       init_calib_complete => NLW_mig_7series_0_init_calib_complete_UNCONNECTED,
       mmcm_locked => mig_7series_0_mmcm_locked,
       s_axi_araddr(28 downto 0) => axi_smc_1_M00_AXI_ARADDR(28 downto 0),

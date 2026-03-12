@@ -2,9 +2,10 @@
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
     "xci_name": "clk_wiz_0",
+    "cell_name": "My_Lab2_slave_lite_v1_0_S00_AXI_inst/lab2_component/datapath/video_inst/mmcm_adv_inst_display_clocks",
     "component_reference": "xilinx.com:ip:clk_wiz:6.0",
     "ip_revision": "15",
-    "gen_directory": ".",
+    "gen_directory": "../../../../../../../users/c27mohamed.metwally/ece383_wksp/ublaze3/ublaze3.tmp/my_lab2_v1_0_project/My_Lab2_v1_0_project.gen/sources_1/ip/clk_wiz_0",
     "parameters": {
       "component_parameters": {
         "Component_Name": [ { "value": "clk_wiz_0", "resolve_type": "user", "usage": "all" } ],
@@ -599,7 +600,7 @@
         "IPCONTEXT": [ { "value": "IP_Flow" } ],
         "IPREVISION": [ { "value": "15" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "." } ],
+        "OUTPUTDIR": [ { "value": "../../../../../../../users/c27mohamed.metwally/ece383_wksp/ublaze3/ublaze3.tmp/my_lab2_v1_0_project/My_Lab2_v1_0_project.gen/sources_1/ip/clk_wiz_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "." } ],
         "SWVERSION": [ { "value": "2024.2" } ],
