@@ -2,7 +2,7 @@
 --Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
---Date        : Wed Mar 11 12:54:08 2026
+--Date        : Wed Mar 11 14:49:01 2026
 --Host        : C27-5CG3123P67 running 64-bit major release  (build 9200)
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -550,18 +550,18 @@ entity design_1 is
     ac_lrclk : out STD_LOGIC;
     ac_mclk : out STD_LOGIC;
     btn : in STD_LOGIC_VECTOR ( 4 downto 0 );
-    clk : in STD_LOGIC;
-    reset_n : in STD_LOGIC;
+    reset : in STD_LOGIC;
     scl : inout STD_LOGIC;
     sda : inout STD_LOGIC;
     switch : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    sys_clock : in STD_LOGIC;
     tmds : out STD_LOGIC_VECTOR ( 3 downto 0 );
     tmdsb : out STD_LOGIC_VECTOR ( 3 downto 0 );
     usb_uart_rxd : in STD_LOGIC;
     usb_uart_txd : out STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=16,numReposBlks=15,numNonXlnxBlks=0,numHierBlks=1,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=8,da_board_cnt=5,da_clkrst_cnt=2,da_mb_cnt=2,synth_mode=None}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=17,numReposBlks=16,numNonXlnxBlks=0,numHierBlks=1,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=4,da_board_cnt=5,da_clkrst_cnt=1,da_mb_cnt=1,synth_mode=Hierarchical}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -734,141 +734,6 @@ architecture STRUCTURE of design_1 is
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1_rst_clk_wiz_1_100M_0;
-  component design_1_axi_uartlite_0_0 is
-  port (
-    s_axi_aclk : in STD_LOGIC;
-    s_axi_aresetn : in STD_LOGIC;
-    interrupt : out STD_LOGIC;
-    s_axi_awaddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s_axi_awvalid : in STD_LOGIC;
-    s_axi_awready : out STD_LOGIC;
-    s_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s_axi_wvalid : in STD_LOGIC;
-    s_axi_wready : out STD_LOGIC;
-    s_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s_axi_bvalid : out STD_LOGIC;
-    s_axi_bready : in STD_LOGIC;
-    s_axi_araddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s_axi_arvalid : in STD_LOGIC;
-    s_axi_arready : out STD_LOGIC;
-    s_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    s_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s_axi_rvalid : out STD_LOGIC;
-    s_axi_rready : in STD_LOGIC;
-    rx : in STD_LOGIC;
-    tx : out STD_LOGIC
-  );
-  end component design_1_axi_uartlite_0_0;
-  component design_1_axi_smc_0 is
-  port (
-    aclk : in STD_LOGIC;
-    aclk1 : in STD_LOGIC;
-    aresetn : in STD_LOGIC;
-    S00_AXI_awaddr : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    S00_AXI_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S00_AXI_awvalid : in STD_LOGIC;
-    S00_AXI_awready : out STD_LOGIC;
-    S00_AXI_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    S00_AXI_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    S00_AXI_wvalid : in STD_LOGIC;
-    S00_AXI_wready : out STD_LOGIC;
-    S00_AXI_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S00_AXI_bvalid : out STD_LOGIC;
-    S00_AXI_bready : in STD_LOGIC;
-    S00_AXI_araddr : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    S00_AXI_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S00_AXI_arvalid : in STD_LOGIC;
-    S00_AXI_arready : out STD_LOGIC;
-    S00_AXI_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    S00_AXI_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S00_AXI_rvalid : out STD_LOGIC;
-    S00_AXI_rready : in STD_LOGIC;
-    S01_AXI_awid : in STD_LOGIC;
-    S01_AXI_awaddr : in STD_LOGIC;
-    S01_AXI_awlen : in STD_LOGIC;
-    S01_AXI_awsize : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S01_AXI_awburst : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    S01_AXI_awlock : in STD_LOGIC;
-    S01_AXI_awcache : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    S01_AXI_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S01_AXI_awregion : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    S01_AXI_awqos : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    S01_AXI_awuser : in STD_LOGIC;
-    S01_AXI_awvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
-    S01_AXI_awready : out STD_LOGIC_VECTOR ( 0 to 0 );
-    S01_AXI_wid : in STD_LOGIC;
-    S01_AXI_wdata : in STD_LOGIC;
-    S01_AXI_wstrb : in STD_LOGIC;
-    S01_AXI_wlast : in STD_LOGIC_VECTOR ( 0 to 0 );
-    S01_AXI_wuser : in STD_LOGIC;
-    S01_AXI_wvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
-    S01_AXI_wready : out STD_LOGIC_VECTOR ( 0 to 0 );
-    S01_AXI_bid : out STD_LOGIC;
-    S01_AXI_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S01_AXI_buser : out STD_LOGIC;
-    S01_AXI_bvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
-    S01_AXI_bready : in STD_LOGIC_VECTOR ( 0 to 0 );
-    S01_AXI_arid : in STD_LOGIC;
-    S01_AXI_araddr : in STD_LOGIC;
-    S01_AXI_arlen : in STD_LOGIC;
-    S01_AXI_arsize : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S01_AXI_arburst : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    S01_AXI_arlock : in STD_LOGIC;
-    S01_AXI_arcache : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    S01_AXI_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    S01_AXI_arregion : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    S01_AXI_arqos : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    S01_AXI_aruser : in STD_LOGIC;
-    S01_AXI_arvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
-    S01_AXI_arready : out STD_LOGIC_VECTOR ( 0 to 0 );
-    S01_AXI_rid : out STD_LOGIC;
-    S01_AXI_rdata : out STD_LOGIC;
-    S01_AXI_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    S01_AXI_rlast : out STD_LOGIC_VECTOR ( 0 to 0 );
-    S01_AXI_ruser : out STD_LOGIC;
-    S01_AXI_rvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
-    S01_AXI_rready : in STD_LOGIC_VECTOR ( 0 to 0 );
-    M00_AXI_awaddr : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    M00_AXI_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    M00_AXI_awvalid : out STD_LOGIC;
-    M00_AXI_awready : in STD_LOGIC;
-    M00_AXI_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    M00_AXI_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    M00_AXI_wvalid : out STD_LOGIC;
-    M00_AXI_wready : in STD_LOGIC;
-    M00_AXI_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    M00_AXI_bvalid : in STD_LOGIC;
-    M00_AXI_bready : out STD_LOGIC;
-    M00_AXI_araddr : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    M00_AXI_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    M00_AXI_arvalid : out STD_LOGIC;
-    M00_AXI_arready : in STD_LOGIC;
-    M00_AXI_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    M00_AXI_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    M00_AXI_rvalid : in STD_LOGIC;
-    M00_AXI_rready : out STD_LOGIC;
-    M01_AXI_awaddr : out STD_LOGIC_VECTOR ( 6 downto 0 );
-    M01_AXI_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    M01_AXI_awvalid : out STD_LOGIC;
-    M01_AXI_awready : in STD_LOGIC;
-    M01_AXI_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    M01_AXI_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    M01_AXI_wvalid : out STD_LOGIC;
-    M01_AXI_wready : in STD_LOGIC;
-    M01_AXI_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    M01_AXI_bvalid : in STD_LOGIC;
-    M01_AXI_bready : out STD_LOGIC;
-    M01_AXI_araddr : out STD_LOGIC_VECTOR ( 6 downto 0 );
-    M01_AXI_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    M01_AXI_arvalid : out STD_LOGIC;
-    M01_AXI_arready : in STD_LOGIC;
-    M01_AXI_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    M01_AXI_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    M01_AXI_rvalid : in STD_LOGIC;
-    M01_AXI_rready : out STD_LOGIC
-  );
-  end component design_1_axi_smc_0;
   component design_1_mig_7series_0_0 is
   port (
     sys_rst : in STD_LOGIC;
@@ -933,6 +798,101 @@ architecture STRUCTURE of design_1 is
     aresetn : in STD_LOGIC
   );
   end component design_1_mig_7series_0_0;
+  component design_1_axi_uartlite_0_0 is
+  port (
+    s_axi_aclk : in STD_LOGIC;
+    s_axi_aresetn : in STD_LOGIC;
+    interrupt : out STD_LOGIC;
+    s_axi_awaddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s_axi_awvalid : in STD_LOGIC;
+    s_axi_awready : out STD_LOGIC;
+    s_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    s_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s_axi_wvalid : in STD_LOGIC;
+    s_axi_wready : out STD_LOGIC;
+    s_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s_axi_bvalid : out STD_LOGIC;
+    s_axi_bready : in STD_LOGIC;
+    s_axi_araddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s_axi_arvalid : in STD_LOGIC;
+    s_axi_arready : out STD_LOGIC;
+    s_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    s_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s_axi_rvalid : out STD_LOGIC;
+    s_axi_rready : in STD_LOGIC;
+    rx : in STD_LOGIC;
+    tx : out STD_LOGIC
+  );
+  end component design_1_axi_uartlite_0_0;
+  component design_1_axi_smc_0 is
+  port (
+    aclk : in STD_LOGIC;
+    aresetn : in STD_LOGIC;
+    S00_AXI_awaddr : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S00_AXI_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S00_AXI_awvalid : in STD_LOGIC;
+    S00_AXI_awready : out STD_LOGIC;
+    S00_AXI_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S00_AXI_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    S00_AXI_wvalid : in STD_LOGIC;
+    S00_AXI_wready : out STD_LOGIC;
+    S00_AXI_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S00_AXI_bvalid : out STD_LOGIC;
+    S00_AXI_bready : in STD_LOGIC;
+    S00_AXI_araddr : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S00_AXI_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S00_AXI_arvalid : in STD_LOGIC;
+    S00_AXI_arready : out STD_LOGIC;
+    S00_AXI_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    S00_AXI_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S00_AXI_rvalid : out STD_LOGIC;
+    S00_AXI_rready : in STD_LOGIC;
+    M00_AXI_awaddr : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    M00_AXI_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    M00_AXI_awvalid : out STD_LOGIC;
+    M00_AXI_awready : in STD_LOGIC;
+    M00_AXI_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    M00_AXI_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    M00_AXI_wvalid : out STD_LOGIC;
+    M00_AXI_wready : in STD_LOGIC;
+    M00_AXI_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    M00_AXI_bvalid : in STD_LOGIC;
+    M00_AXI_bready : out STD_LOGIC;
+    M00_AXI_araddr : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    M00_AXI_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    M00_AXI_arvalid : out STD_LOGIC;
+    M00_AXI_arready : in STD_LOGIC;
+    M00_AXI_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    M00_AXI_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    M00_AXI_rvalid : in STD_LOGIC;
+    M00_AXI_rready : out STD_LOGIC;
+    M01_AXI_awaddr : out STD_LOGIC_VECTOR ( 6 downto 0 );
+    M01_AXI_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    M01_AXI_awvalid : out STD_LOGIC;
+    M01_AXI_awready : in STD_LOGIC;
+    M01_AXI_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    M01_AXI_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    M01_AXI_wvalid : out STD_LOGIC;
+    M01_AXI_wready : in STD_LOGIC;
+    M01_AXI_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    M01_AXI_bvalid : in STD_LOGIC;
+    M01_AXI_bready : out STD_LOGIC;
+    M01_AXI_araddr : out STD_LOGIC_VECTOR ( 6 downto 0 );
+    M01_AXI_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    M01_AXI_arvalid : out STD_LOGIC;
+    M01_AXI_arready : in STD_LOGIC;
+    M01_AXI_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    M01_AXI_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    M01_AXI_rvalid : in STD_LOGIC;
+    M01_AXI_rready : out STD_LOGIC
+  );
+  end component design_1_axi_smc_0;
+  component design_1_util_ds_buf_0_0 is
+  port (
+    BUFG_I : in STD_LOGIC_VECTOR ( 0 to 0 );
+    BUFG_O : out STD_LOGIC_VECTOR ( 0 to 0 )
+  );
+  end component design_1_util_ds_buf_0_0;
   component design_1_axi_smc_1_0 is
   port (
     aclk : in STD_LOGIC;
@@ -1035,7 +995,7 @@ architecture STRUCTURE of design_1 is
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1_rst_mig_7series_0_100M_0;
-  component design_1_My_Lab2_0_3 is
+  component design_1_My_Lab2_0_0 is
   port (
     ac_mclk : out STD_LOGIC;
     ac_adc_sdata : in STD_LOGIC;
@@ -1071,7 +1031,7 @@ architecture STRUCTURE of design_1 is
     s00_axi_rvalid : out STD_LOGIC;
     s00_axi_rready : in STD_LOGIC
   );
-  end component design_1_My_Lab2_0_3;
+  end component design_1_My_Lab2_0_0;
   signal My_Lab2_0_flagQ : STD_LOGIC;
   signal axi_smc_1_M00_AXI_ARADDR : STD_LOGIC_VECTOR ( 28 downto 0 );
   signal axi_smc_1_M00_AXI_ARBURST : STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -1248,21 +1208,9 @@ architecture STRUCTURE of design_1 is
   signal rst_clk_wiz_1_100M_mb_reset : STD_LOGIC;
   signal rst_clk_wiz_1_100M_peripheral_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
   signal rst_mig_7series_0_100M_peripheral_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal NLW_axi_smc_S01_AXI_bid_UNCONNECTED : STD_LOGIC;
-  signal NLW_axi_smc_S01_AXI_buser_UNCONNECTED : STD_LOGIC;
-  signal NLW_axi_smc_S01_AXI_rdata_UNCONNECTED : STD_LOGIC;
-  signal NLW_axi_smc_S01_AXI_rid_UNCONNECTED : STD_LOGIC;
-  signal NLW_axi_smc_S01_AXI_ruser_UNCONNECTED : STD_LOGIC;
+  signal util_ds_buf_0_BUFG_O : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_axi_smc_M00_AXI_arprot_UNCONNECTED : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal NLW_axi_smc_M00_AXI_awprot_UNCONNECTED : STD_LOGIC_VECTOR ( 2 downto 0 );
-  signal NLW_axi_smc_S01_AXI_arready_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal NLW_axi_smc_S01_AXI_awready_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal NLW_axi_smc_S01_AXI_bresp_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
-  signal NLW_axi_smc_S01_AXI_bvalid_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal NLW_axi_smc_S01_AXI_rlast_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal NLW_axi_smc_S01_AXI_rresp_UNCONNECTED : STD_LOGIC_VECTOR ( 1 downto 0 );
-  signal NLW_axi_smc_S01_AXI_rvalid_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal NLW_axi_smc_S01_AXI_wready_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_axi_uartlite_0_interrupt_UNCONNECTED : STD_LOGIC;
   signal NLW_microblaze_0_M_AXI_IC_AWLOCK_UNCONNECTED : STD_LOGIC;
   signal NLW_microblaze_0_M_AXI_IC_AWVALID_UNCONNECTED : STD_LOGIC;
@@ -1302,11 +1250,11 @@ architecture STRUCTURE of design_1 is
   attribute X_INTERFACE_INFO of DDR3_ras_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3 RAS_N";
   attribute X_INTERFACE_INFO of DDR3_reset_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3 RESET_N";
   attribute X_INTERFACE_INFO of DDR3_we_n : signal is "xilinx.com:interface:ddrx:1.0 DDR3 WE_N";
-  attribute X_INTERFACE_INFO of clk : signal is "xilinx.com:signal:clock:1.0 CLK.CLK CLK";
+  attribute X_INTERFACE_INFO of reset : signal is "xilinx.com:signal:reset:1.0 RST.RESET RST";
   attribute X_INTERFACE_PARAMETER : string;
-  attribute X_INTERFACE_PARAMETER of clk : signal is "XIL_INTERFACENAME CLK.CLK, CLK_DOMAIN design_1_sys_clock, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
-  attribute X_INTERFACE_INFO of reset_n : signal is "xilinx.com:signal:reset:1.0 RST.RESET_N RST";
-  attribute X_INTERFACE_PARAMETER of reset_n : signal is "XIL_INTERFACENAME RST.RESET_N, INSERT_VIP 0, POLARITY ACTIVE_LOW";
+  attribute X_INTERFACE_PARAMETER of reset : signal is "XIL_INTERFACENAME RST.RESET, INSERT_VIP 0, POLARITY ACTIVE_LOW";
+  attribute X_INTERFACE_INFO of sys_clock : signal is "xilinx.com:signal:clock:1.0 CLK.SYS_CLOCK CLK";
+  attribute X_INTERFACE_PARAMETER of sys_clock : signal is "XIL_INTERFACENAME CLK.SYS_CLOCK, CLK_DOMAIN design_1_sys_clock, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
   attribute X_INTERFACE_INFO of usb_uart_rxd : signal is "xilinx.com:interface:uart:1.0 usb_uart RxD";
   attribute X_INTERFACE_MODE : string;
   attribute X_INTERFACE_MODE of usb_uart_rxd : signal is "Master";
@@ -1324,7 +1272,7 @@ architecture STRUCTURE of design_1 is
   attribute X_INTERFACE_INFO of DDR3_dqs_p : signal is "xilinx.com:interface:ddrx:1.0 DDR3 DQS_P";
   attribute X_INTERFACE_INFO of DDR3_odt : signal is "xilinx.com:interface:ddrx:1.0 DDR3 ODT";
 begin
-My_Lab2_0: component design_1_My_Lab2_0_3
+My_Lab2_0: component design_1_My_Lab2_0_0
      port map (
       ac_adc_sdata => ac_adc_sdata,
       ac_bclk => ac_bclk,
@@ -1419,53 +1367,7 @@ axi_smc: component design_1_axi_smc_0
       S00_AXI_wready => microblaze_0_M_AXI_DP_WREADY,
       S00_AXI_wstrb(3 downto 0) => microblaze_0_M_AXI_DP_WSTRB(3 downto 0),
       S00_AXI_wvalid => microblaze_0_M_AXI_DP_WVALID,
-      S01_AXI_araddr => '0',
-      S01_AXI_arburst(1 downto 0) => B"01",
-      S01_AXI_arcache(3 downto 0) => B"0011",
-      S01_AXI_arid => '0',
-      S01_AXI_arlen => '0',
-      S01_AXI_arlock => '0',
-      S01_AXI_arprot(2 downto 0) => B"000",
-      S01_AXI_arqos(3 downto 0) => B"0000",
-      S01_AXI_arready(0) => NLW_axi_smc_S01_AXI_arready_UNCONNECTED(0),
-      S01_AXI_arregion(3 downto 0) => B"0000",
-      S01_AXI_arsize(2 downto 0) => B"010",
-      S01_AXI_aruser => '0',
-      S01_AXI_arvalid(0) => '0',
-      S01_AXI_awaddr => '0',
-      S01_AXI_awburst(1 downto 0) => B"01",
-      S01_AXI_awcache(3 downto 0) => B"0011",
-      S01_AXI_awid => '0',
-      S01_AXI_awlen => '0',
-      S01_AXI_awlock => '0',
-      S01_AXI_awprot(2 downto 0) => B"000",
-      S01_AXI_awqos(3 downto 0) => B"0000",
-      S01_AXI_awready(0) => NLW_axi_smc_S01_AXI_awready_UNCONNECTED(0),
-      S01_AXI_awregion(3 downto 0) => B"0000",
-      S01_AXI_awsize(2 downto 0) => B"010",
-      S01_AXI_awuser => '0',
-      S01_AXI_awvalid(0) => '0',
-      S01_AXI_bid => NLW_axi_smc_S01_AXI_bid_UNCONNECTED,
-      S01_AXI_bready(0) => '0',
-      S01_AXI_bresp(1 downto 0) => NLW_axi_smc_S01_AXI_bresp_UNCONNECTED(1 downto 0),
-      S01_AXI_buser => NLW_axi_smc_S01_AXI_buser_UNCONNECTED,
-      S01_AXI_bvalid(0) => NLW_axi_smc_S01_AXI_bvalid_UNCONNECTED(0),
-      S01_AXI_rdata => NLW_axi_smc_S01_AXI_rdata_UNCONNECTED,
-      S01_AXI_rid => NLW_axi_smc_S01_AXI_rid_UNCONNECTED,
-      S01_AXI_rlast(0) => NLW_axi_smc_S01_AXI_rlast_UNCONNECTED(0),
-      S01_AXI_rready(0) => '0',
-      S01_AXI_rresp(1 downto 0) => NLW_axi_smc_S01_AXI_rresp_UNCONNECTED(1 downto 0),
-      S01_AXI_ruser => NLW_axi_smc_S01_AXI_ruser_UNCONNECTED,
-      S01_AXI_rvalid(0) => NLW_axi_smc_S01_AXI_rvalid_UNCONNECTED(0),
-      S01_AXI_wdata => '0',
-      S01_AXI_wid => '0',
-      S01_AXI_wlast(0) => '0',
-      S01_AXI_wready(0) => NLW_axi_smc_S01_AXI_wready_UNCONNECTED(0),
-      S01_AXI_wstrb => '1',
-      S01_AXI_wuser => '0',
-      S01_AXI_wvalid(0) => '0',
       aclk => microblaze_0_Clk,
-      aclk1 => mig_7series_0_ui_clk,
       aresetn => rst_clk_wiz_1_100M_peripheral_aresetn(0)
     );
 axi_smc_1: component design_1_axi_smc_1_0
@@ -1582,11 +1484,11 @@ axi_uartlite_0: component design_1_axi_uartlite_0_0
     );
 clk_wiz_1: component design_1_clk_wiz_1_0
      port map (
-      clk_in1 => clk,
+      clk_in1 => util_ds_buf_0_BUFG_O(0),
       clk_out1 => microblaze_0_Clk,
       clk_out2 => clk_wiz_1_clk_out2,
       locked => clk_wiz_1_locked,
-      resetn => reset_n
+      resetn => reset
     );
 mdm_1: component design_1_mdm_1_0
      port map (
@@ -1757,7 +1659,7 @@ microblaze_0_local_memory: entity work.microblaze_0_local_memory_imp_1K0VQXK
 mig_7series_0: component design_1_mig_7series_0_0
      port map (
       aresetn => rst_mig_7series_0_100M_peripheral_aresetn(0),
-      clk_ref_i => microblaze_0_Clk,
+      clk_ref_i => clk_wiz_1_clk_out2,
       ddr3_addr(14 downto 0) => DDR3_addr(14 downto 0),
       ddr3_ba(2 downto 0) => DDR3_ba(2 downto 0),
       ddr3_cas_n => DDR3_cas_n,
@@ -1811,8 +1713,8 @@ mig_7series_0: component design_1_mig_7series_0_0
       s_axi_wready => axi_smc_1_M00_AXI_WREADY,
       s_axi_wstrb(3 downto 0) => axi_smc_1_M00_AXI_WSTRB(3 downto 0),
       s_axi_wvalid => axi_smc_1_M00_AXI_WVALID,
-      sys_clk_i => clk_wiz_1_clk_out2,
-      sys_rst => reset_n,
+      sys_clk_i => util_ds_buf_0_BUFG_O(0),
+      sys_rst => reset,
       ui_addn_clk_0 => NLW_mig_7series_0_ui_addn_clk_0_UNCONNECTED,
       ui_clk => mig_7series_0_ui_clk,
       ui_clk_sync_rst => mig_7series_0_ui_clk_sync_rst
@@ -1822,7 +1724,7 @@ rst_clk_wiz_1_100M: component design_1_rst_clk_wiz_1_100M_0
       aux_reset_in => '1',
       bus_struct_reset(0) => rst_clk_wiz_1_100M_bus_struct_reset(0),
       dcm_locked => clk_wiz_1_locked,
-      ext_reset_in => reset_n,
+      ext_reset_in => reset,
       interconnect_aresetn(0) => NLW_rst_clk_wiz_1_100M_interconnect_aresetn_UNCONNECTED(0),
       mb_debug_sys_rst => mdm_1_debug_sys_rst,
       mb_reset => rst_clk_wiz_1_100M_mb_reset,
@@ -1842,5 +1744,10 @@ rst_mig_7series_0_100M: component design_1_rst_mig_7series_0_100M_0
       peripheral_aresetn(0) => rst_mig_7series_0_100M_peripheral_aresetn(0),
       peripheral_reset(0) => NLW_rst_mig_7series_0_100M_peripheral_reset_UNCONNECTED(0),
       slowest_sync_clk => mig_7series_0_ui_clk
+    );
+util_ds_buf_0: component design_1_util_ds_buf_0_0
+     port map (
+      BUFG_I(0) => sys_clock,
+      BUFG_O(0) => util_ds_buf_0_BUFG_O(0)
     );
 end STRUCTURE;

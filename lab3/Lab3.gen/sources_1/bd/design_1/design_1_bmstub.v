@@ -22,8 +22,8 @@ module design_1 (
   DDR3_cke,
   DDR3_dm,
   DDR3_odt,
-  clk,
-  reset_n,
+  sys_clock,
+  reset,
   ac_mclk,
   ac_dac_sdata,
   ac_bclk,
@@ -72,14 +72,14 @@ module design_1 (
   output [1:0]DDR3_dm;
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR3 ODT" *)
   output [0:0]DDR3_odt;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.CLK CLK" *)
-  (* X_INTERFACE_MODE = "slave CLK.CLK" *)
-  (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.CLK, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_sys_clock, INSERT_VIP 0" *)
-  input clk;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RST.RESET_N RST" *)
-  (* X_INTERFACE_MODE = "slave RST.RESET_N" *)
-  (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RST.RESET_N, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
-  input reset_n;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.SYS_CLOCK CLK" *)
+  (* X_INTERFACE_MODE = "slave CLK.SYS_CLOCK" *)
+  (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.SYS_CLOCK, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_sys_clock, INSERT_VIP 0" *)
+  input sys_clock;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RST.RESET RST" *)
+  (* X_INTERFACE_MODE = "slave RST.RESET" *)
+  (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RST.RESET, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+  input reset;
   (* X_INTERFACE_IGNORE = "true" *)
   output ac_mclk;
   (* X_INTERFACE_IGNORE = "true" *)

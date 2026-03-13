@@ -10,7 +10,7 @@
       "component_parameters": {
         "SUPPORTS_WRITE_DECERR": [ { "value": "1", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "SUPPORTS_READ_DECERR": [ { "value": "1", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "SUPPORTS_WRAP": [ { "value": "1", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "SUPPORTS_WRAP": [ { "value": "0", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "IS_CASCADED": [ { "value": "0", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "ENABLE_PIPELINING": [ { "value": "0", "value_src": "user", "resolve_type": "user", "format": "bitString", "usage": "all" } ],
         "NUM_SEG": [ { "value": "2", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
@@ -2114,7 +2114,7 @@
         "C_NUM_READ_OUTSTANDING": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_NUM_WRITE_OUTSTANDING": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_SINGLE_ISSUING": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_SUPPORTS_WRAP": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_SUPPORTS_WRAP": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_SUPPORTS_NARROW": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_SUPPORTS_READ_DECERR": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_SUPPORTS_WRITE_DECERR": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ]

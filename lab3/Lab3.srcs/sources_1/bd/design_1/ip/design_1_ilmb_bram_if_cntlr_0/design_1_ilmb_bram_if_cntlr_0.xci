@@ -5,7 +5,7 @@
     "cell_name": "microblaze_0_local_memory/ilmb_bram_if_cntlr",
     "component_reference": "xilinx.com:ip:lmb_bram_if_cntlr:4.0",
     "ip_revision": "25",
-    "gen_directory": "../../../../../../Lab3.gen/sources_1/bd/design_1/ip/design_1_ilmb_bram_if_cntlr_0",
+    "gen_directory": "../../../../../../lab3.gen/sources_1/bd/design_1/ip/design_1_ilmb_bram_if_cntlr_0",
     "parameters": {
       "component_parameters": {
         "C_BASEADDR": [ { "value": "0x0000000000000000", "value_src": "propagated", "value_permission": "bd", "resolve_type": "user", "format": "bitString", "usage": "all" } ],
@@ -87,11 +87,11 @@
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
         "IPREVISION": [ { "value": "25" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../Lab3.gen/sources_1/bd/design_1/ip/design_1_ilmb_bram_if_cntlr_0" } ],
+        "OUTPUTDIR": [ { "value": "../../../../../../lab3.gen/sources_1/bd/design_1/ip/design_1_ilmb_bram_if_cntlr_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "../../ipshared" } ],
         "SWVERSION": [ { "value": "2024.2" } ],
-        "SYNTHESISFLOW": [ { "value": "GLOBAL" } ]
+        "SYNTHESISFLOW": [ { "value": "OUT_OF_CONTEXT" } ]
       }
     },
     "boundary": {

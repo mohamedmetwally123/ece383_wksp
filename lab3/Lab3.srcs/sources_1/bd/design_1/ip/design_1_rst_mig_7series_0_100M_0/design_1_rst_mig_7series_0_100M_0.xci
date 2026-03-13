@@ -5,7 +5,7 @@
     "cell_name": "rst_mig_7series_0_100M",
     "component_reference": "xilinx.com:ip:proc_sys_reset:5.0",
     "ip_revision": "16",
-    "gen_directory": "../../../../../../Lab3.gen/sources_1/bd/design_1/ip/design_1_rst_mig_7series_0_100M_0",
+    "gen_directory": "../../../../../../lab3.gen/sources_1/bd/design_1/ip/design_1_rst_mig_7series_0_100M_0",
     "parameters": {
       "component_parameters": {
         "C_NUM_PERP_ARESETN": [ { "value": "1", "resolve_type": "user", "format": "long", "usage": "all" } ],
@@ -48,11 +48,11 @@
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
         "IPREVISION": [ { "value": "16" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../Lab3.gen/sources_1/bd/design_1/ip/design_1_rst_mig_7series_0_100M_0" } ],
+        "OUTPUTDIR": [ { "value": "../../../../../../lab3.gen/sources_1/bd/design_1/ip/design_1_rst_mig_7series_0_100M_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "../../ipshared" } ],
         "SWVERSION": [ { "value": "2024.2" } ],
-        "SYNTHESISFLOW": [ { "value": "GLOBAL" } ]
+        "SYNTHESISFLOW": [ { "value": "OUT_OF_CONTEXT" } ]
       }
     },
     "boundary": {

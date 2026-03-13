@@ -5,7 +5,7 @@
     "cell_name": "mdm_1",
     "component_reference": "xilinx.com:ip:mdm:3.2",
     "ip_revision": "27",
-    "gen_directory": "../../../../../../Lab3.gen/sources_1/bd/design_1/ip/design_1_mdm_1_0",
+    "gen_directory": "../../../../../../lab3.gen/sources_1/bd/design_1/ip/design_1_mdm_1_0",
     "parameters": {
       "component_parameters": {
         "C_XMTC": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "all" } ],
@@ -98,11 +98,11 @@
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
         "IPREVISION": [ { "value": "27" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../Lab3.gen/sources_1/bd/design_1/ip/design_1_mdm_1_0" } ],
+        "OUTPUTDIR": [ { "value": "../../../../../../lab3.gen/sources_1/bd/design_1/ip/design_1_mdm_1_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "../../ipshared" } ],
         "SWVERSION": [ { "value": "2024.2" } ],
-        "SYNTHESISFLOW": [ { "value": "GLOBAL" } ]
+        "SYNTHESISFLOW": [ { "value": "OUT_OF_CONTEXT" } ]
       }
     },
     "boundary": {
