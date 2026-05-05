@@ -89,6 +89,7 @@ read_vhdl -library xil_defaultlib {
   C:/Users/C27Mohamed.Metwally/ece383_wksp/final_project/final_project.srcs/sources_1/new/doodle_audio.vhd
   C:/Users/C27Mohamed.Metwally/ece383_wksp/final_project/final_project.srcs/sources_1/imports/sources_1/new/doodle_audio_cu.vhd
   C:/Users/C27Mohamed.Metwally/ece383_wksp/final_project/final_project.srcs/sources_1/new/doodle_audio_datapath.vhd
+  C:/Users/C27Mohamed.Metwally/ece383_wksp/final_project/final_project.srcs/sources_1/imports/Downloads/doodle_digits.vhd
   C:/Users/C27Mohamed.Metwally/ece383_wksp/final_project/final_project.srcs/sources_1/imports/sources_1/dvid.vhdl
   C:/Users/C27Mohamed.Metwally/ece383_wksp/final_project/final_project.srcs/sources_1/imports/sources_1/graphics_datapath.vhd
   C:/Users/C27Mohamed.Metwally/ece383_wksp/final_project/final_project.srcs/sources_1/imports/sources_1/graphics_fsm.vhd

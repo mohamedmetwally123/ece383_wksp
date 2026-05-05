@@ -16,7 +16,8 @@ package graphicsParts is
 	type sprite_status_t is record
 	       row: unsigned(9 downto 0);
 	       col: unsigned(9 downto 0);
-	       sprite_type: std_logic_vector (3 downto 0);
+	       --added stuff
+	       sprite_type: std_logic_vector (5 downto 0);
 	       active: std_logic;
 	end record;
 
@@ -43,7 +44,8 @@ component graphics_fsm is
            fsmSpriteStatus: out sprite_status_t;
            fsmWen : out std_logic;
            fsmAudio_type: out std_logic_vector (3 downto 0);
-           fsmAudio_play_request: out std_logic);
+           fsmAudio_play_request: out std_logic;
+           score: in unsigned(16 downto 0));
 end component;
 
 component graphics_datapath
@@ -57,7 +59,8 @@ component graphics_datapath
            signal Wen: in std_logic;
            signal spriteStatus: in sprite_status_t;
            flagQ: out STD_LOGIC;
-           flagClear: in STD_LOGIC);
+           flagClear: in STD_LOGIC;
+           score: in unsigned(16 downto 0));
 end component;
 
 
@@ -74,7 +77,8 @@ end component;
 			  ch2_enb: in std_logic;
 			  v_synch: out std_logic;
 			  flagQ: out STD_LOGIC;
-              flagClear: in STD_LOGIC);
+              flagClear: in STD_LOGIC;
+              score: in unsigned(16 downto 0));
 	end component;
 
   
@@ -174,7 +178,7 @@ constant doodle_outline : std_logic_vector(2 downto 0) := "001";
 constant doodle_body    : std_logic_vector(2 downto 0) := "010";
 constant doodle_light   : std_logic_vector(2 downto 0) := "011";
 constant doodle_stripe  : std_logic_vector(2 downto 0) := "100";
-type doodle_sprite_sym_t is array (0 to 39) of string(1 to 40);
+type doodle_sprite_sym_t is array (0 to 39) of string(0 to 39);
 
 constant doodle_right : doodle_sprite_sym_t := (
     "........................................", -- visual row 04
@@ -222,7 +226,8 @@ constant doodle_right : doodle_sprite_sym_t := (
 function doodle_sym_to_pix(c : character)
     return std_logic_vector;
 	
-
+function play_again_sym_to_pixel(ch : character) 
+    return std_logic_vector;
 
 type wide_tile_t is array (0 to 7, 0 to 47) of std_logic_vector(1 downto 0);
 
@@ -405,11 +410,298 @@ constant platform_full_tile : wide_tile_t := (
     )
 );
 
+    --Added stuff
+    constant JETPACK_AND_DOODLE_WIDTH  : integer := 54;
+    constant JETPACK_AND_DOODLE_HEIGHT : integer := 42;
+    function jetpack_and_doodle_sym_to_pix(c : character)
+    return std_logic_vector;
+    constant doodle_outline_jd : std_logic_vector(3 downto 0) := "0000";
+    constant doodle_body_jd    : std_logic_vector(3 downto 0) := "0001";
+    constant doodle_light_jd   : std_logic_vector(3 downto 0) := "0010";
+    constant doodle_stripe_jd  : std_logic_vector(3 downto 0) := "0011";
+    constant jetpack_body_jd      : std_logic_vector(3 downto 0) := "0100";
+    constant jetpack_yellow_jd    : std_logic_vector(3 downto 0) := "0101";
+    constant jetpack_stripe_jd    : std_logic_vector(3 downto 0) := "0110";
+    constant jetpack_darkblue_jd  : std_logic_vector(3 downto 0) := "0111";
+    constant jetpack_brown_jd     : std_logic_vector(3 downto 0) := "1000";
+    constant flame_core_jd          : std_logic_vector(3 downto 0) := "1001"; 
+    constant flame_outer_jd          : std_logic_vector(3 downto 0) := "1010";
+    constant doodle_BG_jd             : std_logic_vector(3 downto 0) := "1011";
+    
+    
+
+      
+    type jetpack_and_doodle_sprite_sym_t is array (0 to 42) of string(0 to 54);
+    constant jetpackAndDoodle : jetpack_and_doodle_sprite_sym_t:= (
+".......................................................", -- visual row 04
+".......................########........................", -- visual row 05
+"......................##SSSSS####......................", -- visual row 06
+".....................#SLBBBBBBSS##.....................", -- visual row 07
+"...................##BLBBBBBBBBBS##....................", -- visual row 08
+"..................#SLLBBBBBBLLLBBS##...................", 
+"......####........#LLBBBBBBBLLLBBBS##..................", 
+".....######......#LLBBBBBBBBBBBLBBBS#..................", 
+".....#YYYY#.....#SLLBBBBBBBBLLLLLBBBS#.................",
+"....##YYYY##....#LLBBBBBBLLLLLLLLBBBS##................", 
+"....#YYYYYY#....#SLBBBBBBBLLLLLLLLLBBBS#...............",  
+"....#TTTTTT#....#SBBBBBBBBBLLLBBBSLLSBS##..............",
+"....#TTTTTT#....#LBBBBBBBBBBLLLBS#BL#SBS#.........LSS..",
+"....#JJJJJJ######LLBBBBBBBBBLLLBS#BL#SBS###......####..",
+"....#JJJJJJ#DDDD#LLBBLLBBBLLLLBBBBBBBLLLBS###########..",
+"....#JJJJJJ#DDDD#LBBBLLLBBLLLLLLLLBBLLLLBBBSSSSSS#SB#..",
+"....#JJJJJJ######LBBBLLLLBBLLLLLLLLLBBBBBBBLLBBBB#SB##.",
+"....#JJJJJJ#....#LBBBBLLLLBBBBBBBBBBBBBBBBBSSSBLL#SBS#.", 
+"....#JJJJJJ#....#LBBBLLLLBBBBBBBBBBBBBBBS#######S##LS#.",
+"....#JJJJJJ#....#LLBBBBBBBBBBBBBBBBBBBBS##.....####S##.", 
+"....#JJJJJJ#....#LLLBLBBBBBBBBBBBBBBLLB###........###..", 
+"....#JJJJJJ#....#SLLBLLBBBBLLLLLBBBBLLS##..............",
+"....#JJJJJJ#....##SSSSSSSSSSSSSSSSSSSS###..............", 
+"....#JJJJJJ#....#########################..............",
+"....#JJJJJJ#....#SSSSSSSSSSSSSSSSSSSSSSS#..............", 
+"....#JJJJJJ#....#SSSSSSSSSSSSSSSSSSSSSSS#..............",
+"....#JJJJJJ#....#SSSSSSSSSSSSSSSSSSSSSSS#..............",
+"....#JJTTJJ#....#########################..............",
+"....#J####J######SSSSSSSSSLLLLLLSSSSSSSS#..............", 
+"....#JJJJJJ#DDDD#SLLLLLLLLLLLLLLLLLLSSSS#..............",
+"....#JJTTJJ#DDDD#SSSSSSSSSSSSSSSSSSSSSSS#..............", 
+"....#J####J##############################..............", 
+"....#JJJJJJ#....#SSLSSSSSSSSSSSSSSSSSSS##..............",
+"....#JJJJJJ#....#########################..............", 
+"....##RRRR##.......##....##...##....##.................",
+".....######........##....##...##....##.................",
+"......####.........##....##...##....##.................", 
+".....OOOOOO........##....##...##....###................",
+"....OOOOOOOO.......####..####.####..####...............",
+"...OOCCCCCCOO......####..####.####..####...............",
+"..OOCCCCCCCCOO.........................................",
+".OOCCCCCCCCCCOO........................................",
+"OOCCCCCCCCCCCCOO......................................."
+    );
+    
+    
+    
+    constant JETPACK_WIDTH  : integer := 21;
+    constant JETPACK_HEIGHT : integer := 31;
+    function jetpack_sym_to_pix(c : character)
+        return std_logic_vector;
+    constant jetpack_BG        : std_logic_vector(2 downto 0) := "000";
+    constant jetpack_outline   : std_logic_vector(2 downto 0) := "001";
+    constant jetpack_body      : std_logic_vector(2 downto 0) := "010";
+    constant jetpack_yellow    : std_logic_vector(2 downto 0) := "011";
+    constant jetpack_stripe    : std_logic_vector(2 downto 0) := "100";
+    constant jetpack_darkblue  : std_logic_vector(2 downto 0) := "101";
+    constant jetpack_brown     : std_logic_vector(2 downto 0) := "110";
+    
+    type jetpack_sprite_sym_t is array (0 to 31) of string(0 to 21);
+    constant jetpack : jetpack_sprite_sym_t :=
+    (
+    "......................", -- visual row 00
+    "..####........####....", -- visual row 01
+    ".######......######...", -- visual row 02
+    ".#YYYY#......#YYYY#...", -- visual row 03
+    "##YYYY##....##YYYY##..", -- visual row 04
+    "#YYYYYY#....#YYYYYY#..", -- visual row 05
+    "#TTTTTT#....#TTTTTT#..", -- visual row 06
+    "#TTTTTT##..##TTTTTT#..", -- visual row 07
+    "#BBBBBB######BBBBBB#..", -- visual row 08
+    "#BBBBBB#DDDD#BBBBBB#..", -- visual row 09
+    "#BBBBBB#DDDD#BBBBBB#..", -- visual row 10
+    "#BBBBBB######BBBBBB#..", -- visual row 11
+    "#BBBBBB#....#BBBBBB#..", -- visual row 12
+    "#BBBBBB#....#BBBBBB#..", -- visual row 13
+    "#BBBBBB#....#BBBBBB#..", -- visual row 14
+    "#BBBBBB#....#BBBBBB#..", -- visual row 15
+    "#BBBBBB#....#BBBBBB#..", -- visual row 16
+    "#BBBBBB#....#BBBBBB#..", -- visual row 17
+    "#BBBBBB#....#BBBBBB#..", -- visual row 18
+    "#BBBBBB#....#BBBBBB#..", -- visual row 19
+    "#BBBBBB#....#BBBBBB#..", -- visual row 20
+    "#BBBBBB#....#BBBBBB#..", -- visual row 21
+    "#BBTTBB#....#BBTTBB#..", -- visual row 22
+    "#B####B######B####B#..", -- visual row 23
+    "#BBBBBB#DDDD#BBBBBB#..", -- visual row 24
+    "#BBTTBB#DDDD#BBTTBB#..", -- visual row 25
+    "#B####B######B####B#..", -- visual row 26
+    "#BBBBBB#....#BBBBBB#..", -- visual row 27
+    "#BBBBBB#....#BBBBBB#..", -- visual row 28
+    "##RRRR##....##RRRR##..", -- visual row 29
+    ".######......######...", -- visual row 30
+    "..####........####...."  -- visual row 31
+    );
+     
+
+
+    constant TEXT_OUTLINE        : std_logic_vector(1 downto 0) := "00";
+    constant TEXT_SHADOW   : std_logic_vector(1 downto 0) := "01";
+    constant TEXT_BG      : std_logic_vector(1 downto 0) := "10";
+    constant PLAYAGAIN_WIDTH  : integer := 79;
+    constant PLAYAGAIN_HEIGHT : integer := 33; 
+type play_again_sprite_array is array (0 to 33) of string(0 to 79);
+
+constant play_again_sprite : play_again_sprite_array := (
+
+("....########################################################################...."),
+("...##########################################################################..."),
+("..############################################################################.."),
+(".####======================================================================####."),
+("####========================================================================####"),
+("###==========================================================================###"),
+("###==========================================================================###"),
+("###==========================================================================###"),
+("###==========================================================================###"),
+("###==========================================================================###"),
+("###=========#####=#======###==#===#=====###===####==###==#####=#===#=========###"),
+("###=========#####=#======###==#===#=====###===####==###==#####=#===#=========###"),
+("###=========#===#=#=====#===#=#===#====#===#=#=====#===#===#===##==#=========###"),
+("###=========#===#=#=====#===#=#===#====#===#=#=====#===#===#===##==#=========###"),
+("###=========#===#=#=====#===#==###=====#===#=#=====#===#===#===#=#=#=========###"),
+("###=========#===#=#=====#===#==###=====#===#=#=====#===#===#===#=#=#=========###"),
+("###=========#####=#=====#####===#======#####=#=###=#####===#===#==##=========###"),
+("###=========#####=#=====#####===#======#####=#=###=#####===#===#==##=========###"),
+("###=========#=====#=====#===#===#======#===#=#===#=#===#===#===#===#=========###"),
+("###=========#=====#=====#===#===#======#===#=#===#=#===#===#===#===#=========###"),
+("###=========#=====#=====#===#===#======#===#=#===#=#===#===#===#===#=========###"),
+("###=========#=====#=====#===#===#======#===#=#===#=#===#===#===#===#=========###"),
+("###=========#=====#####=#===#===#======#===#==###==#===#=#####=#===#=========###"),
+("###=========#=====#####=#===#===#======#===#==###==#===#=#####=#===#=========###"),
+("###==========================================================================###"),
+("###==========================================================================###"),
+("###==========================================================================###"),
+("###==========================================================================###"),
+("###==========================================================================###"),
+("###==========================================================================###"),
+("####========================================================================####"),
+(".####======================================================================####."),
+("..############################################################################.."),
+("...##########################################################################...")
+
+);
+
+
+
+    constant PLAY_WIDTH  : integer := 79;
+    constant PLAY_HEIGHT : integer := 23; 
+
+type play_sprite_array is array (0 to 23) of string(0 to 79);
+constant play_sprite : play_sprite_array := (
+("....########################################################################...."),
+("..############################################################################.."),
+(".####======================================================================####."),
+("###==========================================================================###"),
+("###==========================================================================###"),
+("###=========================#####=#======###==#===#==========================###"),
+("###=========================#####=#======###==#===#==========================###"),
+("###=========================#===#=#=====#===#=#===#==========================###"),
+("###=========================#===#=#=====#===#=#===#==========================###"),
+("###=========================#===#=#=====#===#==###===========================###"),
+("###=========================#===#=#=====#===#==###===========================###"),
+("###=========================#####=#=====#####===#============================###"),
+("###=========================#####=#=====#####===#============================###"),
+("###=========================#=====#=====#===#===#============================###"),
+("###=========================#=====#=====#===#===#============================###"),
+("###=========================#=====#=====#===#===#============================###"),
+("###=========================#=====#=====#===#===#============================###"),
+("###=========================#=====#####=#===#===#============================###"),
+("###=========================#=====#####=#===#===#============================###"),
+("###==========================================================================###"),
+("###==========================================================================###"),
+(".####======================================================================####."),
+("..############################################################################.."),
+("....########################################################################....")
+);
+
+    constant GAME_OVER_LETTERS        : std_logic_vector(1 downto 0) := "00";
+    constant GAME_OVER_BK   : std_logic_vector(1 downto 0) := "01";
+    constant GAME_OVER_WIDTH  : integer := 79;
+    constant GAME_OVER_HEIGHT : integer := 13; 
+    function game_over_sym_to_pix(c: character)
+        return std_logic_vector;
+type game_over_sprite_array is array (0 to 13) of string(0 to 79);
+constant game_over_sprite : game_over_sprite_array := (
+("...########..###...##...##..########......#####..##...##..########..########...."),
+("...########..###...##...##..########......#####..##...##..########..########...."),
+("...##.......#...#..###.###..##............#...#..##...##..##........#......#...."),
+("...##.......#...#..###.###..##............#...#..##...##..##........#......#...."),
+("...##.......#...#..##.#.##..##............#...#..##...##..##........#......#...."),
+("...##.......#...#..##.#.##..##............#...#..##...##..##........#......#...."),
+("...##..####.#####..##...##..########......#...#..##...##..########..########...."),
+("...##..####.#####..##...##..########......#...#..##...##..########..########...."),
+("...##....##.##.##..##...##..##............#...#..##...##..##........###........."),
+("...##....##.##.##..##...##..##............#...#..##...##..##........#.##........"),
+("...##....##.##.##..##...##..##............#...#...##.##...##........#..##......."),
+("...##....##.##.##..##...##..##............#...#...##.##...##........#...##......"),
+("...########.##.##..##...##..########......#####....###....########..#....##....."),
+("...########.##.##..##...##..########......#####....###....########..#.....##....")
+);
+
+
+constant brown_beam_outline: std_logic_vector(1 downto 0) := "00";
+constant brown_beam_body : std_logic_vector(1 downto 0) := "01";
+constant brown_beam_light : std_logic_vector(1 downto 0) := "10";
+constant brown_beam_bg: std_logic_vector(1 downto 0) := "11";
+constant BROWN_BEAM_WIDTH  : integer := 47;
+constant BROWN_BEAM_HEIGHT : integer := 7; 
+type brown_beam_sprite_array is array (0 to 7) of string(0 to 47);
+    function beam_sym_to_pix(c : character)
+    return std_logic_vector;
+constant brown_beam_sprite : brown_beam_sprite_array :=
+(
+"..####################..#####################...",
+".#BBBBBBBBBBBBBBBBBBB#..#BBBBBBBBBBBBBBBBBBBB#..",
+"#BLLLLLBBBBBBBBBBBBBB#..#BBBBBBBBBBBBBBLLLLLLB#.",
+"#BBBBBBBBBBBBBBBBBBB#..##BBBBBBBBBBBBBBBBBBBBB#.",
+"#BBBBBBBBBBBBBBBBBBB#..#BBBBBBBBBBBBBBBBBBBBBB#.",
+"#BBBBBBBBBBBBBBBBBBBB#..#BBBBBBBBBBBBBBBBBBBBB#.",
+".#BBBBBBBBBBBBBBBBBBB#..#BBBBBBBBBBBBBBBBBBBB#..",
+"..####################..######################.."
+);
+
+
+constant BROKEN_BROWN_BEAM_WIDTH  : integer := 7;
+constant BROKEN_BROWN_BEAM_HEIGHT : integer := 24;
+type broken_brown_beam_sprite_array is array (0 to 24) of string(0 to 7);
+constant broken_brown_beam_sprite: broken_brown_beam_sprite_array:=
+(
+"........",
+"..####..",
+".#BBBB##",
+"#BLBBBB#",
+"#BLBBBB#",
+"#BLBBBB#",
+"#BLBBBB#",
+"#BLBBBB#",
+"#BLBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"#BBBBBB#",
+"####B###",
+"...##..."
+);
 
 end graphicsParts;
 
 package body graphicsParts is
 
+    function game_over_sym_to_pix(c: character)
+        return std_logic_vector is 
+    begin   
+        case c is 
+            when '.' => return game_over_bk;
+            when '#' => return game_over_letters;
+            when others => return game_over_bk;
+        end case;
+    end function;
     function doodle_sym_to_pix(c : character)
         return std_logic_vector is
     begin
@@ -422,5 +714,62 @@ package body graphicsParts is
             when others => return doodle_BG;
         end case;
     end function;
+    
+    --Added stuff
+    function jetpack_sym_to_pix(c : character)
+    return std_logic_vector is
+    begin
+    case c is
+        when '.' => return jetpack_BG;
+        when '#' => return jetpack_outline;
+        when 'B' => return jetpack_body;
+        when 'Y' => return jetpack_yellow;
+        when 'T' => return jetpack_stripe;
+        when 'D' => return jetpack_darkblue;
+        when 'R' => return jetpack_brown;
+        when others => return jetpack_BG;
+    end case;
+end function;
+
+    function jetpack_and_doodle_sym_to_pix(c : character)
+        return std_logic_vector is
+    begin
+        case c is
+            when '.' => return doodle_BG_jd;
+            when '#' => return doodle_outline_jd;
+            when 'B' => return doodle_body_jd;
+            when 'L' => return doodle_light_jd;
+            when 'S' => return doodle_stripe_jd;
+            when 'J' => return jetpack_body_jd;
+            when 'Y' => return jetpack_yellow_jd;
+            when 'T' => return jetpack_stripe_jd;
+            when 'D' => return jetpack_darkblue_jd;
+            when 'R' => return jetpack_brown_jd;
+            when 'O' => return flame_outer_jd;
+            when 'C' => return flame_core_jd;
+            when others => return doodle_BG_jd;
+        end case;
+    end function; 
+
+    function play_again_sym_to_pixel(ch : character) return std_logic_vector is
+    begin
+    case ch is
+        when '#' => return TEXT_OUTLINE; -- outline + text
+        when '=' => return TEXT_SHADOW;
+        when others => return TEXT_BG;
+    end case;
+    end function;
+    
+    function beam_sym_to_pix(c : character)
+    return std_logic_vector is
+begin
+    case c is
+        when '.' => return brown_beam_BG;
+        when '#' => return brown_beam_outline;
+        when 'B' => return brown_beam_body;
+        when 'L' => return brown_beam_light;
+        when others => return brown_beam_BG;
+    end case;
+end function;
 
 end package body graphicsParts;

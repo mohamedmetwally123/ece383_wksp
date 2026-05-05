@@ -27,24 +27,26 @@ entity graphics_fsm is
            fsmSpriteStatus: out sprite_status_t;
            fsmWen : out std_logic;
            fsmAudio_type: out std_logic_vector (3 downto 0);
-           fsmAudio_play_request: out std_logic);
+           fsmAudio_play_request: out std_logic;
+           score: out unsigned(16 downto 0));
 end graphics_fsm;
 
 architecture Behavioral of graphics_fsm is
 
 	type state_type is (SWAP, DELAY, CHANGE_DATA, SET, CLEAR, INCADDR );
 	signal state: state_type;
-	signal writeCntr: unsigned(29 downto 0);
+	signal writeCntr: unsigned(25 downto 0);
 	--signal col : unsigned(6 downto 0);
     --signal row : unsigned(5 downto 0);
-    signal WrAddr: unsigned(4 downto 0);
+    signal WrAddr: unsigned(4 downto 0):= "11111";
 	signal Data, Old_Data: std_logic_vector(15 downto 0);
 	signal Wen: std_logic;
-	
+	signal score_sig: unsigned(16 downto 0):= (others => '0');
 	signal audio_type: std_logic_vector (3 downto 0);
 	signal audio_play_request: std_logic;
 	constant LAST_COL : integer := 80;
     constant LAST_ROW : integer := 60;
+    
 begin
     --fsmCol <= std_logic_vector(col);
     --fsmRow <= std_logic_vector(row);
@@ -87,55 +89,100 @@ begin
 					when SWAP =>
 						state <= DELAY;    		
 					when DELAY => 
-						if (writeCntr = "000000000000000000000000000000") then state <= CHANGE_DATA; end if;
+						if (writeCntr = "00000000000000000000000000") then state <= CHANGE_DATA; end if;
                     when CHANGE_DATA => 
-                             if (audio_type = "0000") then 
-                                audio_type <= "0001";
-                                audio_play_request <= '1';
-                             elsif(audio_type = "0001") then 
-                                audio_type <= "0010";
-                                audio_play_request <= '1';
-                             elsif(audio_type = "0010") then
-                                audio_type <= "0000";
-                                audio_play_request <= '1';
-                             end if;                             
+--                             if (audio_type = "0000") then 
+--                                audio_type <= "0001";
+--                                audio_play_request <= '1';
+--                             elsif(audio_type = "0001") then 
+--                                audio_type <= "0010";
+--                                audio_play_request <= '1';
+--                             elsif(audio_type = "0010") then
+--                                audio_type <= "0000";
+--                                audio_play_request <= '1';
+--                             end if;  
+                                 audio_type <= "0011";
+                                 audio_play_request <= '1';                          
                              -- right facing doodle
                              if (wrAddr = "00000") then 				
                                 fsmSpriteStatus.active <= '1';
 				                fsmSpriteStatus.row <= TO_UNSIGNED(100, fsmSpriteStatus.row'length);
 				                fsmSpriteStatus.col <= TO_UNSIGNED(100, fsmSpriteStatus.col'length);
-				                fsmSpriteStatus.sprite_type <= "0010";
+				                fsmSpriteStatus.sprite_type <= "000000";
 				             -- left facing doodle
 				             elsif (wrAddr = "00001") then 				
                                 fsmSpriteStatus.active <= '1';
 				                fsmSpriteStatus.row <= TO_UNSIGNED(150, fsmSpriteStatus.row'length);
 				                fsmSpriteStatus.col <= TO_UNSIGNED(150, fsmSpriteStatus.col'length);
-				                fsmSpriteStatus.sprite_type <= "0011";
-				            -- blue platform
-                            elsif (wrAddr = "00010") then 				
+				                fsmSpriteStatus.sprite_type <= "000001";
+				            -- Jetpack
+                            elsif (wrAddr = "00011") then 				
                                 fsmSpriteStatus.active <= '1';
-				                fsmSpriteStatus.row <= TO_UNSIGNED(24, fsmSpriteStatus.row'length);
-				                fsmSpriteStatus.col <= TO_UNSIGNED(24, fsmSpriteStatus.col'length);
-				                fsmSpriteStatus.sprite_type <= "0100";
+				                fsmSpriteStatus.row <= TO_UNSIGNED(26, fsmSpriteStatus.row'length);
+				                fsmSpriteStatus.col <= TO_UNSIGNED(26, fsmSpriteStatus.col'length);
+				                fsmSpriteStatus.sprite_type <= "000011";
+				            elsif(wrAddr = "00010") then 
+				                 fsmSpriteStatus.active <= '1';
+				                fsmSpriteStatus.row <= TO_UNSIGNED(300, fsmSpriteStatus.row'length);
+				                fsmSpriteStatus.col <= TO_UNSIGNED(300, fsmSpriteStatus.col'length);
+				                fsmSpriteStatus.sprite_type <= "000010";
 				            -- green platform
-				             elsif (wrAddr = "00100") then 				
+				             elsif (wrAddr = "01100") then 				
                                 fsmSpriteStatus.active <= '1';
-				                fsmSpriteStatus.row <= TO_UNSIGNED(150, fsmSpriteStatus.row'length);
-				                fsmSpriteStatus.col <= TO_UNSIGNED(150, fsmSpriteStatus.col'length);
-				                fsmSpriteStatus.sprite_type <= "0001";
-                            elsif(wrAddr = "11111") then 
+				                fsmSpriteStatus.row <= TO_UNSIGNED(250, fsmSpriteStatus.row'length);
+				                fsmSpriteStatus.col <= TO_UNSIGNED(250, fsmSpriteStatus.col'length);
+				                fsmSpriteStatus.sprite_type <= "001100";
+				            -- blue platform
+                            elsif(wrAddr = "01101") then 
                                 fsmSpriteStatus.active <= '1';
-				                fsmSpriteStatus.row <= TO_UNSIGNED(20, fsmSpriteStatus.row'length);
-				                fsmSpriteStatus.col <= TO_UNSIGNED(20, fsmSpriteStatus.col'length);
-				                fsmSpriteStatus.sprite_type <= "0000";
+				                fsmSpriteStatus.row <= TO_UNSIGNED(400, fsmSpriteStatus.row'length);
+				                fsmSpriteStatus.col <= TO_UNSIGNED(400, fsmSpriteStatus.col'length);
+				                fsmSpriteStatus.sprite_type <= "001101";
+				            -- Play again
+				             elsif(wrAddr = "001000") then 
+                                fsmSpriteStatus.active <= '1';
+				                fsmSpriteStatus.row <= TO_UNSIGNED(300, fsmSpriteStatus.row'length);
+				                fsmSpriteStatus.col <= TO_UNSIGNED(500, fsmSpriteStatus.col'length);
+				                fsmSpriteStatus.sprite_type <= "001000";
+				            -- play
+				            elsif(wrAddr = "000111") then 
+                                fsmSpriteStatus.active <= '1';
+				                fsmSpriteStatus.row <= TO_UNSIGNED(100, fsmSpriteStatus.row'length);
+				                fsmSpriteStatus.col <= TO_UNSIGNED(500, fsmSpriteStatus.col'length);
+				                fsmSpriteStatus.sprite_type <= "000111";
+				            -- GAME OVER
+				             elsif(wrAddr = "000110") then 
+                                fsmSpriteStatus.active <= '1';
+				                fsmSpriteStatus.row <= TO_UNSIGNED(200, fsmSpriteStatus.row'length);
+				                fsmSpriteStatus.col <= TO_UNSIGNED(500, fsmSpriteStatus.col'length);
+				                fsmSpriteStatus.sprite_type <= "000110";
+				             
+				            --brown beam
+				             elsif(wrAddr = "001110") then 
+                                fsmSpriteStatus.active <= '1';
+				                fsmSpriteStatus.row <= TO_UNSIGNED(250, fsmSpriteStatus.row'length);
+				                fsmSpriteStatus.col <= TO_UNSIGNED(450, fsmSpriteStatus.col'length);
+				                fsmSpriteStatus.sprite_type <= "001110";
+				             --broken beam
+				             elsif(wrAddr = "011101") then 
+                                fsmSpriteStatus.active <= '1';
+				                fsmSpriteStatus.row <= TO_UNSIGNED(260, fsmSpriteStatus.row'length);
+				                fsmSpriteStatus.col <= TO_UNSIGNED(450, fsmSpriteStatus.col'length);
+				                fsmSpriteStatus.sprite_type <= "011101";
+				             elsif(wrAddr = "011110") then 
+                                fsmSpriteStatus.active <= '1';
+				                fsmSpriteStatus.row <= TO_UNSIGNED(260, fsmSpriteStatus.row'length);
+				                fsmSpriteStatus.col <= TO_UNSIGNED(500, fsmSpriteStatus.col'length);
+				                fsmSpriteStatus.sprite_type <= "011101";
 				            else 
 				                fsmSpriteStatus.active <= '0';
 				                fsmSpriteStatus.row <= TO_UNSIGNED(0, fsmSpriteStatus.row'length);
 				                fsmSpriteStatus.col <= TO_UNSIGNED(0, fsmSpriteStatus.col'length);
-				                fsmSpriteStatus.sprite_type <= "1011";
+				                fsmSpriteStatus.sprite_type <= "011111";
 
                             end if;
                             state <= SET;
+                            score_sig <= score_sig + 1;
 					when SET =>
 						state <= CLEAR;
 						Wen <= '1';
@@ -152,7 +199,7 @@ begin
 	end process;
 
     Old_Data <= Data;
-
+    score <= score_sig;
 
 end Behavioral;
 

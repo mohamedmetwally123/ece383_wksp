@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Tue Apr 21 15:58:46 2026
+| Date             : Mon Apr 27 22:34:13 2026
 | Host             : C27-5CG3123P67 running 64-bit major release  (build 9200)
 | Command          : report_power -file final_project_power_routed.rpt -pb final_project_power_summary_routed.pb -rpx final_project_power_routed.rpx
 | Design           : final_project
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.590        |
+| Total On-Chip Power (W)  | 0.570        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.435        |
-| Device Static (W)        | 0.155        |
+| Dynamic (W)              | 0.415        |
+| Device Static (W)        | 0.154        |
 | Effective TJA (C/W)      | 3.3          |
-| Max Ambient (C)          | 83.0         |
-| Junction Temperature (C) | 27.0         |
+| Max Ambient (C)          | 83.1         |
+| Junction Temperature (C) | 26.9         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,19 +52,19 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.010 |       10 |       --- |             --- |
-| Slice Logic    |     0.006 |     3116 |       --- |             --- |
-|   LUT as Logic |     0.006 |     1807 |    133800 |            1.35 |
-|   F7/F8 Muxes  |    <0.001 |      256 |    133800 |            0.19 |
-|   CARRY4       |    <0.001 |       93 |     33450 |            0.28 |
-|   Register     |    <0.001 |      496 |    267600 |            0.19 |
-|   Others       |     0.000 |      131 |       --- |             --- |
-| Signals        |     0.013 |     2711 |       --- |             --- |
-| Block RAM      |     0.043 |       49 |       365 |           13.42 |
+| Clocks         |     0.009 |       10 |       --- |             --- |
+| Slice Logic    |     0.006 |     5508 |       --- |             --- |
+|   LUT as Logic |     0.006 |     3450 |    133800 |            2.58 |
+|   F7/F8 Muxes  |    <0.001 |      233 |    133800 |            0.17 |
+|   CARRY4       |    <0.001 |      198 |     33450 |            0.59 |
+|   Register     |    <0.001 |      743 |    267600 |            0.28 |
+|   Others       |     0.000 |       97 |       --- |             --- |
+| Signals        |     0.009 |     4457 |       --- |             --- |
+| Block RAM      |     0.028 |       30 |       365 |            8.22 |
 | MMCM           |     0.228 |        2 |        10 |           20.00 |
 | I/O            |     0.135 |       27 |       285 |            9.47 |
-| Static Power   |     0.155 |          |           |                 |
-| Total          |     0.590 |          |           |                 |
+| Static Power   |     0.154 |          |           |                 |
+| Total          |     0.570 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.103 |       0.069 |      0.033 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.083 |       0.051 |      0.033 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.157 |       0.127 |      0.031 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.046 |       0.041 |      0.005 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.005 |       0.000 |      0.005 |       NA    | Unspecified | NA         |
@@ -83,7 +83,7 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.005 |       0.004 |      0.002 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.004 |       0.002 |      0.001 |       NA    | Unspecified | NA         |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
@@ -149,19 +149,17 @@ Table of Contents
 +------------------------------------+-----------+
 | Name                               | Power (W) |
 +------------------------------------+-----------+
-| final_project                      |     0.435 |
-|   control                          |     0.001 |
-|   datapath                         |     0.245 |
-|     video_inst                     |     0.243 |
-|       Inst_vga                     |     0.001 |
+| final_project                      |     0.415 |
+|   datapath                         |     0.252 |
+|     video_inst                     |     0.250 |
+|       Inst_vga                     |     0.008 |
 |       inst_dvid                    |     0.002 |
 |       mmcm_adv_inst_display_clocks |     0.107 |
-|   doodleAudio                      |     0.186 |
+|   doodleAudio                      |     0.159 |
 |     Audio_Codec                    |     0.125 |
 |       audiocodec_master_clock      |     0.123 |
-|       initialize_audio             |     0.001 |
-|     datapath                       |     0.061 |
-|       read_bram                    |     0.058 |
+|     datapath                       |     0.034 |
+|       read_bram                    |     0.033 |
 +------------------------------------+-----------+
 
 

@@ -10,6 +10,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
 library UNIMACRO;
 use UNIMACRO.vcomponents.all;
 library UNISIM;
@@ -65,6 +66,7 @@ architecture behavior of final_project is
     );
     signal exAudioPlayRequest: std_logic:= '0';
     signal exAudio_type: std_logic_vector(3 downto 0):= "0000";
+    signal score_sig: unsigned(16 downto 0);
 
 begin
     exSel <= '0';
@@ -83,7 +85,8 @@ begin
         Wen => Wen,
         spriteStatus => spriteStatus,
 		flagQ => OPEN,
-        flagClear => '0'
+        flagClear => '0', 
+        score => score_sig
         );		
 			  
 	control: graphics_fsm port  map( 
@@ -93,7 +96,8 @@ begin
         fsmWen => fsmWen,
         fsmSpriteStatus => fsmSpriteStatus,
         fsmAudio_play_request => fsmAudio_play_request,
-        fsmAudio_type => fsmAudio_type
+        fsmAudio_type => fsmAudio_type, 
+        score=> score_sig
       );
     doodleAudio: doodle_audio Port map(
        clk => clk,

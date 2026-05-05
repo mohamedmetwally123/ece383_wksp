@@ -38,7 +38,8 @@ entity video is
 			  ch2_enb: in std_logic;
 			  v_synch: out std_logic;
 			  flagQ: out STD_LOGIC;
-              flagClear: in STD_LOGIC);
+              flagClear: in STD_LOGIC;
+              score: in unsigned(16 downto 0));
 end video;
 
 architecture structure of video is
@@ -64,7 +65,8 @@ architecture structure of video is
 			ch2: in std_logic;
 			ch2_enb: in std_logic;
 			flagQ: out STD_LOGIC;
-            flagClear: in STD_LOGIC);
+            flagClear: in STD_LOGIC;
+            score: in unsigned(16 downto 0));
 	end component;
     --------------------------------------------------------------------------
     -- Clock Wizard Component Declaration Using Xilinx Vivado 
@@ -148,7 +150,8 @@ begin
 						ch2				=> ch2,
 						ch2_enb			=> ch2_enb,
 					    flagQ => flagQ,
-                        flagClear => flagClear); 
+                        flagClear => flagClear,
+                        score=> score); 
 
 	------------------------------------------------------------------------------
 	-- This module was provided to us free of charge.  It converts a VGA signal

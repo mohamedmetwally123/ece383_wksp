@@ -69,47 +69,99 @@ pixel_type <=
         doodle_sym_to_pix(doodle_right(to_integer(row - sprite_status_array(1).row)) (to_integer(TO_UNSIGNED(doodle_width, col'length) - (col - sprite_status_array(1).col)))) /= doodle_BG
 
     else 
-    -- draw blue platform
-    sprite_status_array(2)
+    -- draw jetpack with doodle
+    sprite_status_array(2) 
     when sprite_status_array(2).active = '1' and
          row >= sprite_status_array(2).row and
-         row <= sprite_status_array(2).row + to_unsigned(platform_height, row'length) and
+         row <= sprite_status_array(2).row + to_unsigned(JETPACK_AND_DOODLE_HEIGHT, row'length) and
          col >= sprite_status_array(2).col and
-         col <=  sprite_status_array(2).col + to_unsigned(platform_width, col'length)
+         col <=  sprite_status_array(2).col + to_unsigned(JETPACK_AND_DOODLE_WIDTH, col'length) and 
+         jetpack_and_doodle_sym_to_pix(jetpackAndDoodle(to_integer(row - sprite_status_array(2).row)) (to_integer(col - sprite_status_array(2).col))) /= doodle_BG_jd 
+
+
+    
     else
-    -- draw blue platform
+    -- draw a jetpack
     sprite_status_array(3)
     when sprite_status_array(3).active = '1' and
          row >= sprite_status_array(3).row and
-         row <=  sprite_status_array(3).row + to_unsigned(platform_height, row'length) and
+         row <=  sprite_status_array(3).row + to_unsigned(JETPACK_HEIGHT, row'length) and
          col >= sprite_status_array(3).col and
-         col <=  sprite_status_array(3).col + to_unsigned(platform_width, col'length)
-    else
-
-    --draw green platform
-    sprite_status_array(4)
-    when sprite_status_array(4).active = '1' and
-         row >= sprite_status_array(4).row and
-         row <=  sprite_status_array(4).row + to_unsigned(platform_height, row'length) and
-         col >= sprite_status_array(4).col and
-         col <=  sprite_status_array(4).col + to_unsigned(platform_width, col'length)
-    else
-    --draw green platform
-    sprite_status_array(5)
-    when sprite_status_array(5).active = '1' and
-         row >= sprite_status_array(5).row and
-         row <=  sprite_status_array(5).row + to_unsigned(platform_height, row'length) and
-         col >= sprite_status_array(5).col and
-         col <=  sprite_status_array(5).col + to_unsigned(platform_width, col'length)
-    else
-
-    sprite_status_array(6)
+         col <=  sprite_status_array(3).col + to_unsigned(JETPACK_WIDTH, col'length)
+and jetpack_sym_to_pix(
+    jetpack(to_integer(row - sprite_status_array(3).row))
+    (to_integer(col - sprite_status_array(3).col))) /= jetpack_BG    else
+    
+    --game over
+     sprite_status_array(6)
     when sprite_status_array(6).active = '1' and
          row >= sprite_status_array(6).row and
-         row <=  sprite_status_array(6).row + to_unsigned(platform_height, row'length) and
+         row <=  sprite_status_array(6).row + to_unsigned(GAME_OVER_HEIGHT, row'length) and
          col >= sprite_status_array(6).col and
-         col <=  sprite_status_array(6).col + to_unsigned(platform_width, col'length)
+         col <=  sprite_status_array(6).col + to_unsigned(GAME_OVER_WIDTH, col'length)
+and game_over_sym_to_pix(
+    game_over_sprite(to_integer(row - sprite_status_array(6).row))
+    (to_integer(col - sprite_status_array(6).col))) /= GAME_OVER_BK 
+     else 
+    --play
+     sprite_status_array(7)
+    when sprite_status_array(7).active = '1' and
+         row >= sprite_status_array(7).row and
+         row <=  sprite_status_array(7).row + to_unsigned(PLAY_HEIGHT, row'length) and
+         col >= sprite_status_array(7).col and
+         col <=  sprite_status_array(7).col + to_unsigned(PLAY_WIDTH, col'length)
+         and play_again_sym_to_pixel(
+    play_sprite(to_integer(row - sprite_status_array(7).row))
+    (to_integer(col - sprite_status_array(7).col))) /= TEXT_BG
+     else 
+    --play again
+        sprite_status_array(8)
+    when sprite_status_array(8).active = '1' and
+         row >= sprite_status_array(8).row and
+         row <=  sprite_status_array(8).row + to_unsigned(PLAYAGAIN_HEIGHT, row'length) and
+         col >= sprite_status_array(8).col and
+         col <=  sprite_status_array(8).col + to_unsigned(PLAYAGAIN_WIDTH, col'length)
+and play_again_sym_to_pixel(
+    play_again_sprite(to_integer(row - sprite_status_array(8).row))
+    (to_integer(col - sprite_status_array(8).col))) /= TEXT_BG
+    
     else
+    
+    -- green platform slot 12
+    sprite_status_array(12) when sprite_status_array(12).active = '1' and
+        row >= sprite_status_array(12).row and
+        row <=  sprite_status_array(12).row + to_unsigned(platform_height, row'length) and
+        col >= sprite_status_array(12).col and
+        col <=  sprite_status_array(12).col + to_unsigned(platform_width, col'length)
 
+else
+    -- blue platform slot 13
+    sprite_status_array(13) when sprite_status_array(13).active = '1' and
+        row >= sprite_status_array(13).row and
+        row <=  sprite_status_array(13).row + to_unsigned(platform_height, row'length) and
+        col >= sprite_status_array(13).col and
+        col <=  sprite_status_array(13).col + to_unsigned(platform_width, col'length)
+else
+    --brown beam
+   sprite_status_array(14) when sprite_status_array(14).active = '1' and
+        row >= sprite_status_array(14).row and
+        row <=  sprite_status_array(14).row + to_unsigned(BROWN_BEAM_HEIGHT, row'length) and
+        col >= sprite_status_array(14).col and
+        col <=  sprite_status_array(14).col + to_unsigned(BROWN_BEAM_WIDTH, col'length)
+        else    
+   --broken brown beam
+   sprite_status_array(29) when sprite_status_array(29).active = '1' and
+        row >= sprite_status_array(29).row and
+        row <=  sprite_status_array(29).row + to_unsigned(BROKEN_BROWN_BEAM_HEIGHT, row'length) and
+        col >= sprite_status_array(29).col and
+        col <=  sprite_status_array(29).col + to_unsigned(BROKEN_BROWN_BEAM_WIDTH, col'length)
+        else
+    --broken brown beam
+     sprite_status_array(30) when sprite_status_array(30).active = '1' and
+        row >= sprite_status_array(30).row and
+        row <=  sprite_status_array(30).row + to_unsigned(BROKEN_BROWN_BEAM_HEIGHT, row'length) and
+        col >= sprite_status_array(30).col and
+        col <=  sprite_status_array(30).col + to_unsigned(BROKEN_BROWN_BEAM_WIDTH, col'length)
+    else 
     sprite_status_array(31);                                                       
 end Behavioral;

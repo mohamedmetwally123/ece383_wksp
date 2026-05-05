@@ -28,7 +28,8 @@ entity graphics_datapath is
            signal Wen: in std_logic;
            signal spriteStatus: in sprite_status_t;
            flagQ: out STD_LOGIC;
-           flagClear: in STD_LOGIC);
+           flagClear: in STD_LOGIC;
+           score: in unsigned(16 downto 0));
 end graphics_datapath;
 
 architecture Behavioral of graphics_datapath is
@@ -38,8 +39,14 @@ architecture Behavioral of graphics_datapath is
 	signal row, column: unsigned(9 downto 0);	
 
 	
-	signal sprite_status_array: oneDarray;
-    
+    signal sprite_status_array : oneDarray := (
+        others => (
+            row => (others => '0'),
+            col => (others => '0'),
+            sprite_type => "011111",
+            active => '0'
+        )
+    );    
     signal pixel_type: sprite_status_t;
 	type  TwoDarray is array(0 to 79, 0 to 59) of std_logic_vector(15 downto 0);
 	signal TwoDarray_Grid : TwoDarray;
@@ -99,7 +106,8 @@ begin
 		ch2_enb => ch2,
 		v_synch => v_synch,
 	    flagQ => flagQ,
-        flagClear => flagClear);
+        flagClear => flagClear,
+        score=> score);
 
 
 

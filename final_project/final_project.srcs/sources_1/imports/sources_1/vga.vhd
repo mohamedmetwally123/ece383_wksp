@@ -44,7 +44,8 @@ entity vga is
            ch2 : in  STD_LOGIC;
            ch2_enb : in  STD_LOGIC;
            flagQ: out STD_LOGIC;
-           flagClear: in STD_LOGIC);
+           flagClear: in STD_LOGIC;
+           score: in unsigned(16 downto 0));
 end VGA;
 
 architecture Behavioral of vga is
@@ -56,7 +57,8 @@ architecture Behavioral of vga is
 	signal t_time, t_volt: unsigned(9 downto 0); 
 
 	component scopeFace is
-		Port (	row : in  unsigned(9 downto 0);
+		Port (	clk: in std_logic;
+		row : in  unsigned(9 downto 0);
 					column : in  unsigned(9 downto 0);
 					r : out  std_logic_vector(7 downto 0);
 					g : out  std_logic_vector(7 downto 0);
@@ -64,12 +66,14 @@ architecture Behavioral of vga is
 		            pixel_type : in   sprite_status_t;
 					ch1_enb: in std_logic;
 					ch2: in std_logic;
-					ch2_enb: in std_logic);
+					ch2_enb: in std_logic;
+					score: in unsigned(16 downto 0));
 		end component;
 
 begin
 	Inst_scopeFace: scopeFace  
 	PORT MAP( 
+	               clk => clk,
 					row				=> v_count,
 					column			=> h_count,
 					r					=> rsf,
@@ -78,7 +82,8 @@ begin
 					pixel_type			=> pixel_type,
 					ch1_enb			=> ch1_enb,
 					ch2				=> ch2,
-					ch2_enb			=> ch2_enb);
+					ch2_enb			=> ch2_enb,
+					score => score);
 	
 	-----------------------------------------------------------------------------
 	-- vert_count			State					v_synch		v_blank

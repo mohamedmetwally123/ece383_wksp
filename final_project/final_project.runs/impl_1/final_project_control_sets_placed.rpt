@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Tue Apr 21 15:57:30 2026
+| Date         : Mon Apr 27 22:31:31 2026
 | Host         : C27-5CG3123P67 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file final_project_control_sets_placed.rpt
 | Design       : final_project
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    39 |
-|    Minimum number of control sets                        |    39 |
+| Total control sets                                       |    48 |
+|    Minimum number of control sets                        |    48 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |   144 |
+| Unused register locations in slices containing registers |   153 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    39 |
+| Total control sets |    48 |
 | >= 0 to < 4        |     0 |
-| >= 4 to < 6        |     8 |
-| >= 6 to < 8        |     6 |
-| >= 8 to < 10       |     4 |
-| >= 10 to < 12      |    10 |
-| >= 12 to < 14      |     2 |
+| >= 4 to < 6        |    12 |
+| >= 6 to < 8        |     4 |
+| >= 8 to < 10       |     3 |
+| >= 10 to < 12      |     1 |
+| >= 12 to < 14      |     1 |
 | >= 14 to < 16      |     0 |
-| >= 16              |     9 |
+| >= 16              |    27 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -58,60 +58,69 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             125 |           51 |
+| No           | No                    | No                     |             128 |           50 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |             111 |           43 |
-| Yes          | No                    | No                     |             136 |           60 |
+| No           | Yes                   | No                     |             113 |           44 |
+| Yes          | No                    | No                     |             363 |          174 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |             124 |           43 |
+| Yes          | Yes                   | No                     |             139 |           51 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+-----------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------+------------------+----------------+--------------+
-|                           Clock Signal                          |                                   Enable Signal                                   |                            Set/Reset Signal                           | Slice Load Count | Bel Load Count | Bels / Slice |
-+-----------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------+------------------+----------------+--------------+
-|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | reset_n_IBUF                                                                      | doodleAudio/Audio_Codec/initialize_audio/data_i[5]_i_1_n_0            |                2 |              4 |         2.00 |
-|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | doodleAudio/Audio_Codec/initialize_audio/twi_controller/FSM_gray_state[3]_i_1_n_0 |                                                                       |                2 |              4 |         2.00 |
-|  clk_IBUF_BUFG                                                  | NEScontroller/cu/E[0]                                                             | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |                1 |              4 |         4.00 |
-|  clk_IBUF_BUFG                                                  | control/fsmSpriteStatus[sprite_type][3]_i_1_n_0                                   |                                                                       |                2 |              4 |         2.00 |
-|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | doodleAudio/Audio_Codec/initialize_audio/twi_controller/E[0]                      | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |                3 |              4 |         1.33 |
-|  clk_IBUF_BUFG                                                  | control/WrAddr_0                                                                  | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |                2 |              5 |         2.50 |
-|  clk_IBUF_BUFG                                                  |                                                                                   | doodleAudio/Audio_Codec/audio_inout/Cnt_Bclk[4]_i_1_n_0               |                1 |              5 |         5.00 |
-|  clk_IBUF_BUFG                                                  | doodleAudio/Audio_Codec/audio_inout/BCLK_Fall_int                                 | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |                1 |              5 |         5.00 |
-|  clk_IBUF_BUFG                                                  | control/fsmSpriteStatus[row][7]_i_1_n_0                                           | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |                2 |              6 |         3.00 |
-|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out2 |                                                                                   | datapath/video_inst/inst_dvid/shift_red[9]_i_1_n_0                    |                4 |              6 |         1.50 |
-|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  |                                                                                   | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |                2 |              6 |         3.00 |
-|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | reset_n_IBUF                                                                      |                                                                       |                3 |              6 |         2.00 |
-|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | doodleAudio/Audio_Codec/initialize_audio/twi_controller/sclCnt[6]_i_2_n_0         | doodleAudio/Audio_Codec/initialize_audio/twi_controller/sclCnt0_0     |                2 |              7 |         3.50 |
-|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  |                                                                                   | doodleAudio/Audio_Codec/initialize_audio/twi_controller/busFreeCnt0_1 |                3 |              7 |         2.33 |
-|  clk_IBUF_BUFG                                                  | NEScontroller/cu/Q[1]                                                             | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |                2 |              8 |         4.00 |
-|  clk_IBUF_BUFG                                                  | NEScontroller/cu/Q[4]                                                             | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |                3 |              8 |         2.67 |
-|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | doodleAudio/Audio_Codec/initialize_audio/twi_controller/dataByte[7]_i_1_n_0       |                                                                       |                2 |              8 |         4.00 |
-|  clk_IBUF_BUFG                                                  | control/E[0]                                                                      |                                                                       |                6 |              9 |         1.50 |
-|  clk_IBUF_BUFG                                                  | control/sprite_status_array[4][active]                                            |                                                                       |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG                                                  | control/sprite_status_array[5][active]                                            |                                                                       |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG                                                  | control/sprite_status_array[0][active]                                            |                                                                       |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG                                                  | control/sprite_status_array[6][active]                                            |                                                                       |                6 |             10 |         1.67 |
-|  clk_IBUF_BUFG                                                  | control/sprite_status_array[3][active]                                            |                                                                       |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[1]_0[0]                                                        |                                                                       |                4 |             10 |         2.50 |
-|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 | datapath/video_inst/Inst_vga/h_count[9]_i_2_n_0                                   | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |                4 |             10 |         2.50 |
-|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 | datapath/video_inst/Inst_vga/v_count0                                             | datapath/video_inst/Inst_vga/v_count[9]_i_1_n_0                       |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG                                                  | control/sprite_status_array[2][active]                                            |                                                                       |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG                                                  | NEScontroller/cu/FSM_onehot_state_reg[7]_1[0]                                     | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |                4 |             11 |         2.75 |
-|  clk_IBUF_BUFG                                                  |                                                                                   |                                                                       |                6 |             12 |         2.00 |
-|  clk_IBUF_BUFG                                                  | NEScontroller/cu/FSM_onehot_state[12]_i_1_n_0                                     | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |                4 |             13 |         3.25 |
-|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 |                                                                                   | datapath/video_inst/Inst_vga/blank                                    |               13 |             16 |         1.23 |
-|  clk_IBUF_BUFG                                                  | doodleAudio/Audio_Codec/audio_inout/Data_Out_int[31]_i_1_n_0                      |                                                                       |                9 |             17 |         1.89 |
-|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | doodleAudio/Audio_Codec/initialize_audio/initWord[30]_i_1_n_0                     |                                                                       |                6 |             18 |         3.00 |
-|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  |                                                                                   |                                                                       |               12 |             19 |         1.58 |
-|  clk_IBUF_BUFG                                                  | doodleAudio/cu/FSM_sequential_state_reg[2]_0                                      | doodleAudio/cu/FSM_sequential_state_reg[1]_0                          |                9 |             29 |         3.22 |
-|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  |                                                                                   | doodleAudio/Audio_Codec/initialize_audio/delaycnt0                    |                9 |             32 |         3.56 |
-|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out2 |                                                                                   |                                                                       |                8 |             34 |         4.25 |
-|  clk_IBUF_BUFG                                                  |                                                                                   | doodleAudio/datapath/read_bram/platformSoundBRAM_0/reset_n            |               11 |             39 |         3.55 |
-|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 |                                                                                   |                                                                       |               25 |             60 |         2.40 |
-+-----------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------+------------------+----------------+--------------+
++-----------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------------+------------------+----------------+--------------+
+|                           Clock Signal                          |                                   Enable Signal                                   |                              Set/Reset Signal                             | Slice Load Count | Bel Load Count | Bels / Slice |
++-----------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG                                                  | NEScontroller/cu/E[0]                                                             | doodleAudio/datapath/read_bram/brokenBeamBRAM_0/reset_n                   |                1 |              4 |         4.00 |
+|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | doodleAudio/Audio_Codec/initialize_audio/twi_controller/E[0]                      | doodleAudio/datapath/read_bram/brokenBeamBRAM_0/reset_n                   |                2 |              4 |         2.00 |
+|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 | datapath/video_inst/Inst_vga/Inst_scopeFace/doodleDigits/p_153_in                 |                                                                           |                4 |              4 |         1.00 |
+|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 | datapath/video_inst/Inst_vga/Inst_scopeFace/doodleTenThousands/E[0]               |                                                                           |                3 |              4 |         1.33 |
+|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 | datapath/video_inst/Inst_vga/Inst_scopeFace/doodlehundreds/p_168_in               |                                                                           |                4 |              4 |         1.00 |
+|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 | datapath/video_inst/Inst_vga/Inst_scopeFace/doodletens/h_count_reg[4]             |                                                                           |                4 |              4 |         1.00 |
+|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 | datapath/video_inst/Inst_vga/Inst_scopeFace/doodlethousands/pixel[3]_i_1__3_n_0   |                                                                           |                4 |              4 |         1.00 |
+|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | doodleAudio/Audio_Codec/initialize_audio/twi_controller/FSM_gray_state[3]_i_1_n_0 |                                                                           |                2 |              4 |         2.00 |
+|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | reset_n_IBUF                                                                      | doodleAudio/Audio_Codec/initialize_audio/data_i[5]_i_1_n_0                |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG                                                  |                                                                                   | doodleAudio/Audio_Codec/audio_inout/Cnt_Bclk[4]_i_1_n_0                   |                1 |              5 |         5.00 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_0                                                                  | doodleAudio/datapath/read_bram/brokenBeamBRAM_0/reset_n                   |                1 |              5 |         5.00 |
+|  clk_IBUF_BUFG                                                  | doodleAudio/Audio_Codec/audio_inout/BCLK_Fall_int                                 | doodleAudio/datapath/read_bram/brokenBeamBRAM_0/reset_n                   |                2 |              5 |         2.50 |
+|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out2 |                                                                                   | datapath/video_inst/inst_dvid/shift_red[9]_i_1_n_0                        |                3 |              6 |         2.00 |
+|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | reset_n_IBUF                                                                      |                                                                           |                2 |              6 |         3.00 |
+|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  |                                                                                   | doodleAudio/Audio_Codec/initialize_audio/twi_controller/busFreeCnt0_0     |                2 |              7 |         3.50 |
+|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | doodleAudio/Audio_Codec/initialize_audio/twi_controller/sclCnt[6]_i_2_n_0         | doodleAudio/Audio_Codec/initialize_audio/twi_controller/sclCnt[6]_i_1_n_0 |                3 |              7 |         2.33 |
+|  clk_IBUF_BUFG                                                  | NEScontroller/cu/Q[1]                                                             | doodleAudio/datapath/read_bram/brokenBeamBRAM_0/reset_n                   |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG                                                  | NEScontroller/cu/Q[4]                                                             | doodleAudio/datapath/read_bram/brokenBeamBRAM_0/reset_n                   |                3 |              8 |         2.67 |
+|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | doodleAudio/Audio_Codec/initialize_audio/twi_controller/dataByte[7]_i_1_n_0       |                                                                           |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG                                                  | NEScontroller/cu/FSM_onehot_state_reg[7]_1[0]                                     | doodleAudio/datapath/read_bram/brokenBeamBRAM_0/reset_n                   |                4 |             11 |         2.75 |
+|  clk_IBUF_BUFG                                                  | NEScontroller/cu/FSM_onehot_state[12]_i_1_n_0                                     | doodleAudio/datapath/read_bram/brokenBeamBRAM_0/reset_n                   |                3 |             13 |         4.33 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[3]_8[0]                                                        |                                                                           |               10 |             16 |         1.60 |
+|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 | datapath/video_inst/Inst_vga/h_count[9]_i_1_n_0                                   | doodleAudio/datapath/read_bram/brokenBeamBRAM_0/reset_n                   |                8 |             16 |         2.00 |
+|  clk_IBUF_BUFG                                                  | doodleAudio/cu/sel                                                                | doodleAudio/cu/clear                                                      |                5 |             17 |         3.40 |
+|  clk_IBUF_BUFG                                                  | control/fsmSpriteStatus[row][8]_i_1_n_0                                           | doodleAudio/datapath/read_bram/brokenBeamBRAM_0/reset_n                   |                5 |             17 |         3.40 |
+|  clk_IBUF_BUFG                                                  | doodleAudio/Audio_Codec/audio_inout/Data_Out_int[31]_i_1_n_0                      |                                                                           |                7 |             17 |         2.43 |
+|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  | doodleAudio/Audio_Codec/initialize_audio/initWord[30]_i_1_n_0                     |                                                                           |                6 |             18 |         3.00 |
+|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 | datapath/video_inst/Inst_vga/v_count0                                             | datapath/video_inst/Inst_vga/v_count[9]_i_1_n_0                           |               11 |             20 |         1.82 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[3]_2[0]                                                        |                                                                           |               12 |             21 |         1.75 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[3]_7[0]                                                        |                                                                           |               11 |             21 |         1.91 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[3]_4[0]                                                        |                                                                           |                8 |             21 |         2.62 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[3]_3[0]                                                        |                                                                           |                8 |             21 |         2.62 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[3]_1[0]                                                        |                                                                           |               11 |             21 |         1.91 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[1]_1[0]                                                        |                                                                           |               10 |             21 |         2.10 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[1]_2[0]                                                        |                                                                           |               12 |             21 |         1.75 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[3]_6[0]                                                        |                                                                           |               12 |             21 |         1.75 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[1]_0[0]                                                        |                                                                           |               10 |             21 |         2.10 |
+|  clk_IBUF_BUFG                                                  |                                                                                   |                                                                           |               12 |             21 |         1.75 |
+|  clk_IBUF_BUFG                                                  | control/E[0]                                                                      |                                                                           |               11 |             21 |         1.91 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[3]_0[0]                                                        |                                                                           |                7 |             21 |         3.00 |
+|  clk_IBUF_BUFG                                                  | control/WrAddr_reg[3]_5[0]                                                        |                                                                           |                7 |             21 |         3.00 |
+|  clk_IBUF_BUFG                                                  | control/fsmSpriteStatus[sprite_type][4]_i_1_n_0                                   |                                                                           |                7 |             22 |         3.14 |
+|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  |                                                                                   |                                                                           |               11 |             25 |         2.27 |
+|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 |                                                                                   | datapath/video_inst/Inst_vga/blank                                        |               19 |             28 |         1.47 |
+|  doodleAudio/Audio_Codec/audiocodec_master_clock/inst/clk_out2  |                                                                                   | doodleAudio/Audio_Codec/initialize_audio/delaycnt0                        |                9 |             32 |         3.56 |
+|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out2 |                                                                                   |                                                                           |                7 |             34 |         4.86 |
+|  clk_IBUF_BUFG                                                  |                                                                                   | doodleAudio/datapath/read_bram/brokenBeamBRAM_0/reset_n                   |               10 |             35 |         3.50 |
+|  datapath/video_inst/mmcm_adv_inst_display_clocks/inst/clk_out1 |                                                                                   |                                                                           |               20 |             48 |         2.40 |
++-----------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------------+------------------+----------------+--------------+
 
 
