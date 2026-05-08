@@ -72,7 +72,7 @@ This project implements a simple version of the Doodle Jump game using the Nexys
 This section describes the subsystems and modules included in the final project. More specifically, it explains how each module contributes to the overall functionality of the system while also including datapath and finite state machine (FSM) diagrams for visualization. It also includes the game logic FSM implemented in C on the MicroBlaze processor. Additionally, this section demonstrates the data communicated between the MicroBlaze and the custom hardware and provides an explanation for the three main subsystems in the custom hardware: doodle_audio, NES_controller, and the graphics datapath.
 ### Game Logic
 #### 1-	FSM
-![Game Logic FSM](Game Logic FSM.png)
+![Game Logic FSM](./Images/Game Logic FSM.png)
 #### 2-	Description:
 ##### Wait For Start State: 
 In this state: 
@@ -111,23 +111,7 @@ The NES Controller submodule constantly receive and processes inputs from the NE
 ####	NES Control Unit
 ##### FSM
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![NES Controller FSM](./Images/NES Controller FSM.png)
 
 The FSM starts by pulling the NES Controller latch high. This causes the controller to latch the current button states. It then performs the following loop:
 -	Read the 1-bit data sent from the NES Controller.
@@ -138,65 +122,56 @@ The FSM starts by pulling the NES Controller latch high. This causes the control
 The system receives 8 bits total, corresponding to the current state of the controller buttons.
 Two bits are used in the status word:
 
-•	Sw(0) notifies the control unit when the data path has received all data from the current sample.
-•	 sw(1) notifies the control unit when the delay counter is finished.
-The control word is shown in figure 3:
+- 	Sw(0) notifies the control unit when the data path has received all data from the current sample.
+-	sw(1) notifies the control unit when the delay counter is finished.
 
-•	cw(0:1) controls the read counter
-•	cw(2:3) controls the delay counter. A 10 microseconds delay is applied after toggling latch or clock signals to ensure stable data.
-•	cw(4) commands the Datapath to read the 1-bit input into a shift register. 
-•	cw(5) controls the clock signal sent to the controller.
-•	cw(6) controls the latch signal.
-•	 cw(7) stores the final data and updates it in the MicroBlaze
+##### Control Word Output Table
+
+![Control Word Output Table](./Images/Control Word Output Table.png)
+
+-	cw(0:1) controls the read counter
+-	cw(2:3) controls the delay counter. A 10 microseconds delay is applied after toggling latch or clock signals to ensure stable data.
+-	cw(4) commands the Datapath to read the 1-bit input into a shift register. 
+-	cw(5) controls the clock signal sent to the controller.
+-	cw(6) controls the latch signal.
+-	 cw(7) stores the final data and updates it in the MicroBlaze
 ####	NES Data Path
 The NES Data Path executes the operation commanded by the controller FSM. It sends the latch and the clock signal to the NES controller at the appropriate states and stores incoming data into a shift register by shifting bits into the MSB.
 It also includes two counters:
-•	A read counter that tracks how many bits have been read.
-•	 A delay counter that implements a 10-microsecond delay. 
+-	A read counter that tracks how many bits have been read.
+-	 A delay counter that implements a 10-microsecond delay. 
 ### 2-	Doodle Audio
 The doodle audio submodule is responsible for producing three main sounds: 
-•	Collision with a platform.
-•	 Collision with a spring.
-•	 Game over.
+-	Collision with a platform.
+-	 Collision with a spring.
+-	 Game over.
 It receives an audio request from the MicroBlaze along with audio type. The audio samples are stored in BRAMs as 16-bit raw data sampled at 48 kHz. 
 It’s further broken into three modules:
-•	Audio Codec Wrapper.
-•	Audio Codec Control Unit.
-•	Audio Codec Data Path. 
+-	Audio Codec Wrapper.
+-	Audio Codec Control Unit.
+-	Audio Codec Data Path. 
 
 ####	Audio Codec Control Unit
 ##### FSM
-This module includes FSM. A hand drawn FSM is shown in figure 4. 
 
-
-
-
-
-
-
-
+![Audio Control Unit FSM](./Images/Audio Control Unit FSM.png)
 
 
 The FSM starts in the idle state until an audio request is received from the MicroBlaze. It then transfers to the load sound state, where configurations are set, such as resetting the sample index and loading the audio size. Next, the FSM waits for the audio codec to be ready to process new samples. Once ready, it:
-•	increments sample index, used to read the correct BRAM address 
-•	checks if the full audio has been played. If the playback is completed, it returns back to idle; Otherwise, it repeats the loop. 
+-	increments sample index, used to read the correct BRAM address 
+-	checks if the full audio has been played. If the playback is completed, it returns back to idle; Otherwise, it repeats the loop. 
 
 The FSM uses 3-bit status word:
-•	Sw(0) Audio codec ready signal.
-•	Sw(1) Audio request from MicroBlaze.
-•	Sw(2) Audio playback complete.
+-	Sw(0) Audio codec ready signal.
+-	Sw(1) Audio request from MicroBlaze.
+-	Sw(2) Audio playback complete.
 It also uses 2-bit control word: 
-•	Cw(0) Indicates audio is in progress.
-•	cw(1) Increments sample index.
-The control word output table is shown in figure 5
+-	Cw(0) Indicates audio is in progress.
+-	cw(1) Increments sample index.
 
+##### Control word output table
 
-
-
-
-
-
-
+![Audio Control Word Output Table](./Images/Audio Control Word Output Table.png)
 
 ####	Audio Codec Data Path
 
