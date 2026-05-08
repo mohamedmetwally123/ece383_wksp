@@ -72,7 +72,7 @@ This project implements a simple version of the Doodle Jump game using the Nexys
 This section describes the subsystems and modules included in the final project. More specifically, it explains how each module contributes to the overall functionality of the system while also including datapath and finite state machine (FSM) diagrams for visualization. It also includes the game logic FSM implemented in C on the MicroBlaze processor. Additionally, this section demonstrates the data communicated between the MicroBlaze and the custom hardware and provides an explanation for the three main subsystems in the custom hardware: doodle_audio, NES_controller, and the graphics datapath.
 ### Game Logic
 #### 1-	FSM
-![Game Logic FSM](./Images/Game Logic FSM.png)
+![Game Logic FSM](./Images/Game%20Logic%20FSM.png)
 #### 2-	Description:
 ##### Wait For Start State: 
 In this state: 
@@ -111,7 +111,7 @@ The NES Controller submodule constantly receive and processes inputs from the NE
 ####	NES Control Unit
 ##### FSM
 
-![NES Controller FSM](./Images/NES Controller FSM.png)
+![NES Controller FSM](./Images/NES%20Controller%20FSM.png)
 
 The FSM starts by pulling the NES Controller latch high. This causes the controller to latch the current button states. It then performs the following loop:
 -	Read the 1-bit data sent from the NES Controller.
@@ -127,7 +127,7 @@ Two bits are used in the status word:
 
 ##### Control Word Output Table
 
-![Control Word Output Table](./Images/Control Word Output Table.png)
+![Control Word Output Table](./Images/NES%20Control%20Word%20Output%20Table.png)
 
 -	cw(0:1) controls the read counter
 -	cw(2:3) controls the delay counter. A 10 microseconds delay is applied after toggling latch or clock signals to ensure stable data.
@@ -154,7 +154,7 @@ It’s further broken into three modules:
 ####	Audio Codec Control Unit
 ##### FSM
 
-![Audio Control Unit FSM](./Images/Audio Control Unit FSM.png)
+![Audio Control Unit FSM](./Images/Audio%20Control%20Unit%20FSM.png)
 
 
 The FSM starts in the idle state until an audio request is received from the MicroBlaze. It then transfers to the load sound state, where configurations are set, such as resetting the sample index and loading the audio size. Next, the FSM waits for the audio codec to be ready to process new samples. Once ready, it:
@@ -171,7 +171,7 @@ It also uses 2-bit control word:
 
 ##### Control word output table
 
-![Audio Control Word Output Table](./Images/Audio Control Word Output Table.png)
+![Audio Control Word Output Table](./Images/Audio%20Control%20Word%20Output%20Table.png)
 
 ####	Audio Codec Data Path
 
