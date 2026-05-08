@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="final_doodle_28" location="C:/Users/C27Mohamed.Metwally/vitis_2024_workspace/final_doodle_28" platform="C:/Users/C27Mohamed.Metwally/vitis_2024_workspace/final_doodle_wrapper/export/final_doodle_wrapper/final_doodle_wrapper.xpfm" platformUID="xilinx:nexys_video::0.0(custom)" systemProject="final_doodle_28_system" sysConfig="final_doodle_wrapper" runtime="cpp" cpu="standalone_microblaze_0" cpuInstance="microblaze_0" os="standalone" mssSignature="98eb2553fc21382eff13b03b2281aa4a">
+  <configuration name="Debug" id="xilinx.gnu.mb.exe.debug.1798436053">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.mb.exe.release.799162601" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="hello_world"/>
+</sdkproject:SdkProject>

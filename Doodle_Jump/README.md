@@ -16,12 +16,13 @@ This project implements a simple version of the Doodle Jump game using the Nexys
 8.	Generate vertical scrolling by shifting existing platforms downward as the doodle moves upward, while also randomly generating new platforms that smoothly enter the world from the top of the screen.
 ## 1.3 Level-0 Description & Top Level Design 
 ### 1.3.1 Top Level Design
-
+ 
 ![Top Level Design](./Images/Top%20Level%20Design.png)
 
 ### 1.3.2 Level-0 Description
 
 #### External I/O Signals  
+
 [in = input to the custom hardware; out = output from the custom hardware]
 
 | Signal | Description |
@@ -34,7 +35,6 @@ This project implements a simple version of the Doodle Jump game using the Nexys
 | ac_mclk, ac_adc_sdata, ac_dac_sdata, ac_bclk, ac_lrclk, scl, sda | Signals used for communication between the FPGA and the audio codec for audio synchronization, audio data transfer, and codec configuration |
 
 #### MicroBlaze Registers
-[in = read; out = write]
 
 [in = read; out = write]
 
