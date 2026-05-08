@@ -72,7 +72,7 @@ This project implements a simple version of the Doodle Jump game using the Nexys
 This section describes the subsystems and modules included in the final project. More specifically, it explains how each module contributes to the overall functionality of the system while also including datapath and finite state machine (FSM) diagrams for visualization. It also includes the game logic FSM implemented in C on the MicroBlaze processor. Additionally, this section demonstrates the data communicated between the MicroBlaze and the custom hardware and provides an explanation for the three main subsystems in the custom hardware: doodle_audio, NES_controller, and the graphics datapath.
 ### Game Logic
 #### 1-	FSM
-
+![Game Logic FSM](Game Logic FSM.png)
 #### 2-	Description:
 ##### Wait For Start State: 
 In this state: 
@@ -199,8 +199,11 @@ The control word output table is shown in figure 5
 
 
 ####	Audio Codec Data Path
+
 The data path retrieves the correct audio sample from the pre-loaded BRAMs, based on the current sample index, and sends it to the audio codec. 
+
 ####	Read From Bram
+
 This module helps retrieves the audio samples from the BRAMs. It contains 47 BRAMs storing the 16-bit samples at 48 kHz. It takes
 •	Audio_type: selects which audio to play.
 •	Is_playing:  indicates if audio is still active.
@@ -212,56 +215,76 @@ It the playback is complete, indicated by comparing the sample index against the
 
 
 ####	Audio Codec Wrapper
-The audio codec wrapper takes the selected sample and outputs it through the audio codex. 
+The audio codec wrapper takes the selected sample and outputs it through the audio codec. 
+
 ### 3-	Graphics Data Path
+
 The graphics data path is responsible for rendering graphics on the screen; both background and the game sprites. The main challenge of this module is to determine whether the current pixel belongs to a sprite or background. If it belongs to a sprite, the system determines which pixel within the sprite to draw based on the current row and column. This is done using the pixel classifier and scope face submodules. 
+
 ####	Pixel classifier
+
 This receives the current row and column from the vga. It also receives a 32-sprite status array. Each array element includes: 
-•	X & Y coordinates (top-left corner): received from the Micro Blaze.
-•	Sprite type: including doodle, spring, green and blue platforms, etc.
-•	Active flag: a 1-bit signal indicating whether the sprite should be rendered on the screen
+-	X & Y coordinates (top-left corner): received from the Micro Blaze.
+-	Sprite type: including doodle, spring, green and blue platforms, etc.
+-	Active flag: a 1-bit signal indicating whether the sprite should be rendered on the screen
 The classifier loops through all sprites and determines whether the current pixel lies within any sprite’s boundaries. If not, it outputs a background pixel type.  
+
 ####	ScopeFace
+
 The scope face determines the RGB values of the current pixel. It:
-•	stores the sprite pixel data in separate 2-d arrays. 
-•	Receives the current pixel type from the pixel classifier.
-•	  Computes the offset from the sprite’s top-left corner 
-•	Outputs the RGB value based on the offset
+-	stores the sprite pixel data in separate 2-d arrays. 
+-	Receives the current pixel type from the pixel classifier.
+-	  Computes the offset from the sprite’s top-left corner 
+-	Outputs the RGB value based on the offset
 
 ## 2.3	 Calculations/Analysis/Drawings
+
 ### 1-	Curren pixel:
+
 To determine which pixel within the sprite is drawn:
-•	Local row = row – y
-•	Local col = col – x
-Where row and column are the top left corner coordinates stored in the sprite status array. The local row and col used to index into sprite pixel arrays stored in the ScopeFace
+-	Local row = row – y
+-	Local col = col – x
+Where row and column are the top left corner coordinates stored in the sprite status array. The local row and col used to index into sprite pixel arrays stored in the ScopeFace.
+
 ### 2-	BRAM Access: 
+
 In the audio codec module, the sample index determines both which BRAM to use and the local address within the BRAM:
 2	local_address <= sample_index(10 downto 0): equivalenet to sample index mod 2048. 
-3	BRAM_selection <= sample_index(16 downto 11): equivalent to sample index / 2048. 
-### 2.5 Milestone I
+3	BRAM_selection <= sample_index(16 downto 11): equivalent to sample index / 2048.
+
+## 2.5 Milestone I
+
 All custom hardware will be implemented, including the NES Controller, graphics data path and audio codec. This will be tested using an FSM implemented in VHDL, which acts as a MicroBlaze. 
+
 The NES Controller shall:
-•	Interface with the NES Controller via GPIO pins. 
-•	Receive button states from the NES Controller.
-•	send the latch and clock signals to the NES Controller. 
-•	Output data to LEDs for verification.
+-	Interface with the NES Controller via GPIO pins. 
+-	Receive button states from the NES Controller.
+-	send the latch and clock signals to the NES Controller. 
+-	Output data to LEDs for verification.
+
 The audio codec shall:
-•	Receives audio play request and type from the FSM. 
+-	Receives audio play request and type from the FSM. 
 -	Read from the pre-loaded BRAMs
 -	Output sound to speaker. 
+
 The graphics data path shall: 
-•	Receives sprite data from the FSM.
-•	Determine pixel type
-•	Render it to the screen 
+-	Receives sprite data from the FSM.
+-	Determine pixel type.
+-	Render it to the screen. 
+
 ## 2.6	 Milestone II
+
 The custom hardware shall interface with MicroBlaze processer, and send data through 32*32 slave registers. Game logic shall be implemented in C, which includes the following:
-•	Determines the doodle movement
-•	Determines the world shifting
-•	Implements a collision detection and play the correct audio accordingly
-•	Sprite positioning on the screen
-•	Reposition sprites above the screen when the world shifts down. They should re-enter the screen smoothly from the top. 
+-	Determines the doodle movement
+-	Determines the world shifting
+-	Implements a collision detection and play the correct audio accordingly
+-	Sprite positioning on the screen
+-	Reposition sprites above the screen when the world shifts down. They should re-enter the screen smoothly from the top. 
+
 ## 2.7 Updated Functionality and Requirements
+
 ### Minimum functionality:
+
 To achieve minimum level functionality, the system shall:
 1-	Implement graphics Datapath module responsible for rendering the game background and sprites. 
 2-	Implement graphics control unit that controls the graphics data path. This module will initially be used for testing purposes to verify the custom hardware functionality. It will be replaced later by the micro blaze
@@ -270,9 +293,10 @@ To achieve minimum level functionality, the system shall:
 5-	Implement the Doodle Audio module to output the game audio through the audio_codec wrapper. The module outputs audio based on an audio type signal received from the micro blaze. For minimum level functionality, this signal will be generated by the graphics control unit instead of the MicroBlaze.
 
 ### B-Level Functionality
+
 To achieve B-Level functionality, the system shall:
 1-	Implement an NES controller module capable of interpreting signals sent from the NES controller. Functionality will initially be verified by outputting the interpreted button states to the LEDs. 
-2-	Integrate the NES controller, doodle_audio, and graphics data path into a single top level module named “final_project”
+2-	Integrate the NES controller, doodle_audio, and graphics data path into a single top level module named “final_project”.
 3-	Package the final_project module as a custom AXI IP with 32 slave registers. This allows the custom hardware to communicate with the MicroBlaze processor through memory-mapped addresses.
 4-	Create a block design that incorporates the custom IP, MicroBlaze, AXI infrastructure required for communication, UART, and DDR3 memory. 
 5-	Connect the flag register to the micro blaze interrupt.
@@ -280,28 +304,34 @@ To achieve B-Level functionality, the system shall:
 7-	Ensure that the micro blaze is successfully communicating with the custom hardware through C code. This can be accomplished through the following incremental tests:
 a.	Print a message to UART when the interrupt is triggered. 
 b.	Render sprites on the screen through C code by sending the sprites coordinates and type through the slave registers to the custom hardware.
-c.	Outputs game audio through C code by sending the audio type to the custom hardware
+c.	Outputs game audio through C code by sending the audio type to the custom hardware.
+
 ### A-Level Functionality
+
 A-level functionality will include minimum functionality, B-functionality as well as game logic implemented in C. To achieve A-level functionality, the system shall:
 1-	Renders the game’s initial screen. 
 2-	Wait for the user to press the “start” button on the NES controller.
 3-	Move the doodle horizontally using the NES controller input. 
-4-	Implement a gravity-based system that controls the doodle velocity and acceleration
+4-	Implement a gravity-based system that controls the doodle velocity and acceleration.
 5-	Implement a collision detection to determine when jumps should occur.
 6-	Output game audio, including collision and game over sounds.
 7-	Implement world scrolling by shifting the world downward once the doodle reaches the midpoint of the screen.
-8-	Render the current game score in the top left corner f the screen
+8-	Render the current game score in the top left corner f the screen.
 9-	Detects when the user loses.
 
 # 3  Milestone I
-All deliverable obligations for milestone I were successfully accomplished. The system reads data from the NES controller and outputs the button states to the LEDs. Additionally, the system outputs game audio through speakers and renders sprites at the correct positions on the screen
+
+All deliverable obligations for milestone I were successfully accomplished. The system reads data from the NES controller and outputs the button states to the LEDs. Additionally, the system outputs game audio through speakers and renders sprites at the correct positions on the screen.
 
 # 4	Milestone II
+
 All deliverable obligations for milestone II were successfully accomplished. The game custom hardware interfaced with the micro blaze through the AXI communication protocol. The bit stream was generated, and the hardware platform was exported to Vitis. Game logic was implemented in C; and included collision detection, sprite rendering, game audio playback, and vertical scrolling. 
 
 # 5	Final Demonstration and Test Results
+
 The final system successfully implemented a playable version of doodle jump game on the Nexys Video board. The system integrated custom hardware, the MicroBlaze processor, NES controller, graphics and audio playback. 
 Overall, the system achieved A-level functionality. The custom hardware correctly rendered graphics on the screen, generated audio playback, and read user inputs from the NES controller. After interfacing the custom hardware with the MicroBlaze, the required game logic was successfully implemented in C.  
+
 During the final demonstration: 
 1-	The game sprites and background rendered correctly on the screen. 
 2-	The NES controller controlled the doodle movement.
@@ -313,11 +343,13 @@ During the final demonstration:
 
 
 # Appendix A: Running the Project
+
 1-	Connect the NES controller to the Nexys Video board. 
 2-	Connect an HDMI monitor to the HDMI out port on the board. 
 3-	Connect a speaker to the audio output jack. 
 4-	Open the application project in Vitis. 
 5-	Hit run and you should be able to play the game. 
+
 If another students wishes to build on my project by modifying the custom hardware, here is what you could do:
 1-	Open my git hub repository: mohamedmetwally123/ece383_wksp
 2-	Download the Doodle_Jump File. 
