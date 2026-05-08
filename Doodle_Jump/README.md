@@ -1,6 +1,4 @@
 
-
-Doodle Jump Final Project
 # 1 Proposal 
 ## 1.1 Objective Statement
 This project implements a simple version of the Doodle Jump game using the Nexys Video board. It uses a Micro blaze processor to control the game logic and communicates with the custom hardware through slave registers. The custom hardware is responsible for rendering graphics on the screen, outputting game audio through the audio codec module, and receiving/processing user input from the NES controller. 
@@ -35,7 +33,7 @@ This project implements a simple version of the Doodle Jump game using the Nexys
 
 
 
-## 1.3.2 Level-0 Description
+## 1.3 Level-0 Description
 
 ### External I/O Signals  
 [in = input to the custom hardware; out = output from the custom hardware]
@@ -51,8 +49,11 @@ This project implements a simple version of the Doodle Jump game using the Nexys
 
 ### MicroBlaze Registers
 [in = read; out = write]
-Signal	Direction	Register/Bits	Description
 
+[in = read; out = write]
+
+| Signal | Direction | Register/Bits | Description |
+|---|---|---|---|
 | Audio_type | out | slv_reg0[4:0] | Communicates the audio type to the custom hardware |
 | Audio_playRequest | out | slv_reg1[0] | Requests audio playback from the custom hardware |
 | sprite_row | out | slv_reg2[9:0] | Sends the sprite top-left y-coordinate for screen rendering |
@@ -75,33 +76,33 @@ This section describes the subsystems and modules included in the final project.
 #### 2-	Description:
 ##### Wait For Start State: 
 In this state: 
-•	The screen is initialized 
-•	The “play” sprite is drawn in the middle of the screen
-•	The game waits for the user to press the “start” button on the NES controller
+- 	The screen is initialized 
+- 	The “play” sprite is drawn in the middle of the screen
+- 	The game waits for the user to press the “start” button on the NES controller
  Once the user presses “Start,” the FSM transfers to the Doodle Up state.
 ##### Doodle Up State
 In this state, 
-•	The doodle moves upward.
-•	A gravity constant updates the doodle velocity
+- 	The doodle moves upward.
+- 	A gravity constant updates the doodle velocity
 When the doodle reaches the middle of the screen:
-•	The world begins shifting downward instead of continuing to move the doodle upward. 
-•	All sprites are shifted downward to create the illusion that the doodle is climbing upward.
-•	The sprites leaving the bottom of the screen are repositioned above the screen to renter the world smoothly
+- 	The world begins shifting downward instead of continuing to move the doodle upward. 
+- 	All sprites are shifted downward to create the illusion that the doodle is climbing upward.
+- 	The sprites leaving the bottom of the screen are repositioned above the screen to renter the world smoothly
 When the doodle velocity becomes less than zero, the FSM transfers to the Doodle Down state.
 ##### Doodle Down State
 In this state, the doodle falls downward due to gravity. The FSM checks for the following conditions: 
-•	Grown or Blue Beam Collision: if the doodle collides with green or blue beams, its velocity is reinitialized to -400, and the doodle transfers back to the Doodle Up State. 
-•	Brown beam Collision: If the doodle collides with a brown beam, the beam breaks and the doodle continue moving downard
-•	Game over: The game continuously checks the doodle row position. If it moves past 480, the user loses and the FSM transfers to the Game Over state. 
+-	Grown or Blue Beam Collision: if the doodle collides with green or blue beams, its velocity is reinitialized to -400, and the doodle transfers back to the Doodle Up State. 
+-	Brown beam Collision: If the doodle collides with a brown beam, the beam breaks and the doodle continue moving downard
+-	Game over: The game continuously checks the doodle row position. If it moves past 480, the user loses and the FSM transfers to the Game Over state. 
 ##### Game Over State
 In this state, 
-•	The “Game Over” sprite enters from the bottom of the screen
-•	and moves upward until it reaches the middle of the screen.
+- 	The “Game Over” sprite enters from the bottom of the screen
+- 	and moves upward until it reaches the middle of the screen.
 Once it arrives, the FSM transfers to Wait for Restart state. 
 ##### Wait for Restart State
 In this state:
-•	the game waits for the user to press the “Start” button again. 
-•	Once “Start” is pressed, the FSM resets the gameplay variables, and transfers back to the Doodle Up state
+- 	the game waits for the user to press the “Start” button again. 
+-	Once “Start” is pressed, the FSM resets the gameplay variables, and transfers back to the Doodle Up state
 
 ### Final-Project Custom Hardware Data Path
 
@@ -136,9 +137,11 @@ The FSM starts by pulling the NES Controller latch high. This causes the control
 -	If all data is received, it stores the output and pull the latch high again. Otherwise, repeat the loop.
 The system receives 8 bits total, corresponding to the current state of the controller buttons.
 Two bits are used in the status word:
+
 •	Sw(0) notifies the control unit when the data path has received all data from the current sample.
 •	 sw(1) notifies the control unit when the delay counter is finished.
 The control word is shown in figure 3:
+
 •	cw(0:1) controls the read counter
 •	cw(2:3) controls the delay counter. A 10 microseconds delay is applied after toggling latch or clock signals to ensure stable data.
 •	cw(4) commands the Datapath to read the 1-bit input into a shift register. 
